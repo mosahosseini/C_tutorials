@@ -84,7 +84,7 @@ char string [50] = "myString" // string with max length 50 charachter
 
 Note that there is no string datatype in C. Instead , a string is considererd an array of chars. 
 
-# $${\color{green}Important note}$$:
+# <font color = green> Important note </font>
 You can initialize a string by using: 
 ```c
 char string [50] = "myString" // string with max length 50 charachter
@@ -115,7 +115,7 @@ y = &x;
 ```
 
 
-Just a quick recap of strings:  If we use a pointer variable for a string. The pointer will store the address of the first charachter in the string lateral. Because the end of every string is marked with `/0` we have the address of the entire string. For more information i will reffer you (Basic of string lateral by Nesso Academy)[https://www.youtube.com/watch?v=IlqiTmcK1Eg&list=PLBlnK6fEyqRhwQbYrTDZYJaB4z1YgsAPW&index=1&ab_channel=NesoAcademy]
+Just a quick recap of strings:  If we use a pointer variable for a string. The pointer will store the address of the first charachter in the string lateral. Because the end of every string is marked with `/0` we have the address of the entire string. For more information i will reffer you [Basic of string lateral by Nesso Academy](https://www.youtube.com/watch?v=IlqiTmcK1Eg&list=PLBlnK6fEyqRhwQbYrTDZYJaB4z1YgsAPW&index=1&ab_channel=NesoAcademy)
 
 ```c
 int main()
@@ -126,8 +126,9 @@ return 0 ;
 } // output: H
 ```
 
-$${\color{green} Important:  Note that because string pointer is pointing to the address of a specific string, you can not modify it after it is pointing to an object.}$$
-$${\color{red} The following code will give error }$$ 
+<font color = green> Important:  Note that because string pointer is pointing to the address of a specific string, you can not modify it after it is pointing to an object.</font>
+<font color = green>  The following code will give error</font>
+
 
 ```c
 char *ptr = "Hello World"
