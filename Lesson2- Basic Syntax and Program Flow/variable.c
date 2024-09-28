@@ -51,16 +51,7 @@ void string_pointers()
 
 int main()
 {
-/*    struct car car1;
-    car1.name  = "Volvo" ;
-    car1.model = "V70"   ; 
-    car1.year  = 1970    ;
-    return 0;
 
-
-char name [50];;
-name = "hej";
-*/
 
 // string_pointers();
 char *p = "Hello World";
