@@ -43,11 +43,170 @@ For writing and compiling C programs, **Visual Studio Code (VS Code)** is an exc
 
 Once the compiler is set up, the next step is understanding the structure of a basic C program.
 
-C language contains a number of standard libraries that are usually is the first lines of code you write. and have the following structure. 
+C language contains a number of standard libraries that are usually is the first lines of code you write. Every C program must have at least a main method:
 ``` c
 #include <name_of_the_library.h>
+int main(){
+    return 0;
+}
 ```
-# Most Useful C Libraries
+### Naming conventions in C 
+
+Naming conventions in C help improve code readability, maintainability, and consistency. Adhering to standard naming practices ensures that the code is understandable and organized, especially when working in large teams or on long-term projects. Below is an overview of the most common naming conventions used in C:
+
+#### 1. Variable Names
+
+- **Descriptive and meaningful**: Variable names should describe the purpose or role of the variable.
+- **Lowercase letters**: Use lowercase letters for general variables.
+- **Use underscores**: Use underscores (`_`) to separate words in a variable name (snake_case).
+
+  **Example**:
+  ```c
+  int employee_count;
+  float temperature_reading;
+  ```
+
+- **Avoid single-character names**: Except for loop counters or temporary variables, avoid names like `x`, `y`, `i`.
+
+#### 2. Function Names
+
+- **Verb-Noun combination**: Function names should be descriptive and typically include verbs that indicate the action being performed.
+- **Lowercase letters**: Function names are generally written in lowercase.
+- **Use underscores**: Similar to variables, underscores are used to separate words (snake_case).
+
+  **Example**:
+  ```c
+  void print_report();
+  int calculate_total();
+  ```
+
+- **Avoid overly long names**: Keep names concise but descriptive. For example, instead of `calculate_total_sales_for_the_month`, you could use `calculate_monthly_sales`.
+
+#### 3. Constant Names
+
+- **Uppercase letters**: Constants are written in uppercase letters.
+- **Underscores between words**: Words in a constant name are separated by underscores.
+
+  **Example**:
+  ```c
+  #define MAX_BUFFER_SIZE 1024
+  const float PI = 3.14159;
+  ```
+
+- **Use `const` or `#define` for constants**: Use the `const` keyword or the `#define` preprocessor directive to define constant values.
+
+#### 4. Struct Names
+
+- **CamelCase or PascalCase**: Struct names are usually written in PascalCase (also known as UpperCamelCase), where each word starts with an uppercase letter.
+- **Descriptive names**: The struct name should indicate the entity it represents.
+
+  **Example**:
+  ```c
+  struct EmployeeDetails {
+      int employee_id;
+      char name[50];
+  };
+  ```
+
+#### 5. Typedefs
+
+- **CamelCase or PascalCase**: Typedefs follow similar conventions to struct names and are typically written in PascalCase.
+
+  **Example**:
+  ```c
+  typedef struct EmployeeDetails Employee;
+  ```
+
+#### 6. Enumeration Names
+
+- **PascalCase for Enum type**: Enum type names use PascalCase, starting with an uppercase letter.
+- **Uppercase for Enum constants**: Enum constants should be in uppercase.
+
+  **Example**:
+  ```c
+  enum Color {
+      RED,
+      GREEN,
+      BLUE
+  };
+  ```
+
+#### 7. Global Variables
+
+- **Use of `g_` prefix**: Global variables may use a prefix like `g_` to indicate their global scope.
+- **Descriptive names**: Global variable names should be descriptive and written in snake_case.
+
+  **Example**:
+  ```c
+  int g_total_sales;
+  ```
+
+#### 8. Static Variables
+
+- **Use of `s_` prefix**: Static variables within a function or file scope may use an `s_` prefix to indicate their limited scope.
+- **Descriptive names**: Similar to global variables, use descriptive names.
+
+  **Example**:
+  ```c
+  static int s_retry_count;
+  ```
+
+#### 9. Pointers
+
+- **Use of `p_` prefix**: Pointers often have a prefix like `p_` to indicate that they are pointers.
+- **Descriptive names**: The name should describe the entity to which the pointer refers.
+
+  **Example**:
+  ```c
+  int *p_employee_id;
+  char *p_buffer;
+  ```
+
+#### 10. Preprocessor Macros
+
+- **Uppercase letters**: Macros are usually written in uppercase letters, similar to constants.
+- **Underscores between words**: Use underscores to separate words in a macro name.
+
+  **Example**:
+  ```c
+  #define MAX_USERS 100
+  #define GET_MAX(a, b) ((a) > (b) ? (a) : (b))
+  ```
+
+#### 11. File Names
+
+- **Lowercase letters**: File names are generally written in lowercase.
+- **Use underscores**: If the file name contains multiple words, separate them using underscores.
+- **C file extensions**: Use `.c` for source files and `.h` for header files.
+
+  **Example**:
+  ```
+  employee_management.c
+  employee_management.h
+  ```
+
+#### Summary Table
+
+| Element           | Convention         | Example                        |
+|-------------------|--------------------|--------------------------------|
+| **Variables**      | lowercase, snake_case | `int total_count;`              |
+| **Functions**      | lowercase, snake_case | `void process_data();`         |
+| **Constants**      | UPPERCASE, snake_case | `#define MAX_LIMIT 100`        |
+| **Structs**        | PascalCase         | `struct UserProfile`           |
+| **Typedefs**       | PascalCase         | `typedef struct UserProfile`   |
+| **Enums**          | PascalCase/UPPERCASE | `enum Status { ACTIVE, INACTIVE }` |
+| **Global Variables**| `g_` prefix, snake_case | `int g_total_sales;`        |
+| **Static Variables**| `s_` prefix, snake_case | `static int s_counter;`    |
+| **Pointers**       | `p_` prefix        | `int *p_data;`                 |
+| **Macros**         | UPPERCASE, snake_case | `#define BUFFER_SIZE 1024`   |
+| **File Names**     | lowercase, snake_case | `user_input.c`               |
+
+Following these naming conventions in C will help maintain consistent and easily understandable code.
+
+--- 
+
+
+## Most Useful C Libraries
 
 This document provides an overview of some of the most essential libraries in C programming. These libraries are widely used for handling input/output, memory management, string manipulation, mathematical computations, and more.
 

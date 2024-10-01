@@ -48,17 +48,27 @@ void string_pointers()
 };
 
 
+void format_specifier(){
+    int age = 30;
+    char firstLetter = 'M';
+    printf("You are %d years old and your name starts with %c" ,   age , firstLetter);
+
+};
+
+void input_example(){
+    int p_age;
+    printf("Enter your age:");
+    scanf("%d" , &p_age);
+    printf("You are borned year: %d" , 2024-p_age );
+};
 
 int main()
 {
+    // Format specifier example
+//format_specifier();
 
-
-// string_pointers();
-char *p = "Hello World";
-
-//p[0] = 'M';
-
-printf(p);
+    // Input example:
+//input_example();
 
 
 return 0 ;
