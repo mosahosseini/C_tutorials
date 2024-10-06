@@ -115,16 +115,22 @@ void print_patterns(char shape , char pattern , int size ){
 
 }
 
-
-void triangles(int n){
-    if (n==0)
+//using recursion
+void triangles(int n,  int size ){
+    if (n==size)
         return ;
     else{
-        for (int i=1 ; i<=n ; i++){
-            printf("%c" , '*');
+        int total = size+(size-1);
+        int num_stars = n+(n-1);
+        int num_spaces = (total-num_stars)/2;
+        for (int i=1 ; i<=num_spaces ; i++){
+            printf("%c" , ' ');
+        }
+        for (int j = 1; j <= num_stars ; j++){
+            printf("*");
         }
         printf("\n");
-        triangles(n-1);
+        triangles(n+1 ,size);
     }
 }
 
@@ -133,8 +139,8 @@ int main(){
     //calc();
     
     //print_patterns('t', 'ö' , 30); //print_pattern(shape , pattern , size)
-    printf("\n");
-    triangles(3);
+    printf("\n\n");
+    triangles(1,20);  //triangels(n, size) where n is which level we start to build the triangle from. 
     return 0;
 
 }
