@@ -33,7 +33,19 @@
    - [2.2 User Input](#22-user-input)
    - [2.3 scanf vs printf Behavior](#23-scanf-vs-printf-behavior)
 3. [Operators (Arithmetic, Relational, Logical)](#3-operators-arithmetic-relational-logical)
+  - [3.1 Arithmetic Operators](#31-arithmetic-operators)
+  - [3.1.1 Strange Behavior output of division with rest ](#311-strange-behavior-of-division-with-decimals)
+  - [3.2 Relational Operators](#32-relational-operators-in-c)
+  - [3.3 Logical Operators](#33-logical-operators-in-c)
+  - [3.3.1 Break Down of Logical Operations](#331-breakdown-of-logical-operators)
+
 4. [Control Flow](#4-control-flow)
+    - [4.1 Conditional Statements (if else switch )](#41-conditional-statements-if-else-switch)
+      -[4.1.1 If and Else Statements](#411-if-and-else) 
+      -[4.1.2 Switch case](#412-switch-case)
+    - [4.2 Loops (for, while , do-while )](#42-loops-for-while-do-while)
+      - [4.2.1 For Statement](#421-for-loop)
+      - [4.2.2 While and do-while](#421-while-and-do-while-in-c)
 ---
 
 ## 1. Variables and Datatypes
@@ -332,5 +344,219 @@ int main() {
 
 # 3. Operators (Arithmetic, Relational, Logical)
 
+Operators are symbols that perform operations on variables and values. In C programming, operators are classified into several categories based on the type of operation they perform. In this tutorial, we'll cover three main types of operators:
+
+## 3.1 Arithmetic Operators 
+Arithmetic operators are used to perform basic mathematical operations.
+
+| Operator | Symbol | Description               | Example               |
+|----------|--------|---------------------------|-----------------------|
+| Addition | `+`    | Adds two operands          | `a + b`               |
+| Subtraction | `-` | Subtracts second operand from first | `a - b`      |
+| Multiplication | `*` | Multiplies two operands  | `a * b`               |
+| Division | `/`   | Divides first operand by second | `a / b`           |
+| Modulus | `%`    | Returns remainder of division | `a % b`            |
+
+
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 10, b = 20;
+    
+    printf("Addition: %d\n", a + b);       // Outputs 30
+    printf("Subtraction: %d\n", b - a);    // Outputs 10
+    printf("Multiplication: %d\n", a * b); // Outputs 200
+    printf("Division: %d\n", b / a);       // Outputs 2
+    printf("Modulus: %d\n", b % a);        // Outputs 0
+
+    return 0;
+}
+```
+
+### 3.1.1 Strange Behavior of division with decimals
+Something strange happens when the result of the devision of two integers have decimals. The decimals will be truncated.
+
+In C programming, when you perform the division 1 / 2, the result will be 0 because both 1 and 2 are integers, and integer division in C truncates the decimal part, leaving only the integer part of the result.
+
+To print the result of 1 / 2 as a decimal (e.g., 0.5), you need to perform floating-point division by ensuring that at least one of the operands is a float or double. You can do this in several ways:
+
+- Using typecasting: Convert one of the integers to float or double before performing the division.
+
+- Using floating-point literals: Write the numbers as 1.0 and 2.0.
+
+```c
+#include <stdio.h>
+int main(){
+  printf("Incorrect: The devision of 1 by 2 is : %f \n" , 1/2); //output: 0
+  printf("Alternative 1: The devision of 1 by 2 is : %.2f \n" , (float) 1/2); //output: 0.50
+  printf("Alternative 2: The devision of 1 by 2 is : %.2f \n" , 1.0/2.0); //output: 0.50
+
+  return 0;
+}
+```
+
+
+## 3.2 Relational Operators in C
+Relational operators are used to compare two values or variables. They return either `1` (true) or `0` (false) based on the comparison.
+
+| Operator | Symbol | Description                     | Example     |
+|----------|--------|---------------------------------|-------------|
+| Equal to | `==`   | Returns true if both operands are equal | `a == b`   |
+| Not equal to | `!=` | Returns true if operands are not equal | `a != b`   |
+| Greater than | `>` | Returns true if first operand is greater than second | `a > b` |
+| Less than | `<` | Returns true if first operand is less than second | `a < b` |
+| Greater than or equal to | `>=` | Returns true if first operand is greater than or equal to second | `a >= b` |
+| Less than or equal to | `<=` | Returns true if first operand is less than or equal to second | `a <= b` |
+
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 10, b = 20;
+
+    printf("a == b: %d\n", a == b);    // Outputs 0 (false)
+    printf("a != b: %d\n", a != b);    // Outputs 1 (true)
+    printf("a > b: %d\n", a > b);      // Outputs 0 (false)
+    printf("a < b: %d\n", a < b);      // Outputs 1 (true)
+    printf("a >= b: %d\n", a >= b);    // Outputs 0 (false)
+    printf("a <= b: %d\n", a <= b);    // Outputs 1 (true)
+
+    return 0;
+}
+```
+
+## 3.3 Logical Operators in C
+Logical operators are used to perform logical operations between expressions or conditions. The result is either `true` (1) or `false` (0).
+
+| Operator | Symbol | Description                                   | Example          |
+|----------|--------|-----------------------------------------------|------------------|
+| Logical AND | `&&` | Returns true if both conditions are true      | `(a > 5) && (b < 30)` |
+| Logical OR | `\|\|` | Returns true if at least one condition is true | `(a > 5) \|\| (b < 10)` |
+| Logical NOT | `!`  | Reverses the logical state of its operand      | `!(a == b)`      |
+
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 10, b = 20;
+
+    printf("(a > 5 && b < 30): %d\n", (a > 5 && b < 30));  // Outputs 1 (true)
+    printf("(a > 15 || b < 10): %d\n", (a > 15 || b < 10)); // Outputs 0 (false)
+    printf("!(a == b): %d\n", !(a == b));                  // Outputs 1 (true)
+
+    return 0;
+}
+```
+
+### 3.3.1 Breakdown of Logical Operators:
+
+1. **Logical AND (`&&`)**:
+   - It returns `true` if **both** conditions are true.
+   - Example: `(a > 5 && b < 30)` evaluates to `true` if both `a > 5` and `b < 30` are true.
+
+2. **Logical OR (`||`)**:
+   - It returns `true` if **at least one** of the conditions is true.
+   - Example: `(a > 15 || b < 10)` evaluates to `true` if either `a > 15` or `b < 10` is true.
+
+3. **Logical NOT (`!`)**:
+   - It negates the condition.
+   - Example: `!(a == b)` evaluates to `true` if `a` is **not equal** to `b`.
+
+---
+
+### 3.4 Summary of Operators
+In this tutorial, we covered three main types of operators in C:
+
+1. **Arithmetic Operators** for mathematical calculations like addition, subtraction, etc.
+2. **Relational Operators** for comparing values, returning true or false.
+3. **Logical Operators** for performing logical operations on conditions.
+
+
 
 # 4. Control Flow
+
+## 4.1 Conditional Statements (`if`, `else`, `switch`)
+Conditional statements are the most important part of any progamming language. 
+### 4.1.1 if and else 
+If statement is very easy in C we declare if statement with a condition.
+```C
+void if_statement(int a){
+if (a > 10){
+  printf("The number is larger than 10");
+} 
+else{
+  printf("The number is smaller than or equal to 10");
+}};
+```
+### 4.1.2 Switch case
+In C, a switch statement allows you to execute different blocks of code based on the value of an expression, typically an integer or character. It can be more readable than a series of if-else statements, especially when dealing with multiple conditions. 
+
+The switch statement in C doesn't support relational conditions like >=, <=, or any other comparison operators directly. It only matches specific values (like exact integers or characters) against the expression you provide.
+
+```C
+void switch_case(int a){
+    switch (a)
+    {
+    case 0:
+        printf("You entered 0");
+        break;
+    case 1/* constant-expression */:
+        /* code */
+        printf("You entered 1");
+        break;
+    case 2:
+        printf("You entered 2");
+        break;
+    default:
+        printf("You entered another number");
+        break;
+    }
+}
+```
+## 4.2 Loops (`for`, `while`, `do-while`)
+Loops are fundamental constructs that allow you to execute a block of code multiple times based on a condition. 
+### 4.2.1 For Loop
+For loop in c need a counter , how long should counter do "stop condition" and the increment for example ´for (int i = 0 , i <=10 , i++)´.  
+```c 
+void for_loop(int reps){
+for (int i , i <= 10, i++){
+  printf("i : %d" , i);
+}}
+```
+### 4.2.1 While and do-while in C
+The while and do-while loops are two common types of loops in C. The difference is that in while loop the condition is checked first and the code will get excecuted only if the condition is true. In orther words while loops checks the condition first, then runs the code. OBS! Make sure that the condition will be met, otherwise the code will get stuck in infinite loop and your IDE will crach. 
+
+```c
+void while_loop(int reps){
+    int safty = 0;
+    while (reps>=1 || safty == 1000 ){
+        printf("i: %d \n" , reps);
+        reps--;
+        safty ++;  
+    }
+    if (safty == 1000){
+        printf("Safety activated: Something is wrong with the condition");
+    }
+
+}
+```
+
+Do while loop is the opposite , it will run the code block then checks the condition. 
+
+```c
+void do_while_loop(int reps){
+ 
+    do {
+        printf("i: %d \n" , reps); 
+        reps --;
+
+    }while( reps >= 1);
+}
+```
+
+
+
+
+
+
