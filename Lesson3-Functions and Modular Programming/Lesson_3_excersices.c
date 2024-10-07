@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 //### Exercises:
 //Implement factorial using both loops and recursion
 //Fibonacci series with functions
@@ -71,4 +72,59 @@ int fibonacci(int n){
 }
 
 
+float get_array_length( float a [ ] ){
+    return sizeof(a)/sizeof(a[0]);
+}
+
+
+
+//Write reusable functions for array operations (sum, average, etc.)
+float array_op(float  a []  , char operation []){
+    /* array_op take two float array as input and perform the specified operation 
+    operation : ('s', 'a' , 'm')   
+    */
+   int length_a = get_array_length(a);
+   if ( operation == "sum"){
+    double sum = 0;
+    for (int i = 0 ; i < length_a ; i++){
+        sum = sum + a[i];
+    }
+    return sum;
+   }
+   else if (operation == "avg" || operation == "mean")
+   {
+    double sum = 0;
+
+    for (int i = 0 ; i < length_a ; i++){
+        sum = sum + a[i];
+    }
+    return sum/length_a;
+   }
+
+   else if (operation == "max")
+   {
+    double max = LONG_MIN; 
+    for (int i = 0 ; i<= length_a ; i++)
+    {
+        if (a[i]> max )
+        {
+            max = a[i];
+        }
+    }
+    return max;
+   }
+   else if (operation == "min")
+   {
+    double min = LONG_MAX; 
+    for (int i = 0 ; i<= length_a ; i++)
+    {
+        if (a[i]< min )
+        {
+            min = a[i];
+        }
+    }
+    return min;
+   }
+return 0;
+}
 
