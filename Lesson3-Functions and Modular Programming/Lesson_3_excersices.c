@@ -8,13 +8,37 @@
 int factorial_loop(int n);
 int factorial_recursion(int n);
 int fibonacci(int n);
-
+float array_op(float  a []  , char operation [] , int length_a);
 int main(){
     int n = 3;
     //printf("Factorial of %d is: %d", n ,factorial_loop(n));
     //printf("\n\nFactorial of %d is: %d\n\n", n , factorial_recursion(n));
+    /* 
     printf("\n\n Fibbonacci series of %d is: ", n);
     fibonacci(n);
+    */
+    float a [] = {1,2,3,4,5};
+    char op [] = "max";
+   
+    float result = array_op(a, op ,sizeof(a)/sizeof(a[0]));
+    /*
+
+    float min = array_op(a, "min" ,sizeof(a)/sizeof(a[0]));
+    float sum = array_op(a, "sum" ,sizeof(a)/sizeof(a[0]));
+    float mean = array_op(a, "mean" ,sizeof(a)/sizeof(a[0]));
+    */
+    printf("%s of the array: [" , op );
+    for (int i =0 ; i < sizeof(a)/sizeof(a[0]) ; i++){
+        if (i != sizeof(a)/sizeof(a[0])-1 ){
+        printf("%.1f," , a[i]);
+        }
+        else{
+            printf("%.1f" , a[i]);
+        }
+    }
+
+    printf("] is : %.1f", result);
+
 }
 
 int factorial_loop(int n){
@@ -70,20 +94,11 @@ int fibonacci(int n){
     }
     print_array(series, n);
 }
-
-
-float get_array_length( float a [ ] ){
-    return sizeof(a)/sizeof(a[0]);
-}
-
-
-
 //Write reusable functions for array operations (sum, average, etc.)
-float array_op(float  a []  , char operation []){
+float array_op(float  a []  , char operation [] , int length_a){
     /* array_op take two float array as input and perform the specified operation 
     operation : ('s', 'a' , 'm')   
     */
-   int length_a = get_array_length(a);
    if ( operation == "sum"){
     double sum = 0;
     for (int i = 0 ; i < length_a ; i++){
@@ -104,7 +119,7 @@ float array_op(float  a []  , char operation []){
    else if (operation == "max")
    {
     double max = LONG_MIN; 
-    for (int i = 0 ; i<= length_a ; i++)
+    for (int i = 0 ; i< length_a ; i++)
     {
         if (a[i]> max )
         {
@@ -116,7 +131,7 @@ float array_op(float  a []  , char operation []){
    else if (operation == "min")
    {
     double min = LONG_MAX; 
-    for (int i = 0 ; i<= length_a ; i++)
+    for (int i = 0 ; i< length_a ; i++)
     {
         if (a[i]< min )
         {

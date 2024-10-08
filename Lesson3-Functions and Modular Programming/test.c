@@ -1,10 +1,11 @@
 #include <stdio.h>
 
-int main(){
-    double d= 4.213214;
-    int i = 3;
-    double array [] ={};
-    printf("value of t is %f", i*d );
 
+int main(){
+    int arr = {1,3,4,5};
+    char a [] ="max";
+    char b [] = a[0..-1];
+    int al = array_length(arr);
+    printf("length of array is : %d" , al);
     return 0;
 }
