@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <limits.h>
+#include <string.h>
 //### Exercises:
 //Implement factorial using both loops and recursion
 //Fibonacci series with functions
@@ -18,7 +19,7 @@ int main(){
     fibonacci(n);
     */
     float a [] = {1,2,3,4,5};
-    char op [] = "max";
+    char op [] = "sum";
    
     float result = array_op(a, op ,sizeof(a)/sizeof(a[0]));
     /*
@@ -99,14 +100,16 @@ float array_op(float  a []  , char operation [] , int length_a){
     /* array_op take two float array as input and perform the specified operation 
     operation : ('s', 'a' , 'm')   
     */
-   if ( operation == "sum"){
+ //  printf("string compair result is: %d" ,  strcmp(operation , "sum"));
+   if ( strcmp(operation , "sum") == 0){
     double sum = 0;
     for (int i = 0 ; i < length_a ; i++){
         sum = sum + a[i];
     }
     return sum;
    }
-   else if (operation == "avg" || operation == "mean")
+   
+   else if (strcmp(operation ,  "avg") == 0 || strcmp(operation , "mean") ==0)
    {
     double sum = 0;
 
@@ -116,7 +119,7 @@ float array_op(float  a []  , char operation [] , int length_a){
     return sum/length_a;
    }
 
-   else if (operation == "max")
+   else if ( strcmp(operation , "max") == 0 )
    {
     double max = LONG_MIN; 
     for (int i = 0 ; i< length_a ; i++)
@@ -128,7 +131,7 @@ float array_op(float  a []  , char operation [] , int length_a){
     }
     return max;
    }
-   else if (operation == "min")
+   else if ( strcmp(operation , "min") == 0 )
    {
     double min = LONG_MAX; 
     for (int i = 0 ; i< length_a ; i++)
