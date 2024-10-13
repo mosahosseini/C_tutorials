@@ -7,6 +7,53 @@
 - Reverse a string
 */
 
+
+// let's first define some help function to do the printing of arrays for us. 
+void print_array(float *array , int size);
+void print_int_array(int *array , int size);
+
+// ********************** Help functions********************************
+void print_array(float *array, int size)
+{
+
+    for (int i = 0; i <= size - 1; i++)
+    {
+
+        if (i == 0)
+        {
+            printf("\n [%.1f , ", array[i]);
+        }
+        else if (i == size - 1)
+        {
+            printf("%.1f]", array[i]);
+        }
+        else
+        {
+            printf("%.1f , ", array[i]);
+        }
+    }
+}
+
+
+void print_int_array(int * array , int size){
+    for (int i = 0; i < size ; i++){
+        if (i == 0)
+        {
+            printf("\n [%d,", array[i]);
+        }
+        else if (i == size-1)
+        {
+            printf("%d]", array[i]);
+        }
+        else
+        {
+            printf("%d,", array[i]);
+        }
+    }
+}
+
+//***************************** Execises**********************************
+
 // Linear Search
 // I want to implement it using pointer
 int *linear_search(float *array, float element, int size, int *resultSize);
@@ -44,6 +91,8 @@ int *linear_search(float *array, float element, int size, int *resultSize)
     return p_indexes;
 }
 
+
+//Binary search 
 int binary_search(int *array, int element, int start, int end)
 {
     /*
@@ -57,8 +106,8 @@ int binary_search(int *array, int element, int start, int end)
     - 3. If searched_element> left and  searched_element <= mid :  right = mid ,  mid = (int) (index(left)+ index(mid))/2
     - 4. If searched_element> mid and  searched_element <= right :  left = mid+1 ,  mid = (int) (index(mid)+ index(right))/2
     - 5. If left ==mid or right == mid  return index.
-
     */
+
     int mid = (int)(end + start) / 2;
 
     if (start == mid || end == mid)
@@ -79,28 +128,8 @@ int binary_search(int *array, int element, int start, int end)
         }
     }
 }
-
-void print_array(float *array, int size)
-{
-
-    for (int i = 0; i <= size - 1; i++)
-    {
-
-        if (i == 0)
-        {
-            printf("\n [%.1f , ", array[i]);
-        }
-        else if (i == size - 1)
-        {
-            printf("%.1f]", array[i]);
-        }
-        else
-        {
-            printf("%.1f , ", array[i]);
-        }
-    }
-}
-
+// To simply run the algorithms i define a run function for each exercise with a predefine example. 
+//******************************** Run functions******************************
 void run_linear_search()
 {
     float array[] = {3, 5, 7, 8, 12, 14, 13, 14, 19, 20, 37, 44, 56};
@@ -125,6 +154,7 @@ void run_linear_search()
     }
     printf("]\n\n");
 }
+
 
 
 void run_binary_search(){
@@ -155,15 +185,65 @@ void run_binary_search(){
     int ind = binary_search(array, searched_element , 0 , size-1);
 
     printf("answer: index of the searched element is: %d \n\n" , ind);
-
-
-
 }
 
 
 
+
+//- Implement bubble sort
+
+int * bubble_sort(int * array , int size ){
+    /*
+    - Bubble sort algorithm
+    * Start from the left , compare ajacent element swap if the left element is larger that the right element: otherwise go to the next pair. 
+    * If no swap happenes during the iteration then the array is sorted. 
+    */
+
+    for (int i = 0 ; i< size; i++){
+        int swap_happend = 0;
+        for (int j = 0 ; j < size-1 ; j++){
+            int left = array[j];
+            int right = array[j+1];
+            if  (left >right){
+                swap_happend = 1;
+                array[j] = right;
+                array[j+1] = left;
+
+            }
+        }
+        if(swap_happend == 0){
+            return array;
+        }
+    }
+    return array;
+
+}
+
+void run_bubble_sort(){
+    int array [] = {2,3,6,1,1,1,1,1,8,7,0,9};
+    printf("The example array before sorting: ");
+    print_int_array(array , sizeof(array)/sizeof(array[0])); // we could write sizeof(int) and because the sizeof int is 4 we could simply write 4.
+
+    int * sorted = bubble_sort( array , sizeof(array)/sizeof(array[0]) );
+    printf("\n\nThe array after sorting is:");
+    print_int_array(sorted , sizeof(array)/sizeof(array[0]) ); 
+    printf("\n\n");
+    //Note that because sorted is a pointed , we can use sizeof(sorted)/sizeof(int).
+    //This will give use 2 because the pointes size is 8 bytes. 
+    //But because we know that the sorted array must have the 
+    //same size as original array and we know the length of 
+    //the original array, we can simply use that.
+    //!! Because the length of array should not change 
+    //during sorting. 
+
+
+}
+
+//********************************************* Main method: Just uncomment the algorithm you want to run ***********************************
 int main()
 {
     //run_linear_search();
-    run_binary_search();
+    //run_binary_search();
+    run_bubble_sort();
+    
 }

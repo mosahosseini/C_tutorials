@@ -1,34 +1,45 @@
-#include <stdio.h>
+# include <stdio.h>
 
+int * bubble_sort(int * array , int size ){
 
-int  binary(int* array ,int element ,int start, int end){
-    int mid = (int) (end+start)/2;
-    printf("start: %d , mid: %d  , end: %d  \n " , start ,mid , end);
-    if (start==mid || end == mid){
-        printf("element %d is in index: %d" , element , mid);
-        return mid ;
-    }
-    else{
-    if (element >= array[start] && element< array[mid]){
-        return binary(array , element , start , mid);
-    }
-    if (element >= array[mid] && element <= array[end] ){
-        return binary(array , element , mid , end);
-    }
+    for (int i = 0 ; i< size; i++){
+        int swap_happend = 0;
+        for (int j = 0 ; j < size-1 ; j++){
+            int left = array[j];
+            int right = array[j+1];
+            if  (left >right){
+                swap_happend = 1;
+                array[j] = right;
+                array[j+1] = left;
 
-/* 
-
-    printf("start= %d  , mid = %d  , end = %d\n", array[start] , array[mid] , array[end]);
-    binary(array, start , mid);
-*/
+            }
+        }
+        if(swap_happend == 0){
+            return array;
+        }
     }
+    return array;
+
 }
 
 int main(){
-    int array[] = {1,2,3,6,8,9};
-    int start = 0;
-    int end = sizeof(array)/sizeof(array[0])-1;
-    int ind = binary(array , 3,start , end);
-    printf("index of 3 is : %d ", ind);
+    int array [] = {2,3,6,1,1,1,1,1,8,7,0,9};
+
+    int * sorted = bubble_sort( array , sizeof(array)/sizeof(array[0]));
+
+    for (int i = 0 ; i < sizeof(array)/sizeof(int) ; i++){
+        if (i==0){
+            printf("\n[%d," , sorted[i]);
+        }
+        else if (i== sizeof(array)/sizeof(int)-1){
+            printf("%d]" , sorted[i] );
+        }
+        else{
+           printf("%d," , sorted[i]); 
+        }
+
+
+    }
+    
     return 0;
 }
