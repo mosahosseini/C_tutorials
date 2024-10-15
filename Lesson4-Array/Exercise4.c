@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 /*
 - Implement linear search and binary search
 - Implement bubble sort
@@ -54,11 +55,13 @@ void print_int_array(int * array , int size){
 
 //***************************** Execises**********************************
 
-// Linear Search
-// I want to implement it using pointer
+//functions prototyps
 int *linear_search(float *array, float element, int size, int *resultSize);
 int binary_search(int *array, int element, int start, int end);
+int * bubble_sort(int * array , int size );
+void reverse_string(char * str);
 
+// I want to implement it using pointer
 int *linear_search(float *array, float element, int size, int *resultSize)
 {
     int count = 0;
@@ -128,6 +131,49 @@ int binary_search(int *array, int element, int start, int end)
         }
     }
 }
+
+
+
+//- Implement bubble sort
+
+int * bubble_sort(int * array , int size ){
+    /*
+    - Bubble sort algorithm
+    * Start from the left , compare ajacent element swap if the left element is larger that the right element: otherwise go to the next pair. 
+    * If no swap happenes during the iteration then the array is sorted. 
+    */
+
+    for (int i = 0 ; i< size; i++){
+        int swap_happend = 0;
+        for (int j = 0 ; j < size-1 ; j++){
+            int left = array[j];
+            int right = array[j+1];
+            if  (left >right){
+                swap_happend = 1;
+                array[j] = right;
+                array[j+1] = left;
+
+            }
+        }
+        if(swap_happend == 0){
+            return array;
+        }
+    }
+    return array;
+
+}
+
+
+
+void reverse_string(char* str ){
+    for (int i = strlen(str)-1 ; i >=0 ; i--){
+        printf("%c",str[i]);
+    }
+
+
+
+}
+
 // To simply run the algorithms i define a run function for each exercise with a predefine example. 
 //******************************** Run functions******************************
 void run_linear_search()
@@ -188,37 +234,6 @@ void run_binary_search(){
 }
 
 
-
-
-//- Implement bubble sort
-
-int * bubble_sort(int * array , int size ){
-    /*
-    - Bubble sort algorithm
-    * Start from the left , compare ajacent element swap if the left element is larger that the right element: otherwise go to the next pair. 
-    * If no swap happenes during the iteration then the array is sorted. 
-    */
-
-    for (int i = 0 ; i< size; i++){
-        int swap_happend = 0;
-        for (int j = 0 ; j < size-1 ; j++){
-            int left = array[j];
-            int right = array[j+1];
-            if  (left >right){
-                swap_happend = 1;
-                array[j] = right;
-                array[j+1] = left;
-
-            }
-        }
-        if(swap_happend == 0){
-            return array;
-        }
-    }
-    return array;
-
-}
-
 void run_bubble_sort(){
     int array [] = {2,3,6,1,1,1,1,1,8,7,0,9};
     printf("The example array before sorting: ");
@@ -239,11 +254,16 @@ void run_bubble_sort(){
 
 }
 
+
+void run_reverse_string(){
+    char str [] = "Hello World";
+    reverse_string(str);
+}
 //********************************************* Main method: Just uncomment the algorithm you want to run ***********************************
 int main()
-{
+{   
     //run_linear_search();
     //run_binary_search();
-    run_bubble_sort();
-    
+    //run_bubble_sort();
+    run_reverse_string();
 }
