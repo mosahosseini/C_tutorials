@@ -149,3 +149,141 @@ if (ptr != NULL) {
 ``` 
 
 # 2. Dynamic Memory Allocation (`malloc`, `calloc`,`realloc`, `free`)
+Dynamic memory allocation allows you to allocate memory at runtime using functions from the C Standard Library.
+This is useful when you don't know the size of your data beforehand or when you want to allocate memory for data
+ structures that can grow or shrink.
+
+1. `malloc()` - Allocates uninitialized memory.
+2. `calloc()` - Allocates zero-initialized memory.
+3. `realloc()` - Resizes previously allocated memory.
+4. `free()` - Deallocates previously allocated memory.
+
+
+## 2.1 Basic Syntax
+
+1. `void* malloc(size_t size);`
+2. `void* calloc(size_t num, size_t size);` 
+3. `void* realloc(void* ptr, size_t new_size);` 
+4. `void free(void* ptr);` 
+
+Examples:
+
+**Step 1: Using `malloc()`**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *arr;
+    int n;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    // Allocate memory for n integers
+    arr = (int *)malloc(n * sizeof(int));
+
+    if (arr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1; // Exit if allocation fails
+    }
+
+    // Input values
+    for (int i = 0; i < n; i++) {
+        printf("Enter element %d: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+
+    // Display values
+    printf("You entered: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    // Free allocated memory
+    free(arr);
+    return 0;
+}
+```
+
+**Step 2: Using `calloc`**
+In contrary to malloc , calloc takes two arguments, `(int*) calloc(int num_items, sizeof_item)`
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+   int n = 5;
+   int *array;
+   
+   // use calloc function to allocate the memory
+   array = (int*)calloc(n, sizeof(int));
+   
+   if (array == NULL) {
+      fprintf(stderr, "Memory allocation failed!\n");
+      return 1;
+   }
+   
+   //Display the array value
+   printf("Array elements after calloc: ");
+   for (int i = 0; i < n; i++) {
+      printf("%d ", array[i]);
+   }
+   printf("\n");
+   
+   //free the allocated memory
+   free(array);
+   return 0;
+}
+```
+
+**Step 3: Using `realloc`**
+Sometimes we need to change the size of previousely allocated memory. Lets say we have an array that number of students in a classrum. The class have 30 student and we initiate an array that contains the name of all students. After a while a new student arrives but our array doesnt have anough memory allocated for the last student. 
+
+1. Create a new array and allocated memory for 31 elements. 
+2. Copy each element form the old array to the new array. 
+3. At the last position in array add the new student. 
+4. Free memory that was allocated for the old array.
+
+But doing this for each new student  is not efficient, a better way is to use `realloc`. 
+
+1. Use the `realloc` to allocate additional memory to the original array. 
+2. In the 31 th position add a the new element. 
+
+```c
+    int size = 5;
+    int *arr ;
+    arr = (int*)malloc(size*sizeof(int));
+
+    for (int i = 0 ; i< size ; i++){
+        arr[i] = i
+    }
+
+    int new_size = 9;
+    // reallocation 
+    arr = realloc(arr , new_size*sizeof(int) );
+
+    for (int i = size ; i < new_size ; i++ ){
+        arr[i] = i
+    }
+    
+    
+    for (int i = 0 ; i < new_size ; i++ ){
+        if (i==0){
+        printf("[%d," , arr[i])            
+        }
+        else if(i== new_size-1){
+         printf("%d]" , arr[i])           
+        }
+        else{
+        printf("%d" , arr[i])
+        }
+
+    }
+```
+
+
+**Step 4: Using `free`**
+
+It is very important to use `free` after you are done with the data structure. Otherwise there is a risk for memory leak. 
