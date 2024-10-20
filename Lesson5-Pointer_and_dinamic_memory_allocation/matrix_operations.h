@@ -8,7 +8,29 @@ typedef struct {
 } matrix;
 
 
-void initialize_matrix(matrix*mat , int row , int col , int * arr){
+typedef struct {
+        int *arr;
+        int size; 
+    } modArray;
+
+
+/*
+
+matrix init_mat( int* vec [] , int row , int col){
+    matrix mat;
+    mat.array = (int**)malloc( row*sizeof(int*));
+    mat.row_size = row;
+    mat.col_size = col; 
+    for(int i = 0 ; i< row ; i++ ){
+        mat.array[i] = (int*) malloc( col*sizeof(int));  
+        mat.array[i] = &vec[i];    
+    }
+    return mat ; 
+}
+*/
+
+void initialize_matrix(matrix*mat , int row , int col , modArray* mod_arr){
+    
     mat->col_size = col;
     mat -> row_size = row;
 
@@ -21,20 +43,66 @@ void initialize_matrix(matrix*mat , int row , int col , int * arr){
         mat -> array[i] = (int*) malloc(col*sizeof(int));
     } 
 
-/*
+    int r = 0 ; 
 
-    int row = 0 ; 
-    for (int i = 0 ; i< sizeof(arr)/sizeof(int) ; i+col){
-        for (int j = 0 ; j<col ; j++){
-            mat-> array[row , j] = arr[i+j];
-        }
-        row ++;
+    // obs , fix this so that the size of array is accessible.
+    for (int i = 0 ; i< mod_arr->size ; i+=col){
+//        for (int j = 0 ; j<col ; j++){
+            mat-> array[r] = &(mod_arr-> arr[i]);
+//        }
+        r ++;
     }       
-*/
+}
+
+void print_matrix( matrix *mat ){
+    int row = mat-> row_size;
+    int col = mat -> col_size;
+    printf("|");
+    for (int i = 0 ; i< row ; i++){
+        for (int j = 0 ; j<col ; j++){
+            if (j == col-1){
+            printf("%d" , mat->array[i][j]);               
+            }
+            else {
+            printf("%d " , mat->array[i][j]);
+            }
+        }
+        if (i == row-1){
+            printf("|\n");
+        }
+        else{
+            printf("|\n|");
+        }
+
+    }  
+    free(mat->array);
+}   
 
 
+int** add_mat(matrix*a , matrix *b){
+
+    int ** arr ; 
+    int r = a-> row_size;
+    int c = a-> col_size; 
+    arr = (int**)malloc(r*sizeof(int*));
+
+    for (int i = 0 ; i < r ; i++){
+        arr[i] = (int*)malloc(c*sizeof(int));
+        for (int j = 0 ; j <c ; j++){
+            arr[i][j] = (a->array[i][j])+(b->array[i][j]);
+            int cos = (a->array[i][j]) + (b->array[i][j]);
+            printf("%d", arr[i][j]);
+
+        }
+    }
+
+
+
+    
+    return arr;
 
 }
+
 
 
 
