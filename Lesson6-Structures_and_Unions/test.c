@@ -1,20 +1,15 @@
 #include <stdio.h>
 
 int main(){
-    struct car {
-        char* name  ; 
-        char* model;
-        int year ;
-    };
+typedef struct person {
+    char * name ; 
+    char * address ; 
+} person;
 
-    struct car car1 ; 
-    car1.name = "volvo";
-    car1.model = "v70";
-    car1.year  = 20;
+person person1; 
+person1.name = "Alan Turing";
+person1.address = "West minister abby 2C";
 
-    printf("the name of the car is: %s" ,car1.model );
-
-    return 0;
-
-
+printf("Name : %s\n" , person1.name);
+printf("Address: %s" , person1.address);
 }
