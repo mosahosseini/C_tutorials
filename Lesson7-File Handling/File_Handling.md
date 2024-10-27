@@ -12,7 +12,7 @@
 In C, file handling is done using the standard library `<stdio.h>`. File operations are carried out with file pointers and the `fopen`, `fclose`, `fread`, `fwrite`, `fseek`, and `ftell` functions.
 
 ## 1.1 `fopen` and `fclose`
-Files are opened using fopen and closed with fclose. The function `fopen` takes two arguments , the first one is the name of the file and the second one is the mode (determinds if we are reading or writing to the file) and it will return a pointer of type FILE.
+Files are opened using fopen and closed with `fclose`. The function `fopen` takes two arguments , the first one is the name of the file and the second one is the mode (determinds if we are reading or writing to the file) and it will return a pointer of type FILE.
 
 Example:  
 ```c
@@ -39,15 +39,15 @@ Here is a table of available file modes.
 
 ---
 
-## 1.3 Reading/Writing
+# 2 Reading/Writing
 
 When working with files in C, there are multiple ways to read from and write to files. Each function has different use cases, depending on whether you’re working with text or binary data, handling line-by-line versus word-by-word operations, and whether your focus is on precision or efficiency. Here’s a breakdown of when to use each function.
 
 
-## 1.4 Writing To A File
+## 2.1 Writing To A File
 You can Write to a file using `fprintf`, `fputs`, or `fwrite`.
-### 1.4.1 `fprintf`
-**Use Case:** Writing formatted text data, similar to printf but into a file. This is useful when writing structured information like strings, integers, floats, etc., where formatting (spacing, precision, etc.) is important.
+### 2.1.1 `fprintf`
+**Use Case:** Writing formatted text data, similar to `printf` but into a file. This is useful when writing structured information like strings, integers, floats, etc., where formatting (spacing, precision, etc.) is important.
 
 **Syntax**
 
@@ -69,7 +69,7 @@ fclose(file);
 - Need control over formatting.
 - Logging or saving structured data where format is required.
 
-### 1.4.2 `fputs`
+### 2.1.2 `fputs`
 Use Case: Writing strings to a file, typically one line or chunk at a time without formatting. It doesn’t append newlines automatically, so if you need to separate lines, you have to add \n manually.
 
 **Syntax:**
@@ -93,7 +93,7 @@ fclose(file);
 - Writing simple string data (e.g., line-by-line logging).
 - Avoiding format specifiers for faster output when structure isn’t critical.
 
-### 1.4.3 `fwrite`
+### 2.1.3 `fwrite`
 Use Case: Writing raw binary data or fixed-size data structures to a file. fwrite doesn’t add line breaks or any formatting, so it’s efficient for handling large amounts of binary data or structs.
 
 **Syntax**
@@ -126,10 +126,11 @@ fclose(file);
 
 
 
-## 1.5 Reading From A File 
+## 2.2 Reading From A File 
 
 
-### 1. `fscanf`
+### 2.2.1  `fscanf`
+
 
 **Use Case:** Reading formatted text data, like integers, floats, and strings, where specific format specifiers are needed to interpret the data correctly. Similar to `scanf` but for files.
 
@@ -152,7 +153,10 @@ fscanf(file, "Name: %s, Age: %d, GPA: %f", name, &age, &gpa);
 printf("Name: %s, Age: %d, GPA: %.2f\n", name, age, gpa);
 fclose(file);
 ```
-
+Note that the `data.txt` should be formated as: 
+```c
+Name:John , Age:20, GPA: 3.75
+```
 **When to Use:**
 - Reading structured, formatted text.
 - Extracting specific data types and applying formats (useful for parsing structured text).
@@ -160,7 +164,7 @@ fclose(file);
 
 ---
 
-### 2. `fgets`
+### 2.2.2 `fgets`
 
 **Use Case:** Reading a line of text at a time (until `\n` or end-of-file) into a string. This is efficient and safe for string-based files but doesn’t parse numbers directly.
 
@@ -190,7 +194,7 @@ fclose(file);
 
 ---
 
-### 3. `fread`
+### 2.2.3 `fread`
 
 **Use Case:** Reading raw binary data, commonly used to load files with binary data structures or exact byte-length blocks. It reads exactly the amount specified, without interpretation.
 
@@ -227,7 +231,7 @@ fclose(file);
 
 Each command has a unique purpose. Text-based functions (`fprintf`, `fputs`, `fscanf`, `fgets`) work best for human-readable files, while binary-focused functions (`fwrite`, `fread`) are suitable for handling structured data that doesn’t require interpretation. Choose functions based on the structure and format of your data, ensuring compatibility with the intended data structure and format.
 
-
+# 3 andom Access in Files (`fseek`, `ftell`)
 
 
 
