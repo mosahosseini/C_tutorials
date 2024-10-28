@@ -1,0 +1,1 @@
+        printf("Employee ID: %d , First Name: %s , Last Name: %s\n" , emp.employee_id ,emp.f

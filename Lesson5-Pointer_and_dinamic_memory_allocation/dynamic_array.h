@@ -17,7 +17,7 @@ void initArray(DynamicArray *arr , int capacity){
 }
 
 void resizeArray(DynamicArray *arr , int new_capacity){
-    int* new_arr = realloc(arr , new_capacity * sizeof(int));
+    int* new_arr = (int* )realloc(arr , new_capacity * sizeof(int));
     if (new_arr != NULL){
         arr -> array = new_arr;
         arr -> capacity = new_capacity;

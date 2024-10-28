@@ -1,0 +1,4 @@
+this is a line
+this is another line
+this is third line 
+i want to write this line do determine how buffer works. May be it need some more text
