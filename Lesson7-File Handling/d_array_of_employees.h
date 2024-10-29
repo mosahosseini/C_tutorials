@@ -66,11 +66,36 @@ employee get(dynamic_array *dyn_arr ,int emp_id ){
 }
 
 
+employee remove_element(dynamic_array *dyn_arr , int emp_id){
+    employee emp;  
+    for (int i = 0 ; i<dyn_arr->size ; i++){
+        if (dyn_arr->array[i].employee_id== emp_id){   
+            emp= dyn_arr->array[i];
+            for (int j = i ; j<dyn_arr->size-1 ; j++){
+                dyn_arr->array[j] = dyn_arr->array[j+1];
+            }
+            dyn_arr->size--;
+            return emp;
+        }
+    }
+    perror("Employee not found in the database!");
+    return emp;
+}
+
+void free_array(dynamic_array *dyn_arr){
+    free(dyn_arr);
+    if (dyn_arr == NULL){
+        printf("Successfully freed!");
+    }
+}
+
 void print_array(dynamic_array *dyn_arr){
     for (int i = 0 ; i< dyn_arr-> size ; i++){
         employee emp = dyn_arr->array[i];
         printf("Employee ID: %d , First Name: %s , Last Name: %s\n" , emp.employee_id ,emp.first_name , emp.last_name);
     }
-    free(dyn_arr);
+
 }
+
+
 

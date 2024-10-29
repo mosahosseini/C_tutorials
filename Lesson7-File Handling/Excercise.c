@@ -78,8 +78,6 @@ void read_employee_data(char * data , dynamic_array * emp_arr){
 //            printf("emp_arr size:%d , emp_arr capacity : %d\n " ,  emp_arr-> size , emp_arr-> capacity);
         }
     }
-
-
 }
 
 
@@ -111,6 +109,13 @@ dynamic_array emp_arr ;
 init_dyn_array(&emp_arr , 2);
 read_employee_data( data , &emp_arr);
 print_array(&emp_arr);
+
+employee em = remove_element(&emp_arr , 2);
+//employee em = {1, "Brah" , "Bro"};
+printf("removed_employee : Emp_id: %d , first name: %s ,last name: %s" , em.employee_id , em.first_name , em.last_name);
+
+print_array(&emp_arr);
+//free_array(&emp_arr);
 
 
 
