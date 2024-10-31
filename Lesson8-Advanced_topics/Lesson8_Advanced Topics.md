@@ -81,7 +81,7 @@ hello Alex
 Hello Alex
 ```
 
-## How argv And argc Works
+## 1.3 How argv And argc Works
 The `argc` parameter is telling main function how many commandline arguments are expected. 
 
 The `argv[]` paramenter is containing command line arcuments. 
@@ -97,4 +97,85 @@ The `argv[]` paramenter contains:
 argv[] = {"hello" , "Alex"}
 ``` 
 Therefore we print only the second element in `argv`. 
+
+## 2. Preprocessor Directives. 
+Preprocessors are programs that process the source code before compilation. Several steps are involved between writing a program and executing a program in C. Let us have a look at these steps before we actually start learning about Preprocessors.
+
+![Source: Geek For Geeks ](https://media.geeksforgeeks.org/wp-content/cdn-uploads/Preprocessor-In-C.png)
+
+
+
+You can see the intermediate steps in the above diagram. The source code written by programmers is first stored in a file, let the name be “program.c“. This file is then processed by preprocessors and an expanded source code file is generated named “program.i”. This expanded file is compiled by the compiler and an object code file is generated named “program.obj”. Finally, the linker links this object code file to the object code of the library functions to generate the executable file “program.exe”. 
+
+Preprocessor programs provide preprocessor directives that tell the compiler to preprocess the source code before compiling. All of these preprocessor directives begin with a ‘#’ (hash) symbol. The ‘#’ symbol indicates that whatever statement starts with a ‘#’ will go to the preprocessor program to get executed. We can place these preprocessor directives anywhere in our program.
+
+what we know so far about preprocessor: 
+* preprocessors are excecuted before the code is compiled. 
+* Preprocessor directives tells the compiler to preprocess the source code before compiling.
+* Each preprocessor directives start with `#` and can be placed anywehere in the code. 
+
+Examples of some preprocesssor directives are `#include` , `#define` , `#ifndef`.
+
+Remember that the # symbol only provides a path to the preprocessor, and a command such as include is processed by the preprocessor program. For example, #include will include the code or content of the specified file in your program.
+
+|**Perprocessor Directives**|**Describtion**         |
+|---------------------------|---------------         |
+|#define                    |Used to define macro    |
+|#undef                     |Used to undefine a macro| 
+|#include                   |Used to include a file in the source code programm|
+|#ifdef                     |Used to include a section of code if a certain macro is not defined by #define|
+|#if                        |check for the specified condition|
+|#else                      |Alternate code that executes when #if fails|
+|#elif                      |Combined else and if for another condition check|
+|endif                      |Used to mark the end of #if, #ifdef, and ifndef|
+
+
+## 2.1 Macors 
+In C, Macros are piece of code in a program that is given some name. Whenever this name encountered by compiler, the compiler replaces the name with the actual piece of code. To define a macro we use the preprocessor directive `#define`. 
+Example: 
+
+```c
+#include <stdio.h>
+#define PI  3.14
+int main(){
+printf("The value of pi appoximately is: %f",PI );
+}
+```
+
+### 2.1.1 Macros with argument
+In example above we used macros to declare a constant value. It is also possible to use macros as a function with arguments. 
+
+```c
+#include <stdio.h>
+#include <math.h>
+//#define root(x) sqrt(x)
+
+int main(){
+int x = 2; 
+printf("root of %d is: %.3f" ,x, root(x) );
+}
+```
+## 2.2 File Inclusion
+
+This type of preprocessor directive tells the compiler to include a file in the source code program. The `#include` preprocessor directive is used to include the header files in the C program.
+
+**There are two types of files that can be included by the user in the program:**
+
+### 2.2.1 Standard Header File
+The standard header files contain definitions of pre-defined functions like `printf()`, `scanf()`, etc. These files must be included to work with these functions. Different functions are declared in different header files.
+
+**Syntax**
+```c
+#include <file_name>
+```
+where file_name is the name of the header file to be included. The ‘<‘ and ‘>’ brackets tell the compiler to look for the file in the standard directory.
+
+### 2.2.2 User-defined Header Files
+When a program becomes very large, it is a good practice to divide it into smaller files and include them whenever needed. These types of files are user-defined header files.
+
+**Syntax**
+```c
+#include "filename"
+```
+The double quotes ( ” ” ) tell the compiler to search for the header file in the source file’s directory.
 
