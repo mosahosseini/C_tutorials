@@ -179,3 +179,185 @@ When a program becomes very large, it is a good practice to divide it into small
 ```
 The double quotes ( ” ” ) tell the compiler to search for the header file in the source file’s directory.
 
+## 2.4 Conditional Directives 
+Conditional Compilation in C directives is a type of directive that helps to compile a specific portion of the program or to skip the compilation of some specific part of the program based on some conditions. There are the following preprocessor directives that are used to insert conditional code:
+```c
+#ifdef macro_name
+    // Code to be executed if macro_name is defined
+#ifndef macro_name
+   // Code to be executed if macro_name is not defined
+#if constant_expr
+    // Code to be executed if constant_expression is true
+#elif another_constant_expr
+    // Code to be excuted if another_constant_expression is true
+#else
+    // Code to be excuted if none of the above conditions are true
+#endif
+```
+If the macro with the name ‘macro_name‘ is defined, then the block of statements will execute normally, but if it is not defined, the compiler will simply skip this block of statements.
+
+```c
+//program to demonstrates the use of #if, #elif, #else,
+// and #endif  preprocessor directives.
+#include <stdio.h>
+
+// defining PI
+#define PI 3.14159
+
+int main()
+{
+  
+#ifdef PI
+    printf("PI is defined\n");
+  
+#elif defined(SQUARE)
+    printf("Square is defined\n");
+#else
+    #error "Neither PI nor SQUARE is defined"
+#endif
+  
+#ifndef SQUARE
+    printf("Square is not defined"); 
+#else
+    cout << "Square is defined" << endl;
+#endif
+
+    return 0;
+}
+``` 
+## 2.5 Undef Directives 
+The `#undef` directive is used to undefine an existing macro. This directive works as:
+Using this statement will undefine the existing macro LIMIT. After this statement, every “#ifdef LIMIT” statement will evaluate as false. 
+
+```c
+#include <stdio.h>
+
+// defining MIN_VALUE
+
+#define MIN_VALUE 10
+
+int main() {
+    // Undefining and redefining MIN_VALUE
+printf("Min value is: %d\n",MIN_VALUE);
+  
+//undefining max value   
+#undef MIN_VALUE
+  
+// again redefining MIN_VALUE  
+#define MIN_VALUE 20
+
+    printf("Min value after undef and again redefining it: %d\n", MIN_VALUE);
+
+    return 0;
+}
+```
+Example output:
+
+```c
+Min value is: 10
+Min value after undef and again redefining it: 20
+```
+
+ ## 2.6 Pragma Directives
+
+ Some of the #pragma directives are discussed below: 
+1. `#pragma startup:` These directives help us to specify the functions that are needed to run before program startup (before the control passes to main()).
+2. `#pragma exit:` These directives help us to specify the functions that are needed to run just before the program exit (just before the control returns from main()).
+```c
+// C program to illustrate the #pragma exit and pragma
+// startup
+#include <stdio.h>
+
+void func1();
+void func2();
+
+// specifying funct1 to execute at start
+#pragma startup func1
+// specifying funct2 to execute before end
+#pragma exit func2
+
+void func1() { printf("Inside func1()\n"); }
+
+void func2() { printf("Inside func2()\n"); }
+
+// driver code
+int main()
+{
+    void func1();
+    void func2();
+    printf("Inside main()\n");
+
+    return 0;
+}
+
+```
+example output:
+```c
+Inside func1()
+Inside main()
+Inside func2()
+```
+The above code will produce the output as given below when run on GCC compilers: 
+```c
+Inside main()c 
+```
+
+This happens because GCC does not support #pragma startup or exit. However, you can use the below code for the expected output on GCC compilers. 
+
+```c
+#include <stdio.h>
+
+void func1();
+void func2();
+
+void __attribute__((constructor)) func1();
+void __attribute__((destructor)) func2();
+
+void func1()
+{
+    printf("Inside func1()\n");
+}
+
+void func2()
+{
+    printf("Inside func2()\n");
+}
+
+int main()
+{
+    printf("Inside main()\n");
+
+    return 0;
+}
+
+```
+Output using gcc: 
+```c
+Inside func1()
+Inside main()
+Inside func2() 
+```
+In the above program, we have used some specific syntaxes so that one of the functions executes before the main function and the other executes after the main function.
+
+## 2.7 `pragma warn` Directive 
+This directive is used to hide the warning message which is displayed during compilation. We can hide the warnings as shown below: 
+
+#pragma warn -rvl: This directive hides those warnings which are raised when a function that is supposed to return a value does not return a value.
+#pragma warn -par: This directive hides those warnings which are raised when a function does not use the parameters passed to it.
+#pragma warn -rch: This directive hides those warnings which are raised when a code is unreachable. For example, any code written after the return statement in a function is unreachable.
+
+## 2.8 How Does a Macro with Arguments Differ from a Function in C?
+Macros with arguments are expanded at compile time, unlike functions, which are executed at runtime. This means that the macro performs text substitution before the program is compiled, so it doesn’t have the overhead of a function call that results in a faster execution but lack type checking.
+
+## 2.9 What are the Main Differences Between Macros and Functions in C?
+
+* Macros expand at compile time; functions run at runtime.
+* Functions occupy memory in the code section; macros do not.
+* Functions are type-checked; macros are not.
+* Macros can be faster than functions due to the lack of function call overhead
+
+## 2.10 Why Might One Choose to Use a Macro Instead of a Function in C?
+Macros can be faster because they avoid function call overhead, making them suitable for simple, repetitive tasks.
+
+## 2.11 Why Avoid Macros in Place of Functions?
+Macros lack type checking, leading to potential bugs. Functions are safer and easier to debug.
