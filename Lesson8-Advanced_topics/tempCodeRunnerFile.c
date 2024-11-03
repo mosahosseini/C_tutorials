@@ -1,1 +1,1 @@
-d_list(head);
+ pull(stk);
