@@ -1,1 +1,1 @@
- pull(stk);
+, tree-> right ->
