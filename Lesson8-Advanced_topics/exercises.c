@@ -16,20 +16,24 @@ typedef struct bintree {
 }BinTree;
 
 
-BinTree* init_tree(BinTree* tree , int value){
+BinTree* init_tree( int value){
+    BinTree * tree = (BinTree*)malloc(sizeof(BinTree));
     tree->value = value ; 
     tree-> left = (BinTree*) malloc(sizeof(BinTree));
     tree->right = (BinTree*) malloc(sizeof(BinTree));
     tree-> left = NULL ; 
     tree-> right = NULL;
+    return tree ; 
 }
 
+
+// alternative 1: using while loop
 void insert(BinTree* tree , int value){
     BinTree* t = (BinTree*)malloc(sizeof(BinTree)) ; 
     t = tree; 
     
     int counter = 0; 
-    while (counter < 10){
+    while (1){
         if ( value <= t->value ){
             if ( t->left ==NULL){
                 t->left = (BinTree*)malloc(sizeof(BinTree)) ; 
@@ -53,15 +57,40 @@ void insert(BinTree* tree , int value){
                 t->right->left = NULL ; 
                 t->right->right = (BinTree*)malloc(sizeof(BinTree)) ;  
                 t->right->right =  NULL; 
+                return; 
             }
             else{   
-                t = tree->right; 
+                t = t->right; 
             }
         }
-        counter ++;
+
     }
     
 }
+
+
+// Insert can be implemented using recursion. 
+
+void insert2(BinTree ** root ,int val ){
+    if (*root == NULL){
+        *root = (BinTree * ) malloc(sizeof(BinTree ));
+        (*root) -> value = val ; 
+        (*root) -> left = NULL ; 
+        (*root) -> right = NULL; 
+        return ;
+    } else {
+        if (val <=  (*root) ->value ){
+            insert2(&(*root) -> left , val);
+        }else if (val > (*root) -> value ){
+            insert2(&(*root)->right , val);
+        }
+    }
+
+
+}
+
+
+
 
 void print_tree(BinTree * tree , int depth){
     if (tree == NULL && depth == 0 ){
@@ -75,23 +104,26 @@ void print_tree(BinTree * tree , int depth){
     }
     else if (tree-> left != NULL && tree-> right == NULL ) {
         depth++;
-        printf("depth: %d right: NULL  left: %d\n" , depth ,tree->left->value);
+        printf("depth: %d left: %d  right: NULL\n" , depth ,tree->left->value);
         print_tree(tree->left, depth);
     }
     else if (tree-> right != NULL && tree-> left == NULL ){
         depth++;
-        printf("depth: %d  right : %d  left : NULL\n" , depth ,tree->right->value);
+        printf("depth: %d  left : NULL  right : %d\n" , depth ,tree->right->value);
         print_tree(tree->right , depth  ); 
     } else {
         depth++;
-        printf("depth: %d left : %d   right: %d\n" ,depth,  tree->left ->value , tree-> right -> value);
+        printf("depth: %d left : %d   right: %d\n" ,depth, tree->left ->value, tree-> right -> value );
         print_tree(tree->left , depth );
         print_tree(tree-> right ,depth);
     }
 
-
-
 }
+
+
+
+
+
 
 
 int main(){
@@ -122,13 +154,17 @@ int main(){
     printf("\n the index of 32 is: %d" , ind );
 */
 
-    BinTree* root = (BinTree*)malloc(sizeof(BinTree));
-    init_tree(root, 300);
+    BinTree* root = init_tree(300);
+    insert2(&root , 500);
+    insert2(&root , 200);
+  
+    /*
     insert(root , 500 ); 
     insert(root , 350);
     insert(root, 200);
     insert(root , 100);
     insert(root , 50);
+    */
 /*
 
     printf("root is : %d\n" , root->value);
@@ -137,7 +173,10 @@ int main(){
     printf("left left node is: %d\n" , root -> left -> left -> value); 
 */   
 
-print_tree(root , 0);
+//print_tree(root , 0);
+
+printf("root : %d" , root->right->value);
+
 
     return 0;
 }

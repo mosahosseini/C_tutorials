@@ -1,1 +1,1 @@
-, tree-> right ->
+    if (root == NULL){
