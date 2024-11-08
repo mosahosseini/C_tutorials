@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "matrix_operations.h": "c"
+        "matrix_operations.h": "c",
+        "stdlib.h": "c"
     }
 }

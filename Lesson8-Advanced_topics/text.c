@@ -7,6 +7,10 @@
 // example 2
 //#define root(x) sqrt(x)
 
+
+
+
+
 int main(){
 // example 1
 //printf("The value of pi appoximately is: %f",PI );

@@ -88,18 +88,6 @@ int** add_mat(matrix*a , matrix *b){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 matrix matrix_add( matrix *a , matrix*b ){
     matrix result_mat ;
     result_mat.col_size = a ->col_size;

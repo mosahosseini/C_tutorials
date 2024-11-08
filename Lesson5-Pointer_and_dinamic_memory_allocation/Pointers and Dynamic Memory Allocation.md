@@ -126,6 +126,120 @@ Always ensure a pointer is not NULL before dereferencing it. This is very common
     }
 ```
 
+### 1.4.2 Double Pointer Usecases
+Sometimes it is nessessary to use, specially in two cacese: 
+1. we want to send a matrix to a function. 
+2. We want to modify a data structure 
+
+### 1.4.2.1 Pointer To Matrices
+If we want to create a matrix pointer we can use: 
+
+**Example code:**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void print_matrix(int ** mat , int rows , int cols){
+    for (int i  = 0 ; i <rows ;i++){
+        if (i == 0 ){
+            printf("[");
+        }
+        printf("[");
+        for(int j = 0 ; j < cols ; j++){
+            if (j == cols-1){
+                printf("%d", mat[i][j]);
+            }
+            else{
+                printf("%d,", mat[i][j]);
+            }
+        
+        }
+    
+        
+        if (i == rows-1 ){
+            printf("]]");
+        } 
+        else{
+            printf("],");
+        }       
+    }
+
+}
+
+int main (){
+    int rows = 3; 
+    int cols = 2; 
+    int ** matrix = (int**) malloc(sizeof(int) * rows);
+    for (int i  = 0 ; i <3 ;i++){
+        matrix[i] = (int * ) malloc(sizeof(int) * cols);
+    }
+
+    for (int i  = 0 ; i <rows ;i++){
+        for(int j = 0 ; j < cols ; j++){
+        matrix[i][j] = i+j;
+        }
+    }
+
+    print_matrix(matrix , rows , cols ); 
+
+}
+// output: [[0,1],[1,2],[2,3]]
+``` 
+
+
+### 1.4.2.2 Double Pointer For Modification Outside A Function. 
+Sometimes you might want to modify a data structure outside a function. The problem is that if you send a pointer to an object into a function modyfying the pointer the object inside the function will not effect the object outside the function.This is because every time you send a pointer in a function it will create a copy of it and modfying the copy will not effect the object outside the function. Simply if we modify an objects pointer inside a function the changes will not reflect outside the function. 
+
+```c
+// Function to modify a pointer
+void modifyPointer(int *ptr) {
+    ptr = (int *)malloc(sizeof(int));  // Allocates new memory, modifies the local copy of ptr
+    *ptr = 42;                         // Sets the new memory to 42
+    printf("Inside modifyPointer: %p, value = %d\n", (void *)ptr, *ptr);
+}
+
+int main() {
+    int *originalPtr = NULL;
+
+    modifyPointer(originalPtr);  // Pass the pointer to the function
+    // Check if the original pointer was modified
+    if (originalPtr == NULL) {
+        printf("originalPtr is still NULL after modifyPointer call\n");
+    } else {
+        printf("originalPtr points to %d\n", *originalPtr);
+    }
+
+    return 0;
+}
+```
+One solution is to use double pointer: 
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to modify a pointer
+void modifyPointer(int **ptr) {
+    *ptr = (int *)malloc(sizeof(int));  // Allocates new memory, modifies the actual pointer in main
+    if (*ptr != NULL) {
+        **ptr = 42;                     // Sets the new memory to 42
+        printf("Inside modifyPointer: %p, value = %d\n", (void *)*ptr, **ptr);
+    }
+}
+
+int main() {
+    int *originalPtr = NULL;
+
+    modifyPointer(&originalPtr);  // Pass the address of originalPtr
+    // Check if the original pointer was modified
+    if (originalPtr == NULL) {
+        printf("originalPtr is still NULL after modifyPointer call\n");
+    } else {
+        printf("originalPtr points to %d\n", *original) }
+        return 0 ; }
+
+```
+
+
 ### 1.4.2 Memory Leaks
 Forgetting to free dynamically allocated memory can lead to memory leaks. More about memory allocation later.
 
