@@ -5,8 +5,31 @@
 - Dynamic Memory Allocation (`malloc`, `calloc`,`realloc`, `free`)
 
 
-# Table Of Content
+# Table Of Contents
 
+1. [Introduction to Pointers](#1-introduction-to-pointers)
+
+   1.1 [What are Pointers?](#11-what-are-pointers)  
+   1.2 [Why are Pointers Useful?](#12-why-are-pointers-useful)  
+   1.3 [Basic Syntax](#13-basic-syntax)  
+   - 1.3.1 [Declaring a Pointer](#131-declaring-a-pointer)  
+   - 1.3.2 [Assigning an Address](#132-assigning-an-address)  
+   - 1.3.3 [Dereferencing a Pointer](#133-dereferencing-a-pointer)  
+   - 1.3.4 [Null Pointer](#134-null-pointer)  
+   - 1.3.5 [Pointer to Arrays](#135-pointer-to-arrays)  
+   - 1.3.6 [Pointer Arithmetic](#136-pointer-arithmetic)  
+   - 1.3.7 [Pointer to Pointer](#137-pointer-to-pointer)  
+   1.4 [Common Mistakes When Handling Pointers](#14-common-mistakes-when-handling-pointers)  
+   - 1.4.1 [Dereferencing NULL Pointers](#141-dereferencing-null-pointers)  
+   - 1.4.3 [Memory Leaks](#143-memory-leaks)  
+   - 1.4.4 [Dangling Pointers](#144-dangling-pointers)  
+
+2. [Dynamic Memory Allocation (`malloc`, `calloc`, `realloc`, `free`)](#2-dynamic-memory-allocation-malloc-calloc-realloc-free)  
+   2.1 [Basic Syntax](#21-basic-syntax)  
+   - 2.1.1 [Using `malloc`](#211-using-malloc)  
+   - 2.1.2 [Using `calloc`](#212-using-calloc)  
+   - 2.1.3 [Using `realloc`](#213-using-realloc)  
+   - 2.1.4 [Using `free`](#214-using-free)  
 
 
 # 1. Introduction to Pointers
@@ -14,7 +37,7 @@
 What are Pointers? Pointers are variables that store the memory address of another variable.
 They are a powerful feature in languages like C and C++, allowing for direct memory access and manipulation. 
 
-## 1.2 Why it usefull?
+## 1.2 Why are pointer  usefull?
 Well the first reason is that pointer make the code memory efficient for example Instead of passing large structures or arrays, you can pass their addresses.
 Another reason that makes pointers so special is that They are crucial for using dynamic memory allocation (e.g., malloc, free in C).
 And lastely , Pointers are fundamental in creating complex data structures like linked lists, trees, etc.
@@ -109,29 +132,14 @@ printf("%d" , *p_arr); // output: 7
 printf("%d" , *(p_arr-1)) // output: 6  
 ```
 ### 1.3.7 Pointer to Pointer
-You can have pointers that point to other pointers.
-```c
-int **pptr = &ptr; // pptr is a pointer to ptr
-```
-## 1.4 Common Mistakes When Handling the pointer
-There are some frequent mistakes associated with pointers. Make sure you avoid them when you building you own c programms. 
-
-### 1.4.1 Dereferencing NULL Pointers
-Always ensure a pointer is not NULL before dereferencing it. This is very common mistake. You can check if the pointer is reffering to NULL using an if statement. 
-```c
-    int num = 10; 
-    int * ptr = NULL; 
-    if (ptr == NULL) {
-    printf("The pointer is NULL" );
-    }
-```
-
-### 1.4.2 Double Pointer Usecases
 Sometimes it is nessessary to use, specially in two cacese: 
 1. we want to send a matrix to a function. 
 2. We want to modify a data structure 
+```c
+int **pptr = &ptr; // pptr is a pointer to ptr
+```
 
-### 1.4.2.1 Pointer To Matrices
+**Pointer To Matrices**
 If we want to create a matrix pointer we can use: 
 
 **Example code:**
@@ -186,9 +194,9 @@ int main (){
 // output: [[0,1],[1,2],[2,3]]
 ``` 
 
+**Double Pointer For Modification Outside A Function**
+Sometimes you might want to modify a pointer (Like allocate memory to a pointer) in a locale function but you want to changes happens even outside the function. If you send a pointer to a function and allocate memory to it inside the locale function, the allocated memory will be only local and are not assessible outside the locale function.This is because every time you send a pointer in a function it will create a local copy of it and modfying the copy will not effect the original pointer. Simply if we modify an objects pointer inside a function the changes will not reflect outside the function. Let's look att an example: 
 
-### 1.4.2.2 Double Pointer For Modification Outside A Function. 
-Sometimes you might want to modify a data structure outside a function. The problem is that if you send a pointer to an object into a function modyfying the pointer the object inside the function will not effect the object outside the function.This is because every time you send a pointer in a function it will create a copy of it and modfying the copy will not effect the object outside the function. Simply if we modify an objects pointer inside a function the changes will not reflect outside the function. 
 
 ```c
 // Function to modify a pointer
@@ -200,7 +208,6 @@ void modifyPointer(int *ptr) {
 
 int main() {
     int *originalPtr = NULL;
-
     modifyPointer(originalPtr);  // Pass the pointer to the function
     // Check if the original pointer was modified
     if (originalPtr == NULL) {
@@ -211,8 +218,9 @@ int main() {
 
     return 0;
 }
+//output: originalPtr is still NULL after modifyPointer call
 ```
-One solution is to use double pointer: 
+One solution is to use double pointer: If we use pointer to pointer, We don't need to modify (allocate memory) to the pointer to pointer, but rather we dereference the outer pointer(which give us the inner pointer ) and the allocate memory to the inner pointer. 
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -239,6 +247,19 @@ int main() {
 
 ```
 
+
+## 1.4 Common Mistakes When Handling the pointer
+There are some frequent mistakes associated with pointers. Make sure you avoid them when you building you own c programms. 
+
+### 1.4.1 Dereferencing NULL Pointers
+Always ensure a pointer is not NULL before dereferencing it. This is very common mistake. You can check if the pointer is reffering to NULL using an if statement. 
+```c
+    int num = 10; 
+    int * ptr = NULL; 
+    if (ptr == NULL) {
+    printf("The pointer is NULL" );
+    }
+```
 
 ### 1.4.2 Memory Leaks
 Forgetting to free dynamically allocated memory can lead to memory leaks. More about memory allocation later.

@@ -16,7 +16,7 @@
 
 int main(){
     // 1. Dynamic array
-    /* 
+    
     DynamicArray arr;
     initArray(&arr , 4);
     append(&arr , 1);
@@ -24,7 +24,7 @@ int main(){
     append(&arr , 4);
     print_array(&arr);
     freeArray(&arr);
-    */
+    
 
 
    /* 2. Matrix addition using pointer Alternative 1: 
@@ -77,6 +77,7 @@ int main(){
     print_matrix(&matc);
  */
 
+/*
 
     // Matrix addition using pointer altertative 2 (matrix from array)
     int row = 3;
@@ -115,4 +116,5 @@ int main(){
     printf("\na+b=\n");
     print_matrix(&c);
     return 0;
+    */
 }

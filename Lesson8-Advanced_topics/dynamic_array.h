@@ -10,14 +10,20 @@ typedef struct {
 
 void initArray(DynamicArray *arr , int capacity){
     arr -> array = (int*) malloc(capacity* sizeof(int));
+    if (arr->array ==NULL){
+        printf("memory allocation to dynamic array failed");
+    }
+    else{
     arr -> size = 0;
     arr -> capacity = capacity;
     arr -> initialized = 1;
     printf("\narray initiated...\n");
+    }
 }
 
 void resizeArray(DynamicArray *arr , int new_capacity){
-    arr->array = (int* )realloc(arr->array , new_capacity * sizeof(int));
+    arr->array= (int* )realloc(arr->array , new_capacity * sizeof(int));
+
     if (arr->array != NULL){
         arr -> capacity = new_capacity;
     } else {
@@ -29,12 +35,11 @@ void resizeArray(DynamicArray *arr , int new_capacity){
 }
 
 
-int get(DynamicArray *arr, int index) {
+int dyn_array_get(DynamicArray *arr, int index) {
     if (index >= 0 && index < arr->size) {
         return arr->array[index];
     }
     printf("Index out of bounds.\n");
-    exit(EXIT_FAILURE);
 }
 
 
@@ -42,9 +47,11 @@ void append(DynamicArray *arr ,int element){
 
     if (arr -> size == arr -> capacity){
         resizeArray(arr , 2*(arr-> capacity));
+
     }
     arr -> array[arr->size] = element;
     arr -> size++;
+    
 }
 
 // Function to free the allocated memory

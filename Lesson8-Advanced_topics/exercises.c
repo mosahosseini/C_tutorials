@@ -2,12 +2,17 @@
 #include <stdio.h>
 #include "stack.h"
 #include "linked_list.h"
+#include "dynamic_array.h"
+#include <string.h>
 /*
 ### Exercises:
 - Implement a linked list from scratch
 - Implement a stack using arrays and pointers
 - Create a binary tree with traversal functions
 */
+
+
+
 
 typedef struct bintree {
     int value; 
@@ -89,9 +94,6 @@ void insert2(BinTree ** root ,int val ){
 
 }
 
-
-
-
 void print_tree(BinTree * tree , int depth){
     if (tree == NULL && depth == 0 ){
         printf("The tree is empty!");
@@ -120,7 +122,48 @@ void print_tree(BinTree * tree , int depth){
 
 }
 
+//function for traversing the bst.
+void travers_tree(BinTree * root , DynamicArray** arr , char mode [5]){
+    if (root == NULL){
+        append(*arr , -1);
+        return ; 
+    }
+    else{
 
+        if (root ->left == NULL && root->right == NULL){
+            append(*arr , root->value); 
+            return;
+        }
+        else{
+            if (strcasecmp(mode , "pre") == 0){
+                append(*arr , root->value); 
+                travers_tree(root->left , arr , mode);
+                travers_tree(root->right , arr , mode); 
+
+            }
+            else if (strcasecmp(mode , "post") == 0){ 
+                travers_tree(root->left , arr , mode);
+                travers_tree(root->right , arr , mode);
+                append(*arr , root->value);
+
+            }
+            else if (strcasecmp(mode , "in") == 0){ 
+                travers_tree(root->left , arr , mode);
+                append(*arr , root->value);
+                travers_tree(root->right , arr , mode);
+            }
+            else{
+                printf("\nplease provide a valid mode: (in) for in order travers , (pre) for pre order travers and (post) for post order travers\n");
+            }
+
+  
+
+        }
+        
+    }
+ 
+
+}
 
 
 
@@ -154,29 +197,28 @@ int main(){
     printf("\n the index of 32 is: %d" , ind );
 */
 
-    BinTree* root = init_tree(300);
-    insert2(&root , 500);
-    insert2(&root , 200);
-  
-    /*
-    insert(root , 500 ); 
-    insert(root , 350);
-    insert(root, 200);
-    insert(root , 100);
-    insert(root , 50);
-    */
 /*
 
-    printf("root is : %d\n" , root->value);
-    printf("left node is: %d\n" , root-> left -> value);
-    printf("write node is : %d \n " , root -> right -> value);
-    printf("left left node is: %d\n" , root -> left -> left -> value); 
-*/   
+    
+BinTree  *root = init_tree(300);
 
+insert(root , 500 ); 
+insert(root , 600);
+insert(root , 350);
+insert(root, 200);
+insert(root , 100);
+insert(root , 250);
 //print_tree(root , 0);
 
-printf("root : %d" , root->right->value);
+char  mode [50] = "in";
 
-
+DynamicArray dyn_arr;
+DynamicArray * arr = &dyn_arr;
+initArray(arr , 4); 
+travers_tree(root , &arr , mode );
+print_array(arr);
+freeArray(arr);
+*/
     return 0;
+
 }
