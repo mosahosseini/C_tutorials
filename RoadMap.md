@@ -208,7 +208,6 @@ This roadmap is designed to guide you through learning the C programming languag
 - Learn to use **debugging tools** early.
 - Participate in **open-source** projects for real-world experience.
 - Focus on **time complexity** to write efficient programs.
-
 ---
 
 Happy coding! :computer:
