@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <dirent.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <errno.h>
-
+#include <time.h>
+#include <ctype.h>
 // excersice 1 
 typedef struct q_obj{
     char* question; 
@@ -29,9 +26,7 @@ void remove_substring(char **str_ptr, const char *substr) {
 
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
 
 char* get_substring(int i) {
 
@@ -75,6 +70,32 @@ void init_array(Q_obj * arr , int size ){
 }
 
 
+int random_array(int * array ,int size){
+    for ( int i = size-1 ; i>= 0 ; i--){
+        int j = rand() % (i+1);
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;  
+    }
+}
+
+void play_the_game(){
+    printf("**************************************\n");
+    printf("***** Who Wants To Be A Milioner *****\n");
+    printf("**************************************\n\n");
+
+    printf("Are you ready (y/n)?");
+    char status; 
+    scanf("%c" , &status);
+
+    if (tolower(status) == "y"){
+        //TODO: complete
+    }
+    else {
+        printf("\nExiting the game!");
+    }
+};
+
 int main() {
     FILE *file;    
     char line[256];  // Buffer to hold each line (256 chars per line is common, adjust as needed)
@@ -82,6 +103,8 @@ int main() {
     init_array(arr_q_obj , 100);
 
 
+    time_t now=time(NULL);  
+    srand(time(0)) ;
 
     // Open the file in read mode
     file = fopen("science_questions.txt", "r");
