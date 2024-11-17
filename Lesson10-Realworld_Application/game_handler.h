@@ -1,6 +1,7 @@
 #include "question_array.h"
 #include <stdlib.h>
 #include <string.h>
+#include "generate_random_vector.h"
 
 void print_question(Q_obj* question_obj){
     printf("%s" ,question_obj->question);
@@ -24,13 +25,12 @@ void load_questions(Q_obj * arr_q_obj){
     int question_number = 1 ; 
     int line_number = 1;
     char* st = (char*) malloc(sizeof(char)*256);
-    while (fgets(line, sizeof(line), file)) {
-        
+
+    while (fgets(line, sizeof(line), file)) {    
         strcpy(st , line) ; 
         if (line_number % 7 != 0){
             if (line_number %7 == 1 ){
                 strcpy( arr_q_obj[question_number-1].question ,st );
-
                 line_number++;
             }
             else if (line[0] == 'A'&& line[1] == '.'){
@@ -40,17 +40,14 @@ void load_questions(Q_obj * arr_q_obj){
             else if (line[0] == 'B' ){
                 strcpy( arr_q_obj[question_number-1].B ,st );   
                 line_number++; 
-
             }
             else if (line[0] == 'C' ){
                 strcpy( arr_q_obj[question_number-1].C ,st );   
                 line_number++; 
-
             }
             else if (line[0] == 'D' ){
                 strcpy( arr_q_obj[question_number-1].D ,st );   
                 line_number++; 
-
             }
             else if (line[0] == 'A'   && line[1] == 'n'){
                 strcpy( arr_q_obj[question_number-1].Answer ,st );   
@@ -90,7 +87,6 @@ void play_the_game(int size){
          2000, 4000, 8000 , 16000 , 32000 , 64000 , 125000 ,
           250000 , 500000, 1000000 };
 
-          
         for (int i = 0 ; i <=15 ; i++){
             printf("\n----------------------\n%d$ question:\n----------------------\n" , prices[i]);
             int random_q_index = rand_array[i];
@@ -108,7 +104,6 @@ void play_the_game(int size){
                 printf("Correct answer is: %c \n" , right_ans);
                 printf(" ____________________\n|                    |\n|     Game Over      |\n|Exiting the game... |\n|____________________|");
                 return;
-
             }
 
         }

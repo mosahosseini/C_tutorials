@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "generate_random_vector.h": "c",
+        "string.h": "c"
+    }
+}
