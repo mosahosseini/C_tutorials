@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "generate_random_vector.h"
+#include "fifty_fifty.h"
 
 void print_question(Q_obj* question_obj){
     printf("%s" ,question_obj->question);
@@ -10,6 +11,35 @@ void print_question(Q_obj* question_obj){
     printf("%s" ,question_obj->C);
     printf("%s" ,question_obj->D);
 }
+
+
+void print_part_question(Q_obj* question_obj  , int ans_ind , int fake_ind){
+    char** str = (char** ) malloc(sizeof(char*)*4);
+    str[0] = strdup(question_obj -> A);
+    str[1] = strdup(question_obj -> B);
+    str[2] = strdup(question_obj -> C);
+    str[3] = strdup(question_obj -> D);
+    printf("%s" ,question_obj->question);
+
+    int randomize_order = rand() %2; 
+    
+    if (randomize_order == 0 ){
+        printf("%s" ,str[ans_ind]);
+        printf("%s" , str[fake_ind]);
+    }
+    else{
+        printf("%s" ,str[fake_ind]);
+        printf("%s" , str[ans_ind]); 
+    }
+/*
+
+    for (int i = 0 ; i <4 ; i ++){
+        free(str[i]);
+    }
+    free(str);
+*/
+}
+
 
 void load_questions(Q_obj * arr_q_obj){
     FILE *file;    
@@ -77,6 +107,7 @@ void play_the_game(int size){
     char status; 
     scanf("%c" , &status);
     if (tolower(status) == 'y'){
+
         int rand_array[size];
         random_array(rand_array, size);
         Q_obj arr_q_obj[size];
@@ -88,17 +119,42 @@ void play_the_game(int size){
           250000 , 500000, 1000000 };
 
         for (int i = 0 ; i <=15 ; i++){
-            printf("\n----------------------\n%d$ question:\n----------------------\n" , prices[i]);
+            printf("\n\n%d$ question:\n\n" , prices[i]);
             int random_q_index = rand_array[i];
             print_question(&arr_q_obj[random_q_index]);
+            printf("call a friend: f   Ask public: p   50/50: h");
+            
             char ans;
             printf("Answer: "); 
             scanf(" %c" , &ans);
             char right_ans = arr_q_obj[random_q_index].Answer[8];
 
-            if (ans == tolower(right_ans)){
+            if (tolower(right_ans) == tolower(ans)){
                 printf("Correct!\n\n");
             }
+            else if ('h' == tolower(ans)){
+                int ans_ind = get_right_ans_ind(tolower(right_ans));
+                int fake_ans_ind = get_fake_ans_ind(tolower(right_ans));
+                print_part_question(&arr_q_obj[random_q_index] , ans_ind , fake_ans_ind );
+                printf("Answer: "); 
+                scanf(" %c" , &ans);
+                // this piece of code gonno be repetetiv, may be it deserve a function ? 
+                if (tolower(right_ans) == tolower(ans)){
+                    printf("Correct!\n\n");
+                }
+                else {
+                    printf("Wrong answer!\n");
+                    printf("Correct answer is: %c \n" , right_ans);
+                    printf(" ____________________\n|                    |\n|     Game Over      |\n|Exiting the game... |\n|____________________|");
+                    return;
+                }
+
+
+
+
+            }
+
+            // add another else if for public , and call a friend 
             else {
                 printf("Wrong answer!\n");
                 printf("Correct answer is: %c \n" , right_ans);
