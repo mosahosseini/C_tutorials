@@ -1,1 +1,1 @@
-generatePercentages(input);
+

@@ -3,6 +3,7 @@
 #include <string.h>
 #include "generate_random_vector.h"
 #include "fifty_fifty.h"
+#include <unistd.h>  // For the sleep() function
 
 void print_question(Q_obj* question_obj){
     printf("%s" ,question_obj->question);
@@ -98,6 +99,20 @@ void load_questions(Q_obj * arr_q_obj){
 }
 
 
+void compare_ans(char right_ans,char ans ){
+        // this piece of code gonno be repetetiv, may be it deserve a function ? 
+    if (tolower(right_ans) == tolower(ans)){
+        printf("Correct!\n\n");
+    }
+    else {
+        printf("Wrong answer!\n");
+        printf("Correct answer is: %c \n" , right_ans);
+        printf(" ____________________\n|                    |\n|     Game Over      |\n|Exiting the game... |\n|____________________|");
+        return;
+    }
+
+}
+
 void play_the_game(int size){
     printf("\n**************************************\n");
     printf("***** Who Wants To Be A Milioner *****\n");
@@ -122,13 +137,12 @@ void play_the_game(int size){
             printf("\n\n%d$ question:\n\n" , prices[i]);
             int random_q_index = rand_array[i];
             print_question(&arr_q_obj[random_q_index]);
-            printf("call a friend: f   Ask public: p   50/50: h");
-            
+            printf("\ncall a friend: f   Ask public: p   50/50: h\n");
             char ans;
             printf("Answer: "); 
             scanf(" %c" , &ans);
             char right_ans = arr_q_obj[random_q_index].Answer[8];
-
+            
             if (tolower(right_ans) == tolower(ans)){
                 printf("Correct!\n\n");
             }
@@ -138,20 +152,25 @@ void play_the_game(int size){
                 print_part_question(&arr_q_obj[random_q_index] , ans_ind , fake_ans_ind );
                 printf("Answer: "); 
                 scanf(" %c" , &ans);
-                // this piece of code gonno be repetetiv, may be it deserve a function ? 
-                if (tolower(right_ans) == tolower(ans)){
-                    printf("Correct!\n\n");
-                }
-                else {
-                    printf("Wrong answer!\n");
-                    printf("Correct answer is: %c \n" , right_ans);
-                    printf(" ____________________\n|                    |\n|     Game Over      |\n|Exiting the game... |\n|____________________|");
-                    return;
-                }
+                compare_ans(right_ans , ans);
+            }
+            else if('p' == tolower(ans)){
+                generatePercentages( tolower(right_ans));
+                printf("\nAnswer: "); 
+                scanf(" %c" , &ans);
+                compare_ans(right_ans , ans);
 
-
-
-
+            }
+            else if('f' == tolower(ans)){
+                printf("calling Mike .");
+                sleep(1);
+                printf(".");
+                sleep(1);
+                printf(".");
+                printf("\nMike: I think the answer is: %c\n" , right_ans );
+                printf("Answer: ");
+                scanf(" %c" , &ans);
+                compare_ans(right_ans , ans);
             }
 
             // add another else if for public , and call a friend 
