@@ -7,7 +7,7 @@
 #include <netinet/in.h>
 #include <stdint.h>
 
-typedef uint32_t u_int32_t;
+//typedef uint32_t u_int32_t;
 
 void error(const char *msg)
 {
