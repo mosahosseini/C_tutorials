@@ -99,6 +99,8 @@ int main(){
             }
             printf("\n");
             }
+        
+        
 
         free(men);
         free(women);
