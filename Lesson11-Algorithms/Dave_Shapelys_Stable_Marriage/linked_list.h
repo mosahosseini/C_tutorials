@@ -5,6 +5,7 @@ typedef struct person {
 int index;
 int * preferences;
 int visited ; 
+int wife_ind; 
 }man;
 
 typedef struct node {
@@ -35,7 +36,12 @@ man* remove_node(Node** head , int ind ){
     man* removed_person;
     if ((*head) ->person->index == ind){
         removed_person = (*head)->person;
-        *head = (*head)->next; 
+        if ((*head)->next == NULL){
+            (*head) = NULL; 
+        }else{
+            *head = (*head)->next; 
+        }
+
         return removed_person;
     }
 
@@ -62,13 +68,17 @@ man* remove_node(Node** head , int ind ){
     return removed_person;
     }
 
-void print_linked_list(Node* head , int prefs ){   
+man* pop(Node ** head){
+    return remove_node(head , (*head)->person->index);
+}
+
+void print_linked_list(Node* head , int size ){   
 
     Node* n = head ; 
     while (n != NULL){
         printf(" man %d    pref: " , n -> person->index);
         printf("[");
-        for (int i = 0 ;i<prefs ; i++){
+        for (int i = 0 ;i<size ; i++){
             printf(" %d " , n->person->preferences[i]);
         }
         printf("]\n");

@@ -29,8 +29,13 @@ void add(Node* head , int value){
 
 int remove_node(Node** head , int value ){
     if ((*head) ->val == value){
+        int val = (*head) -> val;
+        if ((*head)->next ==NULL){
+            *head = NULL;
+        }else {
         *head = (*head)->next; 
-        return (*head) -> val ; 
+        }   
+        return val ; 
     }
 
     Node* n = (*head) ; 
@@ -74,9 +79,28 @@ int main() {
     add(head , 1);
     add(head , 2);
     add(head , 3);
-    print_linked_list(head);
+
     int s = remove_node(&head, 2);
-    print_linked_list(head);
+    remove_node(&head , 1);
+    remove_node(&head , 3);
+    remove_node(&head , 0);
+    if (head == NULL){
+        printf("the head is null");
+    }
     return 0;
+
+
+
+    int safe_stop =0 ; 
+
+    while (head != NULL && safe_stop == 100)
+    {
+
+    for (int i = 0 ; i<n ; i++){
+        
+
+    }
+    safe_stop ++; 
+    }
 }
 
