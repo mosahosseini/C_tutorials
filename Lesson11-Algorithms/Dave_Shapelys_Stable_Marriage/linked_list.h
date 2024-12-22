@@ -6,6 +6,7 @@ int index;
 int * preferences;
 int visited ; 
 int wife_ind; 
+int  proposed_ind; 
 }man;
 
 typedef struct node {
@@ -22,14 +23,19 @@ Node* init_head( man* person){
     head->next = NULL; 
 }
 
-void add(Node* head , man* new_person){
-    Node* n = head ; 
+void add(Node** head , man* new_person){
+    if ((*head) == NULL){
+        (*head) = init_head(new_person);
+    }
+    else {
+        Node* n = (*head);
     while (n -> next != NULL){
         n = n -> next;
     }
     n -> next = (Node*)malloc(sizeof(Node*));
     n -> next -> person = new_person;
     n -> next -> next = NULL; 
+    }
 }
 
 man* remove_node(Node** head , int ind ){
