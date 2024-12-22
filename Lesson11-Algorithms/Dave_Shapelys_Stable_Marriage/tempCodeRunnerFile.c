@@ -1,0 +1,1 @@
+women[prefered_woman_ind-1].husband_ind

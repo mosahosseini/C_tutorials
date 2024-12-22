@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "linked_list.h"
+#include "stack.h"
 
 
 typedef struct {
@@ -109,23 +109,35 @@ int main(){
             printf("\n");
         }
 
-        Node * head = init_head( &men[0]);
-        for(int i = 1 ; i<n ; i++){
-            add(&head , &men[i]);
+        // add all men to the stack. 
+        STACK * men_stack = init_stack(n);
+        for (int i = n-1 ; i>= 0  ; i--)
+        {
+            push(men_stack , &men[i]);
         }
+
+
+
+        //////
+        // Node * head = init_head( &men[0]);
+        // for(int i = 1 ; i<n ; i++){
+        //     add(&head , &men[i]);
+        // }
         int prefered_woman_ind ; 
         
+        // 
 
 
 
-        while (head != NULL){
-            man * single_man = pop(&head);
+        while (!is_empty(men_stack)){
+            man * single_man = pop(men_stack);
             int new_man_ind = single_man->index; 
             int old_man_ind;
             int pref_ind ; 
 
 
-                single_man->proposed_ind  +=1 ;
+                single_man->proposed_ind  += 1 ;
+                men[new_man_ind-1].proposed_ind = single_man->proposed_ind;
                 pref_ind = single_man->proposed_ind ; 
                 prefered_woman_ind = single_man->preferences[pref_ind];
                 old_man_ind = women[prefered_woman_ind-1].husband_ind;
@@ -135,6 +147,7 @@ int main(){
 
                 
                 if (old_man_ind == -1 ){ // if prefered women is not proposed to
+                    men[single_man->index-1] = *single_man; 
                     men[single_man->index-1].wife_ind = prefered_woman_ind; 
                     women[prefered_woman_ind-1].husband_ind = new_man_ind;
  
@@ -142,14 +155,14 @@ int main(){
                 else if (  new_pref<old_pref )
                 {
                      women[prefered_woman_ind-1].husband_ind = new_man_ind; 
-                     men[new_man_ind-1].wife_ind =  women[prefered_woman_ind-1].index;
+                     men[single_man->index-1].wife_ind =  prefered_woman_ind;
                      men[old_man_ind-1].wife_ind = -1;  
-                     add(&head ,&men[old_man_ind-1]); 
+                     push(men_stack , &men[old_man_ind-1]);
 
 
                 }
                 else{
-                    add(&head , single_man);
+                    push(men_stack , &men[new_man_ind-1]);
 
                 }
                 
@@ -169,8 +182,13 @@ int main(){
         // printf("\n\n\n");
         // print_linked_list(head , n);
         // }
+        man man1 = men[0];
+        man man2 = men[1];
+        printf("\nwife ind : %d\n" , man2.wife_ind);
+        man man3 = men[2];
+        man man4 = men[3]; 
         for (int i = 0 ; i<n ; i++){
-            printf("man %d is paired with woman : %d \n" , i , men[i].wife_ind );
+            printf("man %d is paired with woman : %d \n" , men[i].index , men[i].wife_ind );
         }
 
 

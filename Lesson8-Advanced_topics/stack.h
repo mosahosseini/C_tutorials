@@ -28,12 +28,12 @@ int is_empty(stack* stk ){
 
 void push(stack* stk , int value){
     if(is_full(stk)){
-        printf("\n!!! Stack overflow! Cannot push %d !!!!\n", value);
+        perror("\n!!! Stack overflow! Cannot push %d !!!!\n", value);
     }
     else
     {   
         stk->items[++stk->top] = value; 
-        printf("\nSuccessfully added %d into the stack.\n" , value);
+        perror("\nSuccessfully added %d into the stack.\n" , value);
 
     }
 
