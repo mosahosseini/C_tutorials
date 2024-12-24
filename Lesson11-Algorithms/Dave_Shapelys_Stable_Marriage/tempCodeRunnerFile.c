@@ -1,1 +1,2 @@
-women[prefered_woman_ind-1].husband_ind
+    //    printf("some debug output\n");
+    //    fflush(stdout);
