@@ -120,10 +120,30 @@ void find_matches(man * men , woman* women , int n){
 
     }
 
-int main(){
+
+int main(int argc , char* argv[]){
 
     int n; //Number of pairs
-    FILE* file = fopen("data/sample/3.txt", "r") ;  // creates a file object. 
+
+        // Directory path (corrected type)
+    char *dir = "data/secret/";
+
+    // File name
+    char *file_name = argv[1];
+
+    // Allocate enough memory for the concatenated result
+    char res[256];  // Ensure this buffer is large enough to hold both strings
+
+    // Concatenate the directory and file name
+    strcpy(res, dir);  // Copy the directory path into 'res'
+    strcat(res, file_name);  // Append the file name to 'res'
+    
+    printf("%s" , res);
+
+
+
+   // FILE* file = fopen("data/secret/1testsmallmessy.in", "r") ;  // creates a file object. 
+   FILE* file = fopen(res , "r");
     if(file == NULL){  
         perror("File opening failed");
         return 1 ; 
