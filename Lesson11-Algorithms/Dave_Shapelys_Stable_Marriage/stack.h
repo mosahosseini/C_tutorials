@@ -19,8 +19,8 @@ typedef struct MANSTACK {
 
 
 STACK* init_stack(  int limit ){
-    STACK* men_stack = (STACK*) malloc(sizeof(STACK*));
-    men_stack->men_array = (man*)malloc(sizeof(man*)*limit);
+    STACK* men_stack = (STACK*) malloc(sizeof(STACK));
+    men_stack->men_array = (man*)malloc(sizeof(man)*limit);
     if(men_stack ->men_array == NULL){
         perror("\nMemory allocation for men stack failed!!\n");
         exit(1);
@@ -31,7 +31,7 @@ STACK* init_stack(  int limit ){
 }
 
 int is_full(STACK* men_stk){
-    return men_stk->top_ind == men_stk->limit;
+    return men_stk->top_ind == men_stk->limit-1;
 }
 
 int is_empty( STACK* men_stk){
@@ -43,7 +43,7 @@ void push(STACK* men_stack , man* single_man){
         perror("------------\nThe stack is full!\n---------------\n");
         exit(1);
     }
-    else{
+    else{     
     men_stack->men_array[++men_stack->top_ind] = *single_man;
 
     }

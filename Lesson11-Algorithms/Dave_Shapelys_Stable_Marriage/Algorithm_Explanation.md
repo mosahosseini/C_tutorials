@@ -119,3 +119,83 @@ This means man in the index 1 which is Orm. have the preference 4.
 
 In this case, if Krok  wants to know wher in the preference of Anna he is. He can simply write his own index, which is 4 in the preference list of Anna and  Anna[4] = 3 , which means He is the third prefered partner for anna. 
 
+# Good practice: 
+## Debugg using gbd. 
+If you are using windows you can use mingw gbd to integrate debugger to vscode. 
+## Use valgrind to check for memoryleak.
+to check for memoryleak you can use valgrind tool. 
+
+
+# How to run Tests. 
+___
+## Create test inviroment. 
+I use windows 10 and to be able to run the test i first install WLS [Windows Linux Subsystem](https://ubuntu.com/desktop/wsl) open wsl: it should look like this: 
+![alt text](image-1.png)
+
+1. change the directory to your project using: 
+```bash 
+cd /path/to/your/project
+```
+You can use `ls` to see content of the current directory. 
+
+## Create an executable file from you c code using the following command. 
+``` bash
+gcc -o your_programs_name.exe your_programs_name.c
+``` 
+
+## Run only 1 test: 
+when you are in the directory of your project, and created and executable file from your c code. You can use the following command to check the output of your code. 
+
+```bash 
+your_programs_name.exe < path/to/test/data.in
+```
+
+In my case , my c program is called `stable_marriage.c` and i want to test `1.in` which is in `data/sample` so I write: 
+
+```bash 
+stable_marriage.exe < data/sample/1.in 
+```
+
+## Check all solution: 
+For this algothim there is an available test case that you can run to check if you code manages to pass all test cases. To run these test cases you write the following command
+
+```bash
+bash check-solution.sh ./your_programs_name.exe
+```
+In my case: 
+```bash
+bash check-solution.sh ./stable_marriage.exe
+```
+It will print `correct!` if you program manages to run all test case and `incorrect!` if it fails one of the test cases. 
+
+### Using time: 
+You can see the time it takes to run all of the test cases by using time in the beginning. 
+
+```
+time bash check-solution.sh ./your_programs_name.exe
+```
+
+### Python VS C 
+I also implemented the algorithm in python to test its run time. You can run the python code using: 
+
+```
+time bash check-solution.sh python3 match.py
+```
+
+#### Conclusion: 
+Run time in c was: 
+
+```bash
+real    0m48.829s
+user    0m35.523s
+sys     0m2.622s
+``` 
+
+But the same algorithm in python have a runtime: 
+
+```bash
+real    1m0.784s
+user    0m55.206s
+sys     0m11.941s
+```
+
