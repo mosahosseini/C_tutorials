@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "stack.h"
 #include <unistd.h>
+
+
 // struct that defines a woman
 typedef struct {
 int index;  // index of he woman 
@@ -9,6 +11,35 @@ int * preferences; // an array containing preference list of the woman
 int visited; // this is a boolean parameter that will be used when reading the data. 
 int husband_ind;  // the index of the husband of the woman. 
 }woman;
+
+void read_input(man *men, woman *women, int *index_plus_preferences, int n) {
+    for (int i = 0; i < 2 * n; i++) {
+        for (int j = 0; j < n + 1; j++) {
+            scanf("%d", &index_plus_preferences[j]);
+        }
+        int ind = index_plus_preferences[0]-1; 
+        
+        //We don't know if the index and preferences is for the woman, or man. Therefore we use 
+        //Visited parameted. 
+        //IF the woman have recieved a preference array, we know that the preference is for the man[ind]
+        if (women[ind].visited){ 
+            men[ind].index = ind+1; 
+            men[ind].preferences = copy_preferences(index_plus_preferences, n);
+            men[ind].visited = 1 ; //set visited to 1
+            men[ind].proposed_ind = -1;  // The index of the woman he proposes to;
+            
+
+        }else{
+            // else , we know that the woman is not visited yet therefor we fill preference to the woman 
+            women[ind].index = ind+1; 
+            women[ind].preferences = copy_preferences(index_plus_preferences, n);
+            women[ind].visited = 1 ; //set visited to 1 
+
+        }
+        
+        // Further logic to assign preferences based on the read data
+    }
+}
 
 
 void inverted_pref_list(int * pref_list , int n){
@@ -85,11 +116,6 @@ void print_husbands(woman* women , int n ){
 
 
 void find_matches(man * men , woman* women , int n){
-    //    printf("find match runs\n");
-    //    printf("\n");
-    //    printf("some debug output\n");
-    //    fflush(stdout);
-        // add all men to the stack. 
         STACK * men_stack = init_stack(n);
         for (int i = n-1 ; i>= 0  ; i--)
         {
@@ -137,41 +163,31 @@ void find_matches(man * men , woman* women , int n){
 
     }
 
+void free_allocated_mems(man* men , woman* women , int n){
+
+        for (int i = 0; i < n; i++) {
+        free(men[i].preferences);
+        free(women[i].preferences);
+        }
+        free(men);
+        free(women);
+
+}
 
 int main(){
 
     int n; //Number of pairs
 
-    //     // Directory path (corrected type)
-    // char *dir = "data/secret/";
-
-    // // File name
-    // char *file_name = argv[1];
-
-    // Allocate enough memory for the concatenated result
-//    char res[256];  // Ensure this buffer is large enough to hold both strings
-
-    // // Concatenate the directory and file name
-    // strcpy(res, dir);  // Copy the directory path into 'res'
-    // strcat(res, file_name);  // Append the file name to 'res'
-    
-    // printf("%s" , res);
-
-
-
-//    // FILE* file = fopen("data/secret/1testsmallmessy.in", "r") ;  // creates a file object. 
-//    FILE* file = fopen(res , "r");
-//     if(file == NULL){  
-//         perror("File opening failed");
-//         return 1 ; 
-//     } 
     scanf("%d" , &n); // we read the first value and store it in n
-//    printf("DEBUG: Read n = %d\n", n);  // Debugging input
-    // Dynamically allocate memory for 'men' and 'women'
+    //allocate memory for 'men' and 'women'
     man* men = (man*)malloc(n * sizeof(man));
     woman* women = (woman*)malloc(n * sizeof(woman));
-    
+    int * index_plus_preferences = (int*) malloc(sizeof(int)* (n+1)); // this array will contain both index and preference. 
     //we loop over the men and women array and initialize some parameters. 
+    if (index_plus_preferences == NULL){
+           perror("Memory allocation for preferences failed!");
+        return 1;
+    }
 
     for (int i = 0 ; i<n ;i++){
         men[i].visited=0;
@@ -182,71 +198,22 @@ int main(){
 
     }
     // We know that there is 2*n rows in the data set. 
-    int * index_plus_preferences = (int*) malloc(sizeof(int)* (n+1)); // this array will contain both index and preference. 
-    for (int i = 0 ; i<2*n ; i++){
+    
+    read_input(men , women , index_plus_preferences , n);
+    free(index_plus_preferences);
+    // we invert each womans preference list 
+    for (int i = 0 ; i<n ; i++){
+        inverted_pref_list(women[i].preferences , n);
+    }
+    find_matches(men , women , n);
+//        print_preferences(men , women , n); //uncomment this if you want to see preferences and the data for men and women
+    print_husbands(women,n);
 
-        
-        if (index_plus_preferences == NULL){
-//            perror("Memory allocation for preferences failed!");
-            return 1;
-        }
-        // each row contains n+1 values which. the first is the index then n element for preferences
-        int val ; 
-        for (int j = 0 ; j< n+1 ; j++ ) {
-            //fscanf(file,"%d" , &index_plus_preferences[j]);
-            scanf("%d" , &val);
-            index_plus_preferences[j] = val;
-//            printf("DEBUG: Read value = %d\n", index_plus_preferences[j]);  // Debugging
 
-            
-        }
-
-        int ind = index_plus_preferences[0]-1; 
-        
-        //We don't know if the index and preferences is for the woman, or man. Therefore we use 
-        //Visited parameted. 
-        //IF the woman have recieved a preference array, we know that the preference is for the man[ind]
-        if (women[ind].visited){ 
-            men[ind].index = ind+1; 
-            men[ind].preferences = copy_preferences(index_plus_preferences, n);
-            men[ind].visited = 1 ; //set visited to 1
-            men[ind].proposed_ind = -1;  // The index of the woman he proposes to;
-            
-
-        }else{
-            // else , we know that the woman is not visited yet therefor we fill preference to the woman 
-            women[ind].index = ind+1; 
-            women[ind].preferences = copy_preferences(index_plus_preferences, n);
-            women[ind].visited = 1 ; //set visited to 1 
-
-        }
-
-        }
-        //fclose;
-        // we invert each womans preference list 
-        for (int i = 0 ; i<n ; i++){
-            inverted_pref_list(women[i].preferences , n);
-        }
-
-        find_matches(men , women , n);
-//        print_preferences(men , women , n);
-        print_husbands(women,n);
-        free(index_plus_preferences);
-        for (int i = 0; i < n; i++) {
-        free(men[i].preferences);
-        free(women[i].preferences);
-        }
-        free(men);
-        free(women);
         
         return 0;
 
     }   
 
-
-
-
-
-// }
 
 
