@@ -86,3 +86,5 @@ In similar way, we can have a double rotation to the left or right.
 
 
 # Graphs 
+
+A graph consist of nodes and edges. Edges will bind two nodes. A graph is written as `G(E,V)`  where E= Edges and V= nodes. A graph can be directed or undirected.
