@@ -85,6 +85,28 @@ In similar way, we can have a double rotation to the left or right.
 ![alt text](image-2.png)
 
 
-# Graphs 
+# 3 Graphs 
 
 A graph consist of nodes and edges. Edges will bind two nodes. A graph is written as `G(E,V)`  where E= Edges and V= nodes. A graph can be directed or undirected.
+
+## 3.1 Graph Representation 
+1. Matrix representation. We can represent a graph as a matrix. We pu a 1 if there is an edge between two node and a 0 if there is not any edge. 
+![alt text](image-3.png)
+
+* Advantages is that it is easy to find out wether two nodes are neibours. 
+* Disadvantages could be that this matrix can be very large and hence cost memory to store it. 
+
+
+2. List representation. 
+Another representation is to have a liked list of neibours. If we need to add more nodes to the graph , it could be beneficial to use linked list.If we know that the number of neibours doesn't change, it is better to use an array. How should we allocate this array? we can use smaller arrays for each nodes neibours or a large array and allocate potions of this big array for neibours
+
+## 3.2 Directed vs Undirected Graphs
+Graphs can be directed or undirected. In directed graph, if have have an edge from A to B. It does not applie that we have an edge from B to A. In undirected gaph if we have an edge from A to B then it implies that we have and edge from B to A. 
+
+## Path and Cycles
+A Path from A to C is a sequence of node that defines a path from A to C. A cycle starts and ends in the same node. 
+![alt text](image-4.png) 
+
+## 3.3 Traversing A graph: 
+
+### 3.3.1 Depth First Search
