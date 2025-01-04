@@ -103,12 +103,12 @@ void print_tree(node * root , int level){
     }
 
     ++level; 
+    printf("Level: %d     value:%d    Balance:%d \n" , level , root -> key , root-> balance);
+
     print_tree(root->left , level);
     print_tree(root->right , level);
 
-    printf("Level: %d     value:%d    Balance:%d \n" , level , root -> key , root-> balance);
-
-
+ 
 }
 
 
@@ -120,6 +120,10 @@ int main(){
     add_node(&root , 7 ); 
     add_node(&root , 8 );
     add_node(&root , 9 );
+
+    int left = update_balance(root ->left); 
+    int right = update_balance(root -> right);
+    printf("left h:%d      right h:%d\n\n" , ++left , ++right);
     print_tree(root , -1);
 
     free_tree(root);
