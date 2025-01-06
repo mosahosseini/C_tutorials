@@ -4,8 +4,10 @@
 typedef struct Node {
 int key; 
 int balance; // range of (-1 to 1) and it is height of 
+int h;
 struct Node * left ;
 struct Node * right; 
+
 } node;
  
 node *  init_tree(int key){
@@ -16,6 +18,7 @@ node *  init_tree(int key){
     }
     root -> key = key ; 
     root ->balance = 0 ; 
+    root -> h  =0; 
     root -> left = NULL; 
     root -> right = NULL;
     return root ;  
@@ -50,11 +53,22 @@ int update_balance(node* root){
 }
 
 
+int get_balance(node* root ){
+    int left = 0 ; 
+    int right = 0;
+    if (root -> left != NULL){
+        left = update_balance(root->left);
+        left++;
+    }
+    if (root -> right != NULL){
+        right = update_balance(root->right);
+        right ++; 
+    }
+    return right - left;
+}
 
-
-
-void add_node(node** root , int key   ){
-
+int insert(node** root , int key   ){
+    int h = 0 ; 
     if ((*root) == NULL){
         (*root) = (node*) malloc(sizeof(node));
         if((*root)== NULL){
@@ -65,24 +79,130 @@ void add_node(node** root , int key   ){
         (*root) -> key = key; 
         (*root) -> left = NULL;
         (*root) -> right = NULL; 
-        (*root) -> balance = update_balance(*root);
+        (*root) -> balance = 0;
+        (*root) -> h = 1;
+        return 1; 
     }
     else{
 
+    if ( key < (*root) ->key ){
+        h = insert( & (*root)->left , key  );
+        
+        if (h == 1){
+            if ((*root) -> balance == 1){
+                (*root)-> balance =0;
+                h = 0;
+            }
 
-    if ((*root) ->key >key  ){
-        add_node( & (*root)->left , key  );
-        (*root) -> balance = update_balance(*root);
-    } 
+            else if ((*root) ->balance == 0){
+                (*root)->balance = -1;
+            }
+            else{
+                if ((*root) -> left -> balance == -1){
+                    // single rigth rotation
+                    node * s = (*root) -> left; 
+                    (*root)->left = s->right ; // possible error; 
+                    s->right = (*root);
+                    (*root)->balance = 0;
+                    (*root) = s;
 
-    else if ((*root) ->key < key  ) {
-        add_node(&(*root) -> right , key);
-        (*root) -> balance = update_balance(*root);
-    }
-    else {
-        perror("The key you want to insert, already exist in the tree");
-    }
+                }
+                else {
+                    //Double right rot
+                    node * s = (*root) -> left; 
+                    node * t = (*root) -> left -> right;
+
+                    s-> right = t-> left ;
+                    t->left   = s; 
+                    
+                    (*root) -> left = t-> right; 
+                    t-> right = (*root);
+
+
+                    if (t->balance == -1){
+                        t->right->balance = 1;
+                    }
+                    else{
+                        t->right -> balance = 0 ; 
+                    }
+
+                    if (t->balance == 1){
+                        s->balance = -1;
+                    }
+                    else{
+                        s->balance = 0;
+                    }
+                    (*root)= t; 
+                }
+                
+                (*root)->balance = 0;
+                h=0;
+            }
+        }
+//        (*root) -> balance = get_balance((*root));
+
     } 
+    else if ( key > (*root) ->key  ) {
+        h = insert(&(*root) -> right , key);
+
+        if (h == 1){
+            if ((*root)->balance == -1){
+            (*root) -> balance = 0 ; 
+            h = 0 ; 
+            }
+
+            if ((*root) -> balance == 0 ){
+                (*root) -> balance = 1; 
+            }
+
+            else{
+                if((*root) ->right -> balance == 1){
+                    //single right rotation. 
+                    node *s = (*root) -> right;
+                    (*root) -> right  = s->left; 
+                    s->left = (*root);
+                    (*root) -> balance = 0 ; 
+                    (*root) = s; 
+                }
+                else{
+                    // double right rotation
+                    node * s = (*root) -> right;
+                    node * t = s->left ; 
+                    s-> left = t->right; 
+                    t->right = s; 
+                    (*root) ->right = t; 
+
+                    (*root) -> right = t-> left; 
+                    t->left = (*root) ;
+                    if (t->balance == 1){
+                        t->left -> balance = -1;
+                    }
+                    else {
+                        t->left -> balance = 0;
+                    }
+
+                    if(t-> balance == -1){
+                        s-> balance = 1;
+                    }
+                    else {
+                        s->balance = 0; 
+                    }
+    
+                    (*root) = t ; 
+
+                }
+                (*root) -> balance = 0 ; 
+                h = 0 ;
+
+            }   
+        }
+//        (*root) -> balance = get_balance((*root));
+    }
+    }
+    return h ;  
+    
+
+
 
  }
 
@@ -115,15 +235,12 @@ void print_tree(node * root , int level){
 
 
 int main(){
-    node * root = init_tree(5); 
-    add_node(&root , 3 ); 
-    add_node(&root , 7 ); 
-    add_node(&root , 8 );
-    add_node(&root , 9 );
+    node * root = init_tree(20); 
+    int h = insert(&root , 10);
+    h = insert(&root , 15);
+    h = insert(&root , 12) ; 
+    
 
-    int left = update_balance(root ->left); 
-    int right = update_balance(root -> right);
-    printf("left h:%d      right h:%d\n\n" , ++left , ++right);
     print_tree(root , -1);
 
     free_tree(root);
