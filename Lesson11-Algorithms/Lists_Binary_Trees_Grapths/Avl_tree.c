@@ -203,32 +203,131 @@ int insert(node** root , int key   ){
     
  }
 
+node* find_min(node* root ){
+    if (root -> left == NULL)
+    {
+        return root; 
+    }
+
+    return find_min(root->left);
+}
 node* delete(node** root , int key ){
 
 if ((*root) == NULL){
     return (*root); 
 }
 else if( key < (*root)->key){
-    delete((*root)-> left , key);
+    (*root)-> left = delete((*root)-> left , key);
 }
 else if( key > (*root)->key){
-    delete((*root)->right , key);
+    (*root)-> right = delete((*root)->right , key);
 }
-else { // key = (*root) ->key 
-    if ((*root)-> left == NULL){
+else { 
+    // key = (*root) ->key 
+    //case 1 Node has no children 
+    if ((*root)-> left == NULL && (*root)-> right == NULL ){
+        return NULL;
+    }
+    //case 2 Node has one child
+    else if ((*root)-> left == NULL){
         node * temp = (*root) ->right; 
-        (*root) = temp;
-        (*root) -> balance = 0; 
+        (*root) = NULL;
         return temp; 
     }
     else if ((*root) -> right == NULL){
         node * temp = (*root) -> left ; 
-        (*root) = temp ;
-        (*root) ->balance = 0;  
+        (*root) = NULL ;
+        //(*root) ->balance = 0;  
         return temp;
     }
-    
+    else {
+        // Find the minimum inorder successor 
+       node* temp = find_min( (*root) -> right );
 
+       // Copy the inorder successors content to this node 
+       (*root )-> key = temp->key ; 
+
+       // Delete the inorder successor
+       (*root ) -> right = delete((*root )->right , temp -> key );
+
+    }
+
+
+
+
+
+
+//     // Step 2: Update the height of the current node
+//     root.height = Max(Height(root.left), Height(root.right)) + 1
+
+//     // Step 3: Get the balance factor
+//     balance = GetBalance(root)
+
+//     // Step 4: Check the four cases of imbalance and apply the necessary rotation
+
+//     // Left-Left (LL) Case: Left child of the left subtree is unbalanced
+//     If balance > 1 AND GetBalance(root.left) >= 0:
+//         Return RightRotate(root)
+
+//     // Left-Right (LR) Case: Right child of the left subtree is unbalanced
+//     If balance > 1 AND GetBalance(root.left) < 0:
+//         root.left = LeftRotate(root.left)
+//         Return RightRotate(root)
+
+//     // Right-Right (RR) Case: Right child of the right subtree is unbalanced
+//     If balance < -1 AND GetBalance(root.right) <= 0:
+//         Return LeftRotate(root)
+
+//     // Right-Left (RL) Case: Left child of the right subtree is unbalanced
+//     If balance < -1 AND GetBalance(root.right) > 0:
+//         root.right = RightRotate(root.right)
+//         Return LeftRotate(root)
+
+//     Return root
+
+// Function RightRotate(y):
+//     x = y.left
+//     T2 = x.right
+    
+//     // Perform rotation
+//     x.right = y
+//     y.left = T2
+
+//     // Update heights
+//     y.height = Max(Height(y.left), Height(y.right)) + 1
+//     x.height = Max(Height(x.left), Height(x.right)) + 1
+    
+//     Return x
+
+// Function LeftRotate(x):
+//     y = x.right
+//     T2 = y.left
+    
+//     // Perform rotation
+//     y.left = x
+//     x.right = T2
+    
+//     // Update heights
+//     x.height = Max(Height(x.left), Height(x.right)) + 1
+//     y.height = Max(Height(y.left), Height(y.right)) + 1
+    
+//     Return y
+
+// Function GetBalance(node):
+//     If node is NULL:
+//         Return 0
+//     Return Height(node.left) - Height(node.right)
+
+// Function Height(node):
+//     If node is NULL:
+//         Return 0
+//     Return node.height
+
+// Function FindMin(node):
+//     current = node
+//     While current.left is not NULL:
+//         current = current.left
+//     Return current
 
 
 
