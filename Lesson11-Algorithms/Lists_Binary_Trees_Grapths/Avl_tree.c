@@ -201,11 +201,40 @@ int insert(node** root , int key   ){
     }
     return h ;  
     
-
-
-
  }
 
+node* delete(node** root , int key ){
+
+if ((*root) == NULL){
+    return (*root); 
+}
+else if( key < (*root)->key){
+    delete((*root)-> left , key);
+}
+else if( key > (*root)->key){
+    delete((*root)->right , key);
+}
+else { // key = (*root) ->key 
+    if ((*root)-> left == NULL){
+        node * temp = (*root) ->right; 
+        (*root) = temp;
+        (*root) -> balance = 0; 
+        return temp; 
+    }
+    else if ((*root) -> right == NULL){
+        node * temp = (*root) -> left ; 
+        (*root) = temp ;
+        (*root) ->balance = 0;  
+        return temp;
+    }
+    
+
+
+
+
+}
+
+}
 
 void free_tree(node* root  ){
     if (root == NULL){
