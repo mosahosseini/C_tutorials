@@ -91,6 +91,8 @@ int insert(node** root , int key   ){
         if (h == 1){
             if ((*root) -> balance == 1){
                 (*root)-> balance =0;
+                (*root) -> h = 0;
+
                 h = 0;
             }
 
@@ -136,6 +138,7 @@ int insert(node** root , int key   ){
                 }
                 
                 (*root)->balance = 0;
+                (*root) -> h = 0 ; 
                 h=0;
             }
         }
@@ -148,6 +151,7 @@ int insert(node** root , int key   ){
         if (h == 1){
             if ((*root)->balance == -1){
             (*root) -> balance = 0 ; 
+            (*root) -> h = 0;
             h = 0 ; 
             }
 
@@ -192,6 +196,7 @@ int insert(node** root , int key   ){
 
                 }
                 (*root) -> balance = 0 ; 
+                (*root) -> h = 0;
                 h = 0 ;
 
             }   
@@ -203,6 +208,8 @@ int insert(node** root , int key   ){
     
  }
 
+
+
 node* find_min(node* root ){
     if (root -> left == NULL)
     {
@@ -211,16 +218,86 @@ node* find_min(node* root ){
 
     return find_min(root->left);
 }
+
+
+int max(int a , int b){
+    if (a<=b)
+    {
+        return b;
+    }
+    else {
+        return a; 
+    }
+}
+
+int get_balancee(node* root){
+    if (root == NULL){
+        return 0; 
+    }
+    return root->left->h - root->right ->h;
+}
+
+int height(node * root){
+    if (root == NULL){
+        return 0;
+    }
+    return root -> h; 
+}
+
+// Function RightRotate(y):
+//     x = y.left
+//     T2 = x.right
+    
+//     // Perform rotation
+//     x.right = y
+//     y.left = T2
+
+//     // Update heights
+//     y.height = Max(Height(y.left), Height(y.right)) + 1
+//     x.height = Max(Height(x.left), Height(x.right)) + 1
+    
+//     Return x
+
+node*  right_rotate(node *root){
+    node * s = root -> left; 
+    node * t = s -> right ;
+    s -> right = root; 
+    root -> left = t ; 
+
+    root -> h = max( height(root -> left) , height(root-> right));
+    s -> h    = max( height(s -> left)  , height( s -> right )) ; 
+
+    return s;
+}
+
+
+node* left_rotate( node *root){
+    node* s = root -> right ; 
+    node* t = s -> left ; 
+    s-> left = root ; 
+    root -> right = t; 
+
+    root -> h = max( height(root -> left) , height(root -> right) ); 
+    s -> h = max( height( s -> left) , height( s -> right)); 
+    return s ; 
+}
+
+
+
+
+
+
+
 node* delete(node** root , int key ){
 
 if ((*root) == NULL){
     return (*root); 
 }
 else if( key < (*root)->key){
-    (*root)-> left = delete((*root)-> left , key);
+    (*root) -> left = delete(&((*root)-> left) , key);
 }
 else if( key > (*root)->key){
-    (*root)-> right = delete((*root)->right , key);
+    (*root)-> right = delete(&((*root)->right) , key);
 }
 else { 
     // key = (*root) ->key 
@@ -248,20 +325,17 @@ else {
        (*root )-> key = temp->key ; 
 
        // Delete the inorder successor
-       (*root ) -> right = delete((*root )->right , temp -> key );
+       (*root ) -> right = delete(&((*root )->right) , temp -> key );
 
     }
 
+    // Step 2: update the height of the current node
+    (*root) -> h = max( height((*root) -> left) , height((*root) -> right) ) +1; 
+
+    // Step 3: Get the balance factor
+    int balance = get_balancee((*root));
 
 
-
-
-
-//     // Step 2: Update the height of the current node
-//     root.height = Max(Height(root.left), Height(root.right)) + 1
-
-//     // Step 3: Get the balance factor
-//     balance = GetBalance(root)
 
 //     // Step 4: Check the four cases of imbalance and apply the necessary rotation
 
@@ -269,14 +343,28 @@ else {
 //     If balance > 1 AND GetBalance(root.left) >= 0:
 //         Return RightRotate(root)
 
+    if (balance > 1 && get_balancee( (*root) -> left ) >= 0){
+        return right_rotate((*root));
+    }
+
 //     // Left-Right (LR) Case: Right child of the left subtree is unbalanced
 //     If balance > 1 AND GetBalance(root.left) < 0:
 //         root.left = LeftRotate(root.left)
 //         Return RightRotate(root)
 
+    if ( balance >1 && get_balancee( (*root) -> left ) >= 0  ){
+        (*root) -> left = left_rotate( (*root) -> left);
+        return right_rotate( (*root)); 
+    }
+
 //     // Right-Right (RR) Case: Right child of the right subtree is unbalanced
 //     If balance < -1 AND GetBalance(root.right) <= 0:
 //         Return LeftRotate(root)
+
+    if (balance < -1 && get_balancee( (*root) -> right) <= 0) {
+        return left_rotate((*root));
+    }
+
 
 //     // Right-Left (RL) Case: Left child of the right subtree is unbalanced
 //     If balance < -1 AND GetBalance(root.right) > 0:
@@ -284,6 +372,15 @@ else {
 //         Return LeftRotate(root)
 
 //     Return root
+
+
+    if ( balance < -1  && get_balancee( (*root) -> right) > 0 ){
+        (*root) -> right = right_rotate( (*root) -> right );
+        return left_rotate( (*root) ); 
+    }
+
+
+
 
 // Function RightRotate(y):
 //     x = y.left
@@ -333,6 +430,9 @@ else {
 
 }
 
+
+
+
 }
 
 void free_tree(node* root  ){
@@ -363,12 +463,14 @@ void print_tree(node * root , int level){
 
 
 int main(){
-    node * root = init_tree(20); 
-    int h = insert(&root , 10);
-    h = insert(&root , 15);
-    h = insert(&root , 12) ; 
+    node * root = init_tree(40); 
+    int k [6] = {20,10,25,30,22,50};
     
-
+    for( int i = 0 ; i<6 ; i++){
+        int h = insert(&root , k[i]);
+    }
+    
+    
     print_tree(root , -1);
 
     free_tree(root);
