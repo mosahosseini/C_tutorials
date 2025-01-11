@@ -18,7 +18,7 @@ node *  init_tree(int key){
     }
     root -> key = key ; 
     root ->balance = 0 ; 
-    root -> h  =0; 
+    root -> h  =1; 
     root -> left = NULL; 
     root -> right = NULL;
     return root ;  
@@ -87,12 +87,13 @@ int insert(node** root , int key   ){
 
     if ( key < (*root) ->key ){
         h = insert( & (*root)->left , key  );
-        
+
+
         if (h == 1){
+            (*root) -> h = max(height( (*root) -> left ) , height( (*root) -> right )) +1 ; 
+
             if ((*root) -> balance == 1){
                 (*root)-> balance =0;
-                (*root) -> h = 0;
-
                 h = 0;
             }
 
@@ -103,21 +104,28 @@ int insert(node** root , int key   ){
                 if ((*root) -> left -> balance == -1){
                     // single rigth rotation
                     node * s = (*root) -> left; 
-                    (*root)->left = s->right ; // possible error; 
+                    node * t = s-> right; 
+                    (*root)->left = t; // possible error; 
+                    (*root) -> h = max(height( (*root) -> left ) , height((*root) -> right )) +1 ; 
                     s->right = (*root);
                     (*root)->balance = 0;
                     (*root) = s;
-
+                    s -> h = max(height( s -> left ) , height( s -> right )) +1 ;
                 }
                 else {
                     //Double right rot
                     node * s = (*root) -> left; 
                     node * t = (*root) -> left -> right;
 
+
                     s-> right = t-> left ;
+                    s -> h = max(height( s -> left ) , height( s -> right )) +1 ;
+
                     t->left   = s; 
-                    
-                    (*root) -> left = t-> right; 
+
+                    (*root) -> left = t-> right;
+                    (*root) -> h = max(height( (*root) -> left ) , height((*root) -> right )) +1 ; 
+
                     t-> right = (*root);
 
 
@@ -134,24 +142,27 @@ int insert(node** root , int key   ){
                     else{
                         s->balance = 0;
                     }
+
+                    t -> h = max(height( t -> left ) , height(t -> right )) +1 ;                     
                     (*root)= t; 
                 }
                 
                 (*root)->balance = 0;
-                (*root) -> h = 0 ; 
                 h=0;
             }
+
+
         }
 //        (*root) -> balance = get_balance((*root));
-
     } 
     else if ( key > (*root) ->key  ) {
         h = insert(&(*root) -> right , key);
-
         if (h == 1){
+            (*root) -> h = max(height( (*root) -> left ) , height((*root) -> right )) +1 ; 
+            
             if ((*root)->balance == -1){
             (*root) -> balance = 0 ; 
-            (*root) -> h = 0;
+  
             h = 0 ; 
             }
 
@@ -161,23 +172,27 @@ int insert(node** root , int key   ){
 
             else{
                 if((*root) ->right -> balance == 1){
-                    //single right rotation. 
+                    //single left rotation. 
                     node *s = (*root) -> right;
-                    (*root) -> right  = s->left; 
+                    (*root) -> right  = s->left;
+                    (*root) -> h = max(height( (*root) -> left ) , height((*root) -> right )) +1 ;  
+
                     s->left = (*root);
+                    s -> h = max(height( s -> left ) , height(s -> right )) +1 ; 
                     (*root) -> balance = 0 ; 
                     (*root) = s; 
                 }
                 else{
-                    // double right rotation
+                    // double left rotation
                     node * s = (*root) -> right;
                     node * t = s->left ; 
                     s-> left = t->right; 
+                    s -> h = max(height( s -> left ) , height(s -> right )) +1 ; 
                     t->right = s; 
-                    (*root) ->right = t; 
-
-                    (*root) -> right = t-> left; 
+                    (*root) -> right = t-> left;
+                    (*root) -> h = max(height( (*root) -> left ) , height((*root) -> right )) +1 ;  
                     t->left = (*root) ;
+                    t -> h = max(height( t -> left ) , height(t -> right )) +1 ; 
                     if (t->balance == 1){
                         t->left -> balance = -1;
                     }
@@ -192,14 +207,13 @@ int insert(node** root , int key   ){
                         s->balance = 0; 
                     }
     
-                    (*root) = t ; 
+                    (*root) = t ;
 
                 }
                 (*root) -> balance = 0 ; 
-                (*root) -> h = 0;
                 h = 0 ;
 
-            }   
+            }    
         }
 //        (*root) -> balance = get_balance((*root));
     }
@@ -234,7 +248,7 @@ int get_balancee(node* root){
     if (root == NULL){
         return 0; 
     }
-    return root->left->h - root->right ->h;
+    return height(root->left) - height(root->right);
 }
 
 int height(node * root){
@@ -271,13 +285,13 @@ node*  right_rotate(node *root){
 }
 
 
-node* left_rotate( node *root){
-    node* s = root -> right ; 
+node* left_rotate( node **root){
+    node* s = (*root) -> right ; 
     node* t = s -> left ; 
-    s-> left = root ; 
-    root -> right = t; 
+    s-> left = (*root) ; 
+    (*root) -> right = t; 
 
-    root -> h = max( height(root -> left) , height(root -> right) ); 
+    (*root) -> h = max( height((*root) -> left) , height((*root) -> right) ); 
     s -> h = max( height( s -> left) , height( s -> right)); 
     return s ; 
 }
@@ -317,18 +331,17 @@ else {
         //(*root) ->balance = 0;  
         return temp;
     }
-    else {
         // Find the minimum inorder successor 
-       node* temp = find_min( (*root) -> right );
+    node* temp = find_min( (*root) -> right );
 
-       // Copy the inorder successors content to this node 
-       (*root )-> key = temp->key ; 
+    // Copy the inorder successors content to this node 
+    (*root )-> key = temp->key ; 
 
-       // Delete the inorder successor
-       (*root ) -> right = delete(&((*root )->right) , temp -> key );
-
+    // Delete the inorder successor
+    (*root ) -> right = delete(&((*root )->right) , temp -> key );
     }
-
+    
+    
     // Step 2: update the height of the current node
     (*root) -> h = max( height((*root) -> left) , height((*root) -> right) ) +1; 
 
@@ -362,7 +375,7 @@ else {
 //         Return LeftRotate(root)
 
     if (balance < -1 && get_balancee( (*root) -> right) <= 0) {
-        return left_rotate((*root));
+        return left_rotate(root);
     }
 
 
@@ -427,10 +440,7 @@ else {
 //     Return current
 
 
-
-}
-
-
+return (*root);
 
 
 }
@@ -469,6 +479,8 @@ int main(){
     for( int i = 0 ; i<6 ; i++){
         int h = insert(&root , k[i]);
     }
+
+    node * deleted_node =  delete( &root , 25);
     
     
     print_tree(root , -1);
