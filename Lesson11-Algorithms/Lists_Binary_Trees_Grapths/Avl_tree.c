@@ -183,9 +183,24 @@ void  insert(node** root , int key   ){
  }
 
 
+node * search(node* root , int key ){
+    if (root == NULL) {
+        perror("The  element with the given key doesnt exist!");
+        exit(1);
+        return NULL;
+    }
+    else if (root -> key < key ){
+        return search(root -> left , key);
+    }
+    else if (root -> key > key){
+        return search(root -> right , key );
+    } else{
+        return root ; 
+    }
 
+    
 
-
+}
 
 
 node* delete(node** root , int key ){
@@ -197,28 +212,35 @@ node* delete(node** root , int key ){
     else if( key < (*root)->key){
         (*root) -> left = delete(&((*root)-> left) , key);
     }
+
     else if( key > (*root)->key){
         (*root)-> right = delete(&((*root)->right) , key);
     }
+
     else { 
+
         // key = (*root) ->key 
         //case 1 Node has no children 
         if ((*root)-> left == NULL && (*root)-> right == NULL ){
+
             return NULL;
         }
         //case 2 Node has one child
         else if ((*root)-> left == NULL){
+
             node * temp = (*root) ->right; 
             (*root) = NULL;
             return temp; 
         }
+
         else if ((*root) -> right == NULL){
             node * temp = (*root) -> left ; 
             (*root) = NULL ;
 
             return temp;
         }
-            // Find the minimum inorder successor 
+
+        // Find the minimum inorder successor 
         node* temp = find_min( (*root) -> right );
 
         // Copy the inorder successors content to this node 
@@ -284,6 +306,7 @@ return (*root);
 
 }
 
+
 void free_tree(node* root  ){
     if (root == NULL){
         return ; 
@@ -305,10 +328,7 @@ void print_tree(node * root , int level){
     print_tree(root->left , level);
     print_tree(root->right , level);
 
- 
 }
-
-
 
 
 int main(){
