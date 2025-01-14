@@ -58,7 +58,7 @@ int max(int a , int b){
 int height(node * root){
     //the the root is only a node , then the height is 1 else just return the height of it. 
     if (root == NULL){
-        return 1;
+        return 0;
     }
     return root -> h;
 
@@ -92,8 +92,8 @@ node* left_rotate( node **root){
     node* t = s -> left ; 
     s-> left = (*root) ; 
     (*root) -> right = t; 
-    (*root) -> h = max( height((*root) -> left) , height((*root) -> right) ); 
-    s -> h = max( height( s -> left) , height( s -> right)); 
+    (*root) -> h = max( height((*root) -> left) , height((*root) -> right) )+1; 
+    s -> h = max( height( s -> left) , height( s -> right)+1); 
     (*root) =s ; 
     return s ; 
 }
@@ -114,8 +114,8 @@ node*  right_rotate(node **root){
     node * t = s -> right ;
     s -> right = (*root); 
     (*root) -> left = t ; 
-    (*root) -> h = max( height((*root) -> left) , height((*root)-> right));
-    s -> h    = max( height(s -> left)  , height( s -> right )) ; 
+    (*root) -> h = max( height((*root) -> left) , height((*root)-> right))+1;
+    s -> h    = max( height(s -> left)  , height( s -> right ))+1 ; 
     (*root) = s; 
     return s;
 }
@@ -184,15 +184,19 @@ void  insert(node** root , int key   ){
 
 
 node * search(node* root , int key ){
+    /*
+    this function is used to searched for a node in the AVL tree. Time complexity O(logn)
+    because  n_h = 2^h-1 -> h = log2( n_h + 1) 
+    */
     if (root == NULL) {
-        perror("The  element with the given key doesnt exist!");
+        perror("\n\nThe  element with the given key doesnt exist!\n\n");
         exit(1);
         return NULL;
     }
-    else if (root -> key < key ){
+    else if (root -> key > key ){
         return search(root -> left , key);
     }
-    else if (root -> key > key){
+    else if (root -> key < key){
         return search(root -> right , key );
     } else{
         return root ; 
@@ -339,7 +343,9 @@ int main(){
         insert(&root , k[i]);
     }
 
-    node * deleted_node =  delete( &root , 25);
+//    node * deleted_node =  delete( &root , 25);
+node * searched_node = search(root , 22 );
+
     
     
     print_tree(root , -1);
