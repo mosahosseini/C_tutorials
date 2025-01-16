@@ -108,5 +108,54 @@ A Path from A to C is a sequence of node that defines a path from A to C. A cycl
 ![alt text](image-4.png) 
 
 ## 3.3 Traversing A graph: 
+There is different ways to travers a graph. We can either search so that we reach the depth first. Or for each node we can travers all its neighbouring nodes and then travers deeper in the tree. 
 
 ### 3.3.1 Depth First Search
+Deapth first search is a searching algorithm for graphs where we first explore the depth of a graph then go back to other neighbouring nodes. 
+
+**Procedure:**
+DFS(graph, start):
+1. Create an empty stack S
+2. Create a set to track visited nodes, visited = empty set
+3. Push start node onto stack S
+4. Add start node to visited set
+
+5. While stack S is not empty:
+   1. Pop node from stack S
+   2. If node is not in visited:
+      1. Mark node as visited
+      2. For each neighbor of node in graph[node]:
+         1. Push neighbor onto stack S
+
+6. End
+
+ 
+
+**Pseudo code:**
+![alt text](image-5.png)
+
+
+### 3.3.2 Bredth First Search
+In stead of exploring the depth of a graph first. This algorithm can be used to find the shortest path between two nodes. So in bfs we visit all neighbours will the current node before we go to next level. 
+
+**Prodecude**
+BFS(graph, start):
+1. Create an empty queue Q
+2. Create a set to track visited nodes, visited = empty set
+3. Enqueue start node into Q
+4. Add start node to visited set
+
+5. While Q is not empty:
+   1. Dequeue a node from Q, let's call it node
+   2. For each neighbor of node in graph[node]:
+      1. If neighbor is not in visited:
+         1. Enqueue neighbor into Q
+         2. Add neighbor to visited set
+
+6. End
+
+
+**Pseudo code:**
+![alt text](image-6.png)
+
+
