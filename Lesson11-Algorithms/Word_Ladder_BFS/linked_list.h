@@ -1,23 +1,18 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct g_node{
-    int node_num;
-    char* value;
-}G_NODE;
-
 typedef struct node {
     int node_num; 
     char * value; 
     struct node * next;
 } Node;
 
-Node* init_node(char* value){
+Node* init_node(char* value, int n_num){
     Node * start = (Node*) malloc(sizeof(Node));
     if (start == NULL){
         printf("Initiation of linked list failed");
     }
-    start -> node_num = 0; 
+    start -> node_num = n_num; 
     start  -> value = value;
     start -> next = NULL;
     return start;
@@ -61,12 +56,23 @@ int  remove_node (Node ** start , int node_num)
     }
 }
 
+void free_mem(Node* start){
+    Node * temp = start; 
+    Node * temp2; 
+    while (temp-> next != NULL){
+        temp2 = temp->next;
+        free(temp->value);
+        free(temp);
+        temp = temp2;
+    }
+}
+
 
 int main(){
     char* s = "where";
     char * n1 = "there";
     char *n2 = "cat"; 
-    Node * start = init_node(s);
+    Node * start = init_node(s , 0);
 
     add(&start , 1, n1) ; 
     // printf("Node: %d , value: %s" , start -> next -> node_num , start -> next ->value);
@@ -89,7 +95,12 @@ int main(){
         temp = temp -> next ; 
   
     }
-    free(start); 
+
+    free_mem(start);
+    free(start ->value);
+    free(start);
+    free(temp -> value);
+    free(temp);
 
 
 
