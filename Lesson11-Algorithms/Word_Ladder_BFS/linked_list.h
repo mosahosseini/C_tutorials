@@ -96,6 +96,8 @@ int main(){
   
     }
 
+    
+
     free_mem(start);
     free(start ->value);
     free(start);
