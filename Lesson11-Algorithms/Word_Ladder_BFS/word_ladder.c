@@ -1,12 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "linked_list.h"
 #define WORD_LENGTH 5
 
 typedef struct g_node{
     int node_num;
-    char * values; 
-    Node neighbours; 
+    char * value; 
 }G_node;
 
 
@@ -66,24 +64,28 @@ const char* determine_edge_type(const char *u, const char *v) {
 }
 
 
-
-
-void add_neighbour(Node * start , int node_num , char* val){
-    if (start == NULL){
-        start =  init_node(val, node_num);
-    }
-    else {
-        add(start , node_num , val);
-    }
-
-}
-
-
-
-
-
 int main(){
+    int n ; 
+    int q ; 
 
+    scanf("%d" ,&n);
+    scanf("%d" , &q); 
+    G_node  graph [n];
+    char * val ; 
+
+    for (int i = 0 ; i < n ; i++) {
+        graph[i].node_num = i ; 
+        scanf("%s" , val);
+        graph[i].value = val; 
+    }
+
+    
+
+    for (int i = 0 ; i < n ; i++) {
+        printf("\nNode number:    %d    value: %s" , graph[i].node_num , graph[i].value );
+    }
+
+return 0;
 
 
 }
