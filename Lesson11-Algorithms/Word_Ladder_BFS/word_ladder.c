@@ -70,7 +70,7 @@ int main(){
 
     scanf("%d" ,&n);
     scanf("%d" , &q); 
-    G_node  graph [n];
+    G_node  graph[n] ;
     char * val ; 
 
     for (int i = 0 ; i < n ; i++) {

@@ -59,14 +59,23 @@ int  remove_node (Node ** start , int node_num)
 void free_mem(Node* start){
     Node * temp = start; 
     Node * temp2; 
-    while (temp-> next != NULL){
+    while (temp != NULL){
         temp2 = temp->next;
-        free(temp->value);
         free(temp);
         temp = temp2;
     }
+
 }
 
+void print_linked_list(Node * start){
+    Node* temp = start; 
+    while (temp != NULL){
+        printf("node number : %d    value: %c \n" , temp -> node_num , temp ->value[0] );
+        temp = temp -> next ; 
+  
+    }
+
+    }
 
 // int main(){
 //     char* s = "where";
