@@ -7,8 +7,8 @@ typedef struct {
     int capacity ; 
 } Stack;
 
-Stack* init_stack( int value){
-    Stack* stk; 
+void init_stack( Stack **s ,int value){
+    Stack* stk = *s; 
     stk->arry = (int*)malloc(sizeof(int)*2);
     if (stk == NULL) {
         printf("Error initiating stack!");
@@ -16,7 +16,6 @@ Stack* init_stack( int value){
     stk->arry[0] = value;
     stk ->capacity = 2;
     stk -> size = 1;
-    return stk;
 }
 
 
@@ -65,24 +64,24 @@ void print_stack(Stack * stk){
     printf("]");
 
 }
-int main(){
-    Stack * s = init_stack(4);
-    push(s , 3);
-    push(s , 2);
-    push(s , 1);
-    push(s , 0);
-    printf("initial stack: ");
-    print_stack(s);
-    int stop_iter = s->size;
-    for(int i = 0 ; i< stop_iter+1 ; i++){  
-        printf("\n");
-        printf("poped element: %d\n" , pop(s) );
-        printf("stack after poping : ");
-        print_stack(s);
+// int main(){
+//     Stack * s = init_stack(4);
+//     push(s , 3);
+//     push(s , 2);
+//     push(s , 1);
+//     push(s , 0);
+//     printf("initial stack: ");
+//     print_stack(s);
+//     int stop_iter = s->size;
+//     for(int i = 0 ; i< stop_iter+1 ; i++){  
+//         printf("\n");
+//         printf("poped element: %d\n" , pop(s) );
+//         printf("stack after poping : ");
+//         print_stack(s);
      
-    }
-    free_stack(s);
-    free(s);
+//     }
+//     free_stack(s);
+//     free(s);
     
 
-}
+// }
