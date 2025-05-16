@@ -7,8 +7,9 @@ typedef struct {
     int capacity ; 
 } Stack;
 
-void init_stack( Stack **s ,int value){
-    Stack* stk = *s; 
+void init_stack( Stack ** s , int value){
+    *s = (Stack*)malloc(sizeof(Stack));
+    Stack* stk = *s ;
     stk->arry = (int*)malloc(sizeof(int)*2);
     if (stk == NULL) {
         printf("Error initiating stack!");
@@ -16,6 +17,7 @@ void init_stack( Stack **s ,int value){
     stk->arry[0] = value;
     stk ->capacity = 2;
     stk -> size = 1;
+
 }
 
 

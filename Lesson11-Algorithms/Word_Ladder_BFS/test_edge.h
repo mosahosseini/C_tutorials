@@ -61,10 +61,10 @@ int node_from_1_to_2( char * word_1 , char * word_2){
  
 
 //  int main(){
-//     // char a = 'a';
-//     // char * b = &a;
-//     // Node * root = init_node( b , 0);
-//     // printf("char : %c node_num : %d" , *(root ->value) ,root ->node_num);
+// //     // char a = 'a';
+// //     // char * b = &a;
+// //     // Node * root = init_node( b , 0);
+// //     // printf("char : %c node_num : %d" , *(root ->value) ,root ->node_num);
 
 
 
@@ -74,9 +74,10 @@ int node_from_1_to_2( char * word_1 , char * word_2){
 //    //  char *w2 = malloc(6);
 //    //  strcpy(w2, "there"); 
 
-//       char * w1 = "ellil";
-//       char * w2 = "iwlle";
+//       char * w1 = "abbcc";
+//       char * w2 = "bccba";
 //    //  printf("sring1 : %s , string2: %s" , w1,w2);
 //    printf("node from w1 to w2 %d " ,     node_from_1_to_2(w1 ,w2 ));
-
+   
+//    printf("node from w2 to w1 %d " ,     node_from_1_to_2(w2 ,w1 ));
 //   }
