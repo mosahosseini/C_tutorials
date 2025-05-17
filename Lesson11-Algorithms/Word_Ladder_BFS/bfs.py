@@ -4,10 +4,11 @@ import fileinput
 from collections import deque 
 
 class Node:
-    def __init__(self,string,pred,arcs):
+    def __init__(self,string,pred,arcs , ind):
         self.pred = pred
         self.string = string
         self.arcs = arcs
+        self.ind = ind
 
 
 def ssplit(word):
@@ -95,10 +96,11 @@ def clear_pred (G):
 inp_tot = ""
 
 
-for line in fileinput.input():
-    inp_tot += line
+# for line in fileinput.input():
+#     inp_tot += line
 
-
+with open("3medium1.in" , "r") as f:
+    inp_tot = f.read()
 
 inp_tot =  inp_tot.split()
 
@@ -109,7 +111,7 @@ graph = []
 que = []
 
 for i in range(2,N+2):
-    graph.append(Node(inp_tot[i],None,[]))
+    graph.append(Node(inp_tot[i],None,[] , i-2))
 
 
 make_graph(graph)
@@ -122,6 +124,7 @@ for j in range(N+2,len(inp_tot),2):
     clear_pred(graph)
 
 
+print([n.ind for n in graph[58].arcs])
 
 
 

@@ -90,7 +90,7 @@ int main(){
     }
 
 
-     free_graph(&graph , n);
+    free_graph(&graph , n);
 
     for (int i = 0 ; i < n ; i++) {
         printf("\nNode number:    %d    value: %s" , i, graph[i].value );

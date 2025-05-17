@@ -37,7 +37,7 @@ void add_to_dyn_arr(Dynamic_Array ** dyn_arr , int value){
 
             new_arr = (int*) malloc(sizeof( int) * new_capacity);
             if (new_arr == NULL){
-            printf("Error occured while initiating the dynamic array");
+                printf("Error occured while initiating the dynamic array");
             }
             
 

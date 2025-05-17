@@ -38,7 +38,7 @@ int bfs (G_node * graph, int n  , char* start_word , char* dest_word){
     int counter = 0;
     int ind = pop(q);
     graph[ind].visited = 1;
-    while (ind != -1 & counter < 100){
+    while (ind != -1 & counter < 100000){
         G_node * temp = &graph[ind];
         // char *  temp_w= (char*) malloc(sizeof(char)*10); 
         // temp_w = graph[ind].value;
@@ -47,13 +47,13 @@ int bfs (G_node * graph, int n  , char* start_word , char* dest_word){
             int edge_count = 0;
             int temp_ind = ind; 
             int counter2= 0;
-            while (temp_ind != start_ind && counter2 < 10){
+            while (temp_ind != start_ind && counter2 < 10000){
                 temp_ind = graph[temp_ind].pred;
 
                 edge_count ++;
                 counter2++;
             }
-            free_stack(q);
+            free_stack(&q);
             return edge_count;
         }
         // free(temp_w);
@@ -69,25 +69,19 @@ int bfs (G_node * graph, int n  , char* start_word , char* dest_word){
         }
         ind = pop(q);
     }
-    
-    free_stack(q);
+    free_stack(&q);
+
     return -1 ;
-
- 
-
-
 }
 
 
 
 void construct_graph(G_node ** graph , int n){ 
     G_node * g_arr = * graph;
-    int k = node_from_1_to_2(g_arr[9].value , g_arr[0].value);
-    int o = node_from_1_to_2(g_arr[0].value , g_arr[9].value);
     for (int i = 0 ; i< n-1 ; i++){
         for (int j= i+1 ; j < n ; j++){
-            if ( node_from_1_to_2(g_arr[i].value , g_arr[j].value)){
-
+            // if ( node_from_1_to_2(g_arr[i].value , g_arr[j].value)){
+                if ( node_from_1_to_2(g_arr[i].value , g_arr[j].value)){
                 add_to_dyn_arr(&g_arr[i].edges , j);
 
             }
@@ -113,16 +107,30 @@ void restore_default_value(G_node*  graph , int n ){
 void free_graph(G_node ** p_graph , int n){
     G_node * graph = *p_graph;
     for (int i = 0; i < n ; i++){
-        free(graph[i].value);
-        free( graph[i].edges->array);
-       free( graph[i].edges);
+        if (graph[i].value != NULL){
+            free(graph[i].value);
+        }
+        
+        if (graph[i].edges->array != NULL){
+            free( graph[i].edges->array);
+        }
+        
+        if (graph[i].edges != NULL){
+            free( graph[i].edges);
+        }
+
     }
-    free(graph);
 }
 int main(){
 
     FILE *file;
-    file = fopen("1small1.txt", "r"); // Opens file in read mode
+    file = fopen("3medium1.in", "r"); // Opens file in read mode
+    FILE *outfile ; 
+    outfile = fopen("output.txt" , "w");
+    if (outfile == NULL) {
+        perror("Error opening output file");
+        return 1;
+    }
 
     if (file == NULL) {
     perror("File opening failed");
@@ -135,13 +143,14 @@ int main(){
     // scanf("%d %d" , &n , &q);
     fscanf(file , "%d %d" , &n , &q);
 
-    printf("n = %d , q = %d\n" , n , q);
+    // printf("n = %d , q = %d\n" , n , q);
     G_node*  graph = (G_node*)malloc(n*sizeof(G_node));
 
     for (int i = 0 ; i < n ; i++) {
         // graph[i].edges = NULL;
         graph[i].value = (char*)malloc(sizeof(char)*6);
         graph[i].edges =  (Dynamic_Array*) malloc(sizeof(Dynamic_Array));
+        graph[i].edges->array = NULL;
         graph[i].edges->size = 0;
         graph[i].edges -> capacity = 0;
         graph[i].pred = -1;
@@ -159,15 +168,15 @@ int main(){
 
     construct_graph(&graph , n);
 
-   for (int i = 0 ; i < n ; i++) {
-        printf("\nNode number: %d   value: %s   Edges: [" , i, graph[i].value );
-        for (int j = 0 ; j < graph[i].edges->size ; j++){
-                printf(" %d " , graph[i].edges->array[j]);
-        }
-         printf("]\n");
+//    for (int i = 0 ; i < n ; i++) {
+//         printf("\nNode number: %d   value: %s   Edges: [" , i, graph[i].value );
+//         for (int j = 0 ; j < graph[i].edges->size ; j++){
+//                 printf(" %d " , graph[i].edges->array[j]);
+//         }
+//          printf("]\n");
 
 
-    }
+//     }
 
     char *start_word =(char*) malloc(sizeof(char)*10);
     char *dest_word =(char*) malloc(sizeof(char)*10); 
@@ -176,13 +185,16 @@ int main(){
     // strcpy(dest_word ,"bccba" );
     for (int i = 0 ; i<q ; i++){
         fscanf(file,"%s %s" , start_word , dest_word);
+        // scanf("%s %s" , start_word ,dest_word );
         int num_edge = bfs(graph , n , start_word , dest_word);
         restore_default_value(graph , n);
         if (num_edge == -1){
-            printf("\nimpossible!");
+            // fprintf(outfile, "Impossible\n");
+            printf("Impossible\n");
         }
         else{
-            printf("\n%d", num_edge);
+            // fprintf(outfile, "%d\n" , num_edge);            
+            printf("%d\n", num_edge);
         }
     }
 
@@ -190,9 +202,10 @@ int main(){
     free(start_word);
     free(dest_word);
     free_graph(&graph , n);
+    free(graph);
 
     free(word);
-    fclose(file);  
+    // fclose(file);  
 
 
 

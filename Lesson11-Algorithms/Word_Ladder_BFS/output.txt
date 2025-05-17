@@ -1,0 +1,500 @@
+
+Node number: 0   value: ceeee   Edges: [ 76  139 ]
+
+Node number: 1   value: aeabd   Edges: [ 2  15  31  34  38  40  53  72  89  111  123  124  127  144  145  151  154  160  162  164  165  172  175  180  200  203  213  222  232 ]
+
+Node number: 2   value: deacb   Edges: [ 4  14  18  25  31  40  47  57  60  70  77  82  94  97  114  115  123  127  157  161  162  166  174  194  213  216  222  224 ]
+
+Node number: 3   value: ebdcc   Edges: [ 74  84  92  122  135  182  185 ]
+
+Node number: 4   value: ecbca   Edges: [ 36  57  74  84  97  114  115  182  205  220  224  229  234 ]
+
+Node number: 5   value: ceaee   Edges: [ 27  76  116  120  133  156  231  236 ]
+
+Node number: 6   value: caddc   Edges: [ 7  86  102  103  138  202  215  223  227  247 ]
+
+Node number: 7   value: dcead   Edges: [ 2  11  13  31  40  43  55  64  66  75  78  79  83  86  88  102  108  123  127  131  137  155  162  168  170  176  188  213  215  222  227  238  239  248 ]
+
+Node number: 8   value: ecaaa   Edges: [ 23  52  214 ]
+
+Node number: 9   value: aebbe   Edges: [ 91  134  148  149  186  195  207  211 ]
+
+Node number: 10   value: addad   Edges: [ 29  138 ]
+
+Node number: 11   value: acdce   Edges: [ 3  64  67  79  83  88  131  132  155  167  185  187  204  238  239 ]
+
+Node number: 12   value: dceed   Edges: [ 13  58  66  68  75  78  101  108  118  163  168  176  188  248 ]
+
+Node number: 13   value: caede   Edges: [ 15  27  66  72  75  78  90  108  109  113  121  124  128  144  156  168  172  176  188  236  240  248 ]
+
+Node number: 14   value: beabc   Edges: [ 2  4  18  25  31  40  47  57  60  70  77  82  94  97  114  115  123  127  157  161  162  166  174  194  213  216  222  224 ]
+
+Node number: 15   value: bdaee   Edges: [ 13  27  66  72  75  78  90  108  109  113  121  124  128  144  156  168  172  176  188  236  240  248 ]
+
+Node number: 16   value: bbcbe   Edges: [ 14  28  48  54  60  61  63  142  190  207  211  225  228  230  241 ]
+
+Node number: 17   value: dcbde   Edges: [ 2  3  28  31  40  48  58  61  68  98  118  123  127  162  185  190  197  213  219  222  228  241 ]
+
+Node number: 18   value: eacba   Edges: [ 23  25  47  52  71  77  82  104  112  161  174  191  199  205  212  220  229  237 ]
+
+Node number: 19   value: cbcce   Edges: [ 3  4  46  57  87  97  114  115  184  185  224  225  230 ]
+
+Node number: 20   value: cacce   Edges: [ 4  11  26  35  50  57  59  62  64  79  83  88  95  97  110  114  115  131  155  169  209  224  238  239  243 ]
+
+Node number: 21   value: cbeee   Edges: [ 41  116  139  146 ]
+
+Node number: 22   value: eeaba   Edges: [ 1  18  25  47  77  81  82  126  130  145  147  154  161  165  174  175  192  203  235 ]
+
+Node number: 23   value: aacab   Edges: [ 18  25  47  52  71  77  82  104  112  161  174  191  199  205  212  220  229  237 ]
+
+Node number: 24   value: babab   Edges: [ 104  107  126  147  199  212  217  235  237 ]
+
+Node number: 25   value: baace   Edges: [ 8  18  43  47  55  62  77  80  82  93  95  117  137  158  161  170  174  214  243 ]
+
+Node number: 26   value: eccae   Edges: [ 4  11  20  35  50  57  59  62  64  79  83  88  95  97  110  114  115  131  155  169  209  224  238  239  243 ]
+
+Node number: 27   value: adeee   Edges: [ 99  146  156  163  236 ]
+
+Node number: 28   value: edcbb   Edges: [ 30  48  61  73  92  105  125  135  150  171  177  190  228  241 ]
+
+Node number: 29   value: ddead   Edges: [ 7  34  38  86  90  102  121  151  164  200  215  227  232 ]
+
+Node number: 30   value: abdcb   Edges: [ 28  48  61  73  92  105  125  135  150  171  177  190  228  241 ]
+
+Node number: 31   value: aecdb   Edges: [ 2  3  17  28  40  48  58  61  68  98  118  123  127  162  185  190  197  213  219  222  228  241 ]
+
+Node number: 32   value: bbbca   Edges: [ 14  30  36  60  104  105  171  177  199  212  237 ]
+
+Node number: 33   value: baddb   Edges: [ 34  38  96  103  136  151  164  193  198  200  202  223  226  232  233  247 ]
+
+Node number: 34   value: bddae   Edges: [ 7  29  38  86  90  102  121  151  164  200  215  227  232 ]
+
+Node number: 35   value: ceeac   Edges: [ 5  13  26  50  66  70  75  78  80  93  94  108  117  120  157  158  166  168  176  188  194  209  216  248 ]
+
+Node number: 36   value: acbbc   Edges: [ 51  85  92  135  225  230 ]
+
+Node number: 37   value: accad   Edges: [ 6  11  45  64  74  79  83  84  88  131  155  182  208  221  238  239 ]
+
+Node number: 38   value: adbde   Edges: [ 17  34  56  98  119  140  141  151  159  164  197  200  210  219  232  246 ]
+
+Node number: 39   value: badaa   Edges: [ 49  65  100  179  181  201  249 ]
+
+Node number: 40   value: eacbd   Edges: [ 2  30  31  71  74  84  103  105  112  123  127  162  171  177  182  191  202  213  222  223  247 ]
+
+Node number: 41   value: eebce   Edges: [ 21  46  58  68  70  87  94  118  157  166  184  194  207  211  216 ]
+
+Node number: 42   value: eeecc   Edges: [ 26  35  46  50  87  173  184  209 ]
+
+Node number: 43   value: aedac   Edges: [ 2  7  11  13  31  40  55  64  66  75  78  79  83  86  88  102  108  123  127  131  137  155  162  168  170  176  188  213  215  222  227  238  239  248 ]
+
+Node number: 44   value: edddd   Edges: [ 69  206 ]
+
+Node number: 45   value: cacad   Edges: [ 37  43  55  71  112  137  170  191  221 ]
+
+Node number: 46   value: cbeec   Edges: [ 21  41  58  68  70  87  94  118  157  166  184  194  207  211  216 ]
+
+Node number: 47   value: ceaba   Edges: [ 1  18  22  25  77  81  82  126  130  145  147  154  161  165  174  175  192  203  235 ]
+
+Node number: 48   value: ecdbb   Edges: [ 28  30  61  73  92  105  125  135  150  171  177  190  228  241 ]
+
+Node number: 49   value: daaea   Edges: [ 8  129  214 ]
+
+Node number: 50   value: cacee   Edges: [ 5  13  26  35  66  70  75  78  80  93  94  108  117  120  157  158  166  168  176  188  194  209  216  248 ]
+
+Node number: 51   value: bcbcb   Edges: [ 36  85  92  135  225  230 ]
+
+Node number: 52   value: abcaa   Edges: [ 18  23  25  47  71  77  82  104  112  161  174  191  199  205  212  220  229  237 ]
+
+Node number: 53   value: debba   Edges: [ 9  14  60  89  91  111  126  134  147  148  149  160  180  235 ]
+
+Node number: 54   value: bcebb   Edges: [ 14  16  28  48  60  61  63  142  190  207  211  225  228  230  241 ]
+
+Node number: 55   value: aeacd   Edges: [ 2  7  11  13  31  40  43  64  66  75  78  79  83  86  88  102  108  123  127  131  137  155  162  168  170  176  188  213  215  222  227  238  239  248 ]
+
+Node number: 56   value: ddbeb   Edges: [ 28  48  53  61  89  111  119  160  180  183  186  190  195  210  228  241 ]
+
+Node number: 57   value: ccabe   Edges: [ 2  4  14  18  25  31  40  47  60  70  77  82  94  97  114  115  123  127  157  161  162  166  174  194  213  216  222  224 ]
+
+Node number: 58   value: deecb   Edges: [ 21  41  46  68  70  87  94  118  157  166  184  194  207  211  216 ]
+
+Node number: 59   value: ccace   Edges: [ 4  11  20  26  35  50  57  62  64  79  83  88  95  97  110  114  115  131  155  169  209  224  238  239  243 ]
+
+Node number: 60   value: bbeca   Edges: [ 2  4  14  18  25  31  40  47  57  70  77  82  94  97  114  115  123  127  157  161  162  166  174  194  213  216  222  224 ]
+
+Node number: 61   value: bbced   Edges: [ 2  3  17  28  31  40  48  58  68  98  118  123  127  162  185  190  197  213  219  222  228  241 ]
+
+Node number: 62   value: eacca   Edges: [ 37  45  95  205  220  221  229  243 ]
+
+Node number: 63   value: bebbc   Edges: [ 14  16  28  48  54  60  61  142  190  207  211  225  228  230  241 ]
+
+Node number: 64   value: caced   Edges: [ 2  7  11  13  31  40  43  55  66  75  78  79  83  86  88  102  108  123  127  131  137  155  162  168  170  176  188  213  215  222  227  238  239  248 ]
+
+Node number: 65   value: adada   Edges: [ 10  226  249 ]
+
+Node number: 66   value: dceea   Edges: [ 5  13  26  35  50  70  75  78  80  93  94  108  117  120  157  158  166  168  176  188  194  209  216  248 ]
+
+Node number: 67   value: eddcc   Edges: [ 6  106  122  167  187  204 ]
+
+Node number: 68   value: edceb   Edges: [ 2  3  17  28  31  40  48  58  61  98  118  123  127  162  185  190  197  213  219  222  228  241 ]
+
+Node number: 69   value: ddddd   Edges: [ 44  206 ]
+
+Node number: 70   value: eceab   Edges: [ 2  4  14  18  25  31  40  47  57  60  77  82  94  97  114  115  123  127  157  161  162  166  174  194  213  216  222  224 ]
+
+Node number: 71   value: abdac   Edges: [ 2  30  31  40  74  84  103  105  112  123  127  162  171  177  182  191  202  213  222  223  247 ]
+
+Node number: 72   value: dbeae   Edges: [ 9  15  22  70  81  91  94  116  124  130  134  144  148  149  157  166  172  192  194  216 ]
+
+Node number: 73   value: cbbdb   Edges: [ 125  183  196  242  245 ]
+
+Node number: 74   value: cbdac   Edges: [ 2  30  31  40  71  84  103  105  112  123  127  162  171  177  182  191  202  213  222  223  247 ]
+
+Node number: 75   value: ceeda   Edges: [ 13  15  27  66  72  78  90  108  109  113  121  124  128  144  156  168  172  176  188  236  240  248 ]
+
+Node number: 76   value: eeeea   Edges: [ 5  27  116  120  133  156  231  236 ]
+
+Node number: 77   value: aaecb   Edges: [ 2  4  14  18  25  31  40  47  57  60  70  82  94  97  114  115  123  127  157  161  162  166  174  194  213  216  222  224 ]
+
+Node number: 78   value: ceaed   Edges: [ 13  15  27  66  72  75  90  108  109  113  121  124  128  144  156  168  172  176  188  236  240  248 ]
+
+Node number: 79   value: ecacd   Edges: [ 6  11  37  45  64  74  83  84  88  131  155  182  208  221  238  239 ]
+
+Node number: 80   value: eaeac   Edges: [ 8  18  25  43  47  55  62  77  82  93  95  117  137  158  161  170  174  214  243 ]
+
+Node number: 81   value: aaebe   Edges: [ 9  15  22  70  72  91  94  116  124  130  134  144  148  149  157  166  172  192  194  216 ]
+
+Node number: 82   value: aabec   Edges: [ 2  4  14  18  25  31  40  47  57  60  70  77  94  97  114  115  123  127  157  161  162  166  174  194  213  216  222  224 ]
+
+Node number: 83   value: edcac   Edges: [ 6  11  37  45  64  74  79  84  88  131  155  182  208  221  238  239 ]
+
+Node number: 84   value: acdcb   Edges: [ 3  74  92  122  135  182  185 ]
+
+Node number: 85   value: bccbc   Edges: [ 19  153  234 ]
+
+Node number: 86   value: acdde   Edges: [ 7  12  17  67  98  101  102  167  187  197  204  215  219  227 ]
+
+Node number: 87   value: ebcec   Edges: [ 3  4  19  46  57  97  114  115  184  185  224  225  230 ]
+
+Node number: 88   value: ceacd   Edges: [ 2  7  11  13  31  40  43  55  64  66  75  78  79  83  86  102  108  123  127  131  137  155  162  168  170  176  188  213  215  222  227  238  239  248 ]
+
+Node number: 89   value: edabb   Edges: [ 30  33  53  96  105  107  111  136  160  171  177  180  193  198  217  233  242  245 ]
+
+Node number: 90   value: addee   Edges: [ 12  99  101  121  140  141  246 ]
+
+Node number: 91   value: baeeb   Edges: [ 9  15  22  70  72  81  94  116  124  130  134  144  148  149  157  166  172  192  194  216 ]
+
+Node number: 92   value: bcdcb   Edges: [ 3  74  84  122  135  182  185 ]
+
+Node number: 93   value: aaece   Edges: [ 5  13  26  35  50  66  70  75  78  80  94  108  117  120  157  158  166  168  176  188  194  209  216  248 ]
+
+Node number: 94   value: eeabc   Edges: [ 2  4  14  18  25  31  40  47  57  60  70  77  82  97  114  115  123  127  157  161  162  166  174  194  213  216  222  224 ]
+
+Node number: 95   value: aaecc   Edges: [ 4  11  20  26  35  50  57  59  62  64  79  83  88  97  110  114  115  131  155  169  209  224  238  239  243 ]
+
+Node number: 96   value: dabdb   Edges: [ 30  33  53  89  105  107  111  136  160  171  177  180  193  198  217  233  242  245 ]
+
+Node number: 97   value: ebcac   Edges: [ 4  36  57  74  84  114  115  182  205  220  224  229  234 ]
+
+Node number: 98   value: dbcde   Edges: [ 2  3  17  28  31  40  48  58  61  68  118  123  127  162  185  190  197  213  219  222  228  241 ]
+
+Node number: 99   value: eeedd   Edges: [ 12  90  101  121  140  141  246 ]
+
+Node number: 100   value: baaad   Edges: [ 39  49  65  179  181  201  249 ]
+
+Node number: 101   value: dedce   Edges: [ 12  13  58  66  68  75  78  108  118  163  168  176  188  248 ]
+
+Node number: 102   value: dadec   Edges: [ 2  7  11  13  31  40  43  55  64  66  75  78  79  83  86  88  108  123  127  131  137  155  162  168  170  176  188  213  215  222  227  238  239  248 ]
+
+Node number: 103   value: dbcad   Edges: [ 2  30  31  40  71  74  84  105  112  123  127  162  171  177  182  191  202  213  222  223  247 ]
+
+Node number: 104   value: baabc   Edges: [ 18  23  25  47  52  71  77  82  112  161  174  191  199  205  212  220  229  237 ]
+
+Node number: 105   value: bcbad   Edges: [ 2  30  31  40  71  74  84  103  112  123  127  162  171  177  182  191  202  213  222  223  247 ]
+
+Node number: 106   value: ddccd   Edges: [ 6  67  122  167  187  204 ]
+
+Node number: 107   value: badba   Edges: [ 1  39  71  100  112  145  154  165  175  181  191  201  203  217  226 ]
+
+Node number: 108   value: decea   Edges: [ 5  13  26  35  50  66  70  75  78  80  93  94  117  120  157  158  166  168  176  188  194  209  216  248 ]
+
+Node number: 109   value: deeaa   Edges: [ 22  80  81  93  113  117  128  129  130  133  158  192  231  240 ]
+
+Node number: 110   value: eccca   Edges: [ 20  59  169  208  234 ]
+
+Node number: 111   value: dbeba   Edges: [ 9  14  53  60  89  91  126  134  147  148  149  160  180  235 ]
+
+Node number: 112   value: daabc   Edges: [ 18  23  25  47  52  71  77  82  104  161  174  191  199  205  212  220  229  237 ]
+
+Node number: 113   value: aeaed   Edges: [ 13  15  27  66  72  75  78  90  108  109  121  124  128  144  156  168  172  176  188  236  240  248 ]
+
+Node number: 114   value: ecacb   Edges: [ 4  36  57  74  84  97  115  182  205  220  224  229  234 ]
+
+Node number: 115   value: caebc   Edges: [ 2  4  14  18  25  31  40  47  57  60  70  77  82  94  97  114  123  127  157  161  162  166  174  194  213  216  222  224 ]
+
+Node number: 116   value: ebaee   Edges: [ 9  15  22  70  72  81  91  94  124  130  134  144  148  149  157  166  172  192  194  216 ]
+
+Node number: 117   value: caeae   Edges: [ 22  80  81  93  109  113  128  129  130  133  158  192  231  240 ]
+
+Node number: 118   value: ecbed   Edges: [ 2  3  17  28  31  40  48  58  61  68  98  123  127  162  185  190  197  213  219  222  228  241 ]
+
+Node number: 119   value: bdedb   Edges: [ 17  34  38  56  98  140  141  151  159  164  197  200  210  219  232  246 ]
+
+Node number: 120   value: eeaec   Edges: [ 5  13  26  35  50  66  70  75  78  80  93  94  108  117  157  158  166  168  176  188  194  209  216  248 ]
+
+Node number: 121   value: adede   Edges: [ 12  90  99  101  140  141  246 ]
+
+Node number: 122   value: dbccd   Edges: [ 3  74  84  92  135  182  185 ]
+
+Node number: 123   value: ebcad   Edges: [ 2  30  31  40  71  74  84  103  105  112  127  162  171  177  182  191  202  213  222  223  247 ]
+
+Node number: 124   value: deeba   Edges: [ 9  15  22  70  72  81  91  94  116  130  134  144  148  149  157  166  172  192  194  216 ]
+
+Node number: 125   value: dbcbb   Edges: [ 16  32  51  54  63  73  142 ]
+
+Node number: 126   value: aebba   Edges: [ 9  14  53  60  89  91  111  134  147  148  149  160  180  235 ]
+
+Node number: 127   value: dceab   Edges: [ 2  4  14  18  25  31  40  47  57  60  70  77  82  94  97  114  115  123  157  161  162  166  174  194  213  216  222  224 ]
+
+Node number: 128   value: adaee   Edges: [ 13  15  27  66  72  75  78  90  108  109  113  121  124  144  156  168  172  176  188  236  240  248 ]
+
+Node number: 129   value: aeaea   Edges: [ 22  80  81  93  109  113  117  128  130  133  158  192  231  240 ]
+
+Node number: 130   value: aeeba   Edges: [ 9  15  22  70  72  81  91  94  116  124  134  144  148  149  157  166  172  192  194  216 ]
+
+Node number: 131   value: aecdc   Edges: [ 3  11  64  67  79  83  88  132  155  167  185  187  204  238  239 ]
+
+Node number: 132   value: dcecc   Edges: [ 19  20  59  110  169  173  178  244 ]
+
+Node number: 133   value: aaeee   Edges: [ 5  27  76  116  120  156  231  236 ]
+
+Node number: 134   value: eeabb   Edges: [ 9  14  53  60  89  91  111  126  147  148  149  160  180  235 ]
+
+Node number: 135   value: cbdbc   Edges: [ 28  30  48  61  73  92  105  125  150  171  177  190  228  241 ]
+
+Node number: 136   value: bdbad   Edges: [ 33  34  38  96  103  151  164  193  198  200  202  223  226  232  233  247 ]
+
+Node number: 137   value: eadca   Edges: [ 37  43  45  55  71  112  170  191  221 ]
+
+Node number: 138   value: acddd   Edges: [ 106  143  218 ]
+
+Node number: 139   value: eeeeb   Edges: [ 21  41  116  146 ]
+
+Node number: 140   value: dbeed   Edges: [ 15  58  68  72  118  124  141  144  146  172  186  195  246 ]
+
+Node number: 141   value: edbed   Edges: [ 17  34  38  56  98  119  140  151  159  164  197  200  210  219  232  246 ]
+
+Node number: 142   value: ebbbc   Edges: [ 16  32  51  54  63  73  125 ]
+
+Node number: 143   value: dcdbd   Edges: [ 17  98  103  122  150  197  202  218  219  223  247 ]
+
+Node number: 144   value: eadbe   Edges: [ 1  2  15  31  34  38  40  53  72  89  111  123  124  127  145  151  154  160  162  164  165  172  175  180  200  203  213  222  232 ]
+
+Node number: 145   value: eabda   Edges: [ 1  39  71  100  107  112  154  165  175  181  191  201  203  217  226 ]
+
+Node number: 146   value: edbee   Edges: [ 15  58  68  72  118  124  140  141  144  172  186  195  246 ]
+
+Node number: 147   value: aaebb   Edges: [ 9  14  53  60  89  91  111  126  134  148  149  160  180  235 ]
+
+Node number: 148   value: ebeba   Edges: [ 9  14  53  60  89  91  111  126  134  147  149  160  180  235 ]
+
+Node number: 149   value: bbaee   Edges: [ 9  15  22  70  72  81  91  94  116  124  130  134  144  148  157  166  172  192  194  216 ]
+
+Node number: 150   value: bcdbd   Edges: [ 17  98  103  122  143  197  202  218  219  223  247 ]
+
+Node number: 151   value: edabd   Edges: [ 33  34  38  96  103  136  164  193  198  200  202  223  226  232  233  247 ]
+
+Node number: 152   value: aaaab   Edges: [ 23  39  52  100  181  201 ]
+
+Node number: 153   value: cccbc   Edges: [ 19  85  234 ]
+
+Node number: 154   value: edbaa   Edges: [ 1  39  71  100  107  112  145  165  175  181  191  201  203  217  226 ]
+
+Node number: 155   value: eadcc   Edges: [ 6  11  37  45  64  74  79  83  84  88  131  182  208  221  238  239 ]
+
+Node number: 156   value: daeee   Edges: [ 5  27  76  116  120  133  231  236 ]
+
+Node number: 157   value: beaec   Edges: [ 5  13  26  35  50  66  70  75  78  80  93  94  108  117  120  158  166  168  176  188  194  209  216  248 ]
+
+Node number: 158   value: acaee   Edges: [ 5  13  26  35  50  66  70  75  78  80  93  94  108  117  120  157  166  168  176  188  194  209  216  248 ]
+
+Node number: 159   value: dddbe   Edges: [ 17  34  38  56  98  119  140  141  151  164  197  200  210  219  232  246 ]
+
+Node number: 160   value: edbba   Edges: [ 30  33  53  89  96  105  107  111  136  171  177  180  193  198  217  233  242  245 ]
+
+Node number: 161   value: eabca   Edges: [ 18  23  25  47  52  71  77  82  104  112  174  191  199  205  212  220  229  237 ]
+
+Node number: 162   value: acbed   Edges: [ 2  3  17  28  31  40  48  58  61  68  98  118  123  127  185  190  197  213  219  222  228  241 ]
+
+Node number: 163   value: eedce   Edges: [ 12  13  58  66  68  75  78  101  108  118  168  176  188  248 ]
+
+Node number: 164   value: bdaed   Edges: [ 7  29  34  38  86  90  102  121  151  200  215  227  232 ]
+
+Node number: 165   value: adaeb   Edges: [ 1  2  15  31  34  38  40  53  72  89  111  123  124  127  144  145  151  154  160  162  164  172  175  180  200  203  213  222  232 ]
+
+Node number: 166   value: caeeb   Edges: [ 9  15  22  70  72  81  91  94  116  124  130  134  144  148  149  157  172  192  194  216 ]
+
+Node number: 167   value: cddce   Edges: [ 7  12  17  67  86  98  101  102  187  197  204  215  219  227 ]
+
+Node number: 168   value: eecad   Edges: [ 2  7  11  13  31  40  43  55  64  66  75  78  79  83  86  88  102  108  123  127  131  137  155  162  170  176  188  213  215  222  227  238  239  248 ]
+
+Node number: 169   value: eccac   Edges: [ 20  59  110  208  234 ]
+
+Node number: 170   value: ceada   Edges: [ 1  43  49  55  109  113  128  137  145  154  165  175  203  240 ]
+
+Node number: 171   value: abbcd   Edges: [ 28  30  48  61  73  92  105  125  135  150  177  190  228  241 ]
+
+Node number: 172   value: ebaed   Edges: [ 1  2  15  31  34  38  40  53  72  89  111  123  124  127  144  145  151  154  160  162  164  165  175  180  200  203  213  222  232 ]
+
+Node number: 173   value: cecce   Edges: [ 26  35  42  46  50  87  184  209 ]
+
+Node number: 174   value: bcaea   Edges: [ 8  18  25  43  47  55  62  77  80  82  93  95  117  137  158  161  170  214  243 ]
+
+Node number: 175   value: dbeaa   Edges: [ 1  18  22  25  47  77  81  82  126  130  145  147  154  161  165  174  192  203  235 ]
+
+Node number: 176   value: adece   Edges: [ 12  13  58  66  68  75  78  101  108  118  163  168  188  248 ]
+
+Node number: 177   value: bacdb   Edges: [ 2  30  31  40  71  74  84  103  105  112  123  127  162  171  182  191  202  213  222  223  247 ]
+
+Node number: 178   value: cccce   Edges: [ 19  20  59  110  132  169  173  244 ]
+
+Node number: 179   value: aaaad   Edges: [ 39  49  65  100  181  201  249 ]
+
+Node number: 180   value: abebd   Edges: [ 28  48  53  56  61  89  111  119  160  183  186  190  195  210  228  241 ]
+
+Node number: 181   value: aaadb   Edges: [ 1  39  71  100  107  112  145  154  165  175  191  201  203  217  226 ]
+
+Node number: 182   value: cdacb   Edges: [ 2  30  31  40  71  74  84  103  105  112  123  127  162  171  177  191  202  213  222  223  247 ]
+
+Node number: 183   value: bbdbe   Edges: [ 28  48  53  56  61  89  111  119  160  180  186  190  195  210  228  241 ]
+
+Node number: 184   value: ececb   Edges: [ 3  4  19  46  57  87  97  114  115  185  224  225  230 ]
+
+Node number: 185   value: bcdce   Edges: [ 3  11  64  67  79  83  88  131  132  155  167  187  204  238  239 ]
+
+Node number: 186   value: beedb   Edges: [ 15  58  68  72  118  124  140  141  144  146  172  195  246 ]
+
+Node number: 187   value: ccedd   Edges: [ 7  12  17  67  86  98  101  102  167  197  204  215  219  227 ]
+
+Node number: 188   value: eacde   Edges: [ 2  7  11  13  31  40  43  55  64  66  75  78  79  83  86  88  102  108  123  127  131  137  155  162  168  170  176  213  215  222  227  238  239  248 ]
+
+Node number: 189   value: dddbb   Edges: [ 33  56  96  119  136  150  193  196  198  210  233 ]
+
+Node number: 190   value: dcbeb   Edges: [ 14  16  28  48  54  60  61  63  142  207  211  225  228  230  241 ]
+
+Node number: 191   value: dacba   Edges: [ 18  23  25  47  52  71  77  82  104  112  161  174  199  205  212  220  229  237 ]
+
+Node number: 192   value: eabae   Edges: [ 1  18  22  25  47  77  81  82  126  130  145  147  154  161  165  174  175  203  235 ]
+
+Node number: 193   value: abdbd   Edges: [ 33  56  96  119  136  150  189  196  198  210  233 ]
+
+Node number: 194   value: aeecb   Edges: [ 21  41  46  58  68  70  87  94  118  157  166  184  207  211  216 ]
+
+Node number: 195   value: dbbee   Edges: [ 9  91  134  148  149  186  207  211 ]
+
+Node number: 196   value: ddbbb   Edges: [ 73  125  183  242  245 ]
+
+Node number: 197   value: dbecd   Edges: [ 2  3  17  28  31  40  48  58  61  68  98  118  123  127  162  185  190  213  219  222  228  241 ]
+
+Node number: 198   value: dbabd   Edges: [ 30  33  53  89  96  105  107  111  136  160  171  177  180  193  217  233  242  245 ]
+
+Node number: 199   value: abcba   Edges: [ 14  30  32  36  60  104  105  171  177  212  237 ]
+
+Node number: 200   value: eddab   Edges: [ 33  34  38  96  103  136  151  164  193  198  202  223  226  232  233  247 ]
+
+Node number: 201   value: adaab   Edges: [ 1  39  71  100  107  112  145  154  165  175  181  191  203  217  226 ]
+
+Node number: 202   value: caddb   Edges: [ 33  34  38  96  103  136  151  164  193  198  200  223  226  232  233  247 ]
+
+Node number: 203   value: adbae   Edges: [ 1  2  15  31  34  38  40  53  72  89  111  123  124  127  144  145  151  154  160  162  164  165  172  175  180  200  213  222  232 ]
+
+Node number: 204   value: dcdce   Edges: [ 3  11  64  67  79  83  88  131  132  155  167  185  187  238  239 ]
+
+Node number: 205   value: cbaca   Edges: [ 18  23  25  47  52  71  77  82  104  112  161  174  191  199  212  220  229  237 ]
+
+Node number: 206   value: deddd   Edges: [ 29  44  159 ]
+
+Node number: 207   value: bbcee   Edges: [ 21  41  46  58  68  70  87  94  118  157  166  184  194  211  216 ]
+
+Node number: 208   value: acdcc   Edges: [ 132 ]
+
+Node number: 209   value: ceaec   Edges: [ 5  13  26  35  50  66  70  75  78  80  93  94  108  117  120  157  158  166  168  176  188  194  216  248 ]
+
+Node number: 210   value: eddbb   Edges: [ 33  56  96  119  136  150  189  193  196  198  233 ]
+
+Node number: 211   value: beebc   Edges: [ 21  41  46  58  68  70  87  94  118  157  166  184  194  207  216 ]
+
+Node number: 212   value: bbcaa   Edges: [ 18  23  25  47  52  71  77  82  104  112  161  174  191  199  205  220  229  237 ]
+
+Node number: 213   value: bdcea   Edges: [ 2  7  11  13  31  40  43  55  64  66  75  78  79  83  86  88  102  108  123  127  131  137  155  162  168  170  176  188  215  222  227  238  239  248 ]
+
+Node number: 214   value: aecaa   Edges: [ 8  18  25  43  47  55  62  77  80  82  93  95  117  137  158  161  170  174  243 ]
+
+Node number: 215   value: eacdd   Edges: [ 6  7  86  102  103  138  202  223  227  247 ]
+
+Node number: 216   value: aeebc   Edges: [ 21  41  46  58  68  70  87  94  118  157  166  184  194  207  211 ]
+
+Node number: 217   value: baadb   Edges: [ 1  39  71  100  107  112  145  154  165  175  181  191  201  203  226 ]
+
+Node number: 218   value: cddbd   Edges: [ 143  159  189 ]
+
+Node number: 219   value: bdedc   Edges: [ 7  12  17  67  86  98  101  102  167  187  197  204  215  227 ]
+
+Node number: 220   value: cacba   Edges: [ 18  23  25  47  52  71  77  82  104  112  161  174  191  199  205  212  229  237 ]
+
+Node number: 221   value: acadc   Edges: [ 6  11  37  45  64  74  79  83  84  88  131  155  182  208  238  239 ]
+
+Node number: 222   value: cdbea   Edges: [ 1  2  15  31  34  38  40  53  72  89  111  123  124  127  144  145  151  154  160  162  164  165  172  175  180  200  203  213  232 ]
+
+Node number: 223   value: cbadd   Edges: [ 33  34  38  96  103  136  151  164  193  198  200  202  226  232  233  247 ]
+
+Node number: 224   value: acebc   Edges: [ 3  4  19  46  57  87  97  114  115  184  185  225  230 ]
+
+Node number: 225   value: cbebc   Edges: [ 14  16  28  48  54  60  61  63  142  190  207  211  228  230  241 ]
+
+Node number: 226   value: abdda   Edges: [ 33  34  38  96  103  136  151  164  193  198  200  202  223  232  233  247 ]
+
+Node number: 227   value: cdeda   Edges: [ 7  29  34  38  86  90  102  121  151  164  200  215  232 ]
+
+Node number: 228   value: bbdec   Edges: [ 2  3  17  28  31  40  48  58  61  68  98  118  123  127  162  185  190  197  213  219  222  241 ]
+
+Node number: 229   value: bcaca   Edges: [ 37  45  62  95  205  220  221  243 ]
+
+Node number: 230   value: eccbb   Edges: [ 36  51  85  92  135  225 ]
+
+Node number: 231   value: eeaae   Edges: [ 22  80  81  93  109  113  117  128  129  130  133  158  192  240 ]
+
+Node number: 232   value: bddea   Edges: [ 7  29  34  38  86  90  102  121  151  164  200  215  227 ]
+
+Node number: 233   value: bbdda   Edges: [ 33  34  38  96  103  136  151  164  193  198  200  202  223  226  232  247 ]
+
+Node number: 234   value: bcacc   Edges: [ 20  59  110  169  208 ]
+
+Node number: 235   value: eabba   Edges: [ 24  104  107  126  147  199  212  217  237 ]
+
+Node number: 236   value: eedae   Edges: [ 13  15  27  66  72  75  78  90  108  109  113  121  124  128  144  156  168  172  176  188  240  248 ]
+
+Node number: 237   value: cbaba   Edges: [ 24  104  107  126  147  199  212  217  235 ]
+
+Node number: 238   value: eaccd   Edges: [ 6  11  37  45  64  74  79  83  84  88  131  155  182  208  221  239 ]
+
+Node number: 239   value: aeccd   Edges: [ 3  11  64  67  79  83  88  131  132  155  167  185  187  204  238 ]
+
+Node number: 240   value: edeaa   Edges: [ 1  43  49  55  109  113  128  137  145  154  165  170  175  203 ]
+
+Node number: 241   value: bcbed   Edges: [ 2  3  17  28  31  40  48  58  61  68  98  118  123  127  162  185  190  197  213  219  222  228 ]
+
+Node number: 242   value: bbdba   Edges: [ 30  33  53  89  96  105  107  111  136  160  171  177  180  193  198  217  233  245 ]
+
+Node number: 243   value: aceac   Edges: [ 4  11  20  26  35  50  57  59  62  64  79  83  88  95  97  110  114  115  131  155  169  209  224  238  239 ]
+
+Node number: 244   value: ecccc   Edges: [ 153  178 ]
+
+Node number: 245   value: babbd   Edges: [ 30  33  53  89  96  105  107  111  136  160  171  177  180  193  198  217  233  242 ]
+
+Node number: 246   value: bddee   Edges: [ 12  90  99  101  121  140  141 ]
+
+Node number: 247   value: dcadb   Edges: [ 2  30  31  40  71  74  84  103  105  112  123  127  162  171  177  182  191  202  213  222  223 ]
+
+Node number: 248   value: ecade   Edges: [ 2  7  11  13  31  40  43  55  64  66  75  78  79  83  86  88  102  108  123  127  131  137  155  162  168  170  176  188  213  215  222  227  238  239 ]
+
+Node number: 249   value: addaa   Edges: [ 10  65  226 ]

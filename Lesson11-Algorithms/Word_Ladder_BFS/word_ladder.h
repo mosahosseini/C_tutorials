@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #define WORD_LENGTH 5
 
-typedef struct g_node{
-    int node_num;
-    char * value; 
-}G_node;
+// typedef struct g_node{
+//     int node_num;
+//     char * value; 
+// }G_node;
 
 
 // Function to count frequency of characters in the last 4 characters of a word
@@ -64,28 +64,28 @@ const char* determine_edge_type(const char *u, const char *v) {
 }
 
 
-int main(){
-    int n ; 
-    int q ; 
+// int main(){
+//     int n ; 
+//     int q ; 
 
-    scanf("%d" ,&n);
-    scanf("%d" , &q); 
-    G_node  graph[n] ;
-    char * val ; 
+//     scanf("%d" ,&n);
+//     scanf("%d" , &q); 
+//     G_node  graph[n] ;
+//     char * val ; 
 
-    for (int i = 0 ; i < n ; i++) {
-        graph[i].node_num = i ; 
-        scanf("%s" , val);
-        graph[i].value = val; 
-    }
+//     for (int i = 0 ; i < n ; i++) {
+//         graph[i].node_num = i ; 
+//         scanf("%s" , val);
+//         graph[i].value = val; 
+//     }
 
     
 
-    for (int i = 0 ; i < n ; i++) {
-        printf("\nNode number:    %d    value: %s" , graph[i].node_num , graph[i].value );
-    }
+//     for (int i = 0 ; i < n ; i++) {
+//         printf("\nNode number:    %d    value: %s" , graph[i].node_num , graph[i].value );
+//     }
 
-return 0;
+// return 0;
 
 
-}
+// }
