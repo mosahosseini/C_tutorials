@@ -3,7 +3,8 @@
 #include <string.h>
 #include "dynamic_array.h"
 #include "test_edge.h"
-#include "stack.h"
+// #include "stack.h"
+#include "fifo.h"
 #define WORD_LENGTH 5
 
 
@@ -33,17 +34,17 @@ int get_index(G_node* graph, int n ,  char* word) {
 int bfs (G_node * graph, int n  , char* start_word , char* dest_word){
 
     int start_ind = get_index(graph , n , start_word);
-    Stack *q  ;
-    init_stack(&q , start_ind);
+    q_node *q  ;
+    init_fifo(&q , start_ind);
     int counter = 0;
-    int ind = pop(q);
-    graph[ind].visited = 1;
-    while (ind != -1 & counter < 100000){
-        G_node * temp = &graph[ind];
-        // char *  temp_w= (char*) malloc(sizeof(char)*10); 
-        // temp_w = graph[ind].value;
+    graph[start_ind].visited = 1;
+    
+    while ( q != NULL & counter < 100000){
+        int ind = remove_head(&q);
+        // G_node * temp = &graph[ind];
+
+
         if (strcmp(graph[ind].value , dest_word ) == 0 ){
-            // free(temp_w);
             int edge_count = 0;
             int temp_ind = ind; 
             int counter2= 0;
@@ -53,23 +54,26 @@ int bfs (G_node * graph, int n  , char* start_word , char* dest_word){
                 edge_count ++;
                 counter2++;
             }
-            free_stack(&q);
+            free_fifo(&q);
             return edge_count;
         }
-        // free(temp_w);
+
         for (int i = 0 ; i < graph[ ind].edges -> size ; i++ ){
             int edge_ind = graph[ind].edges->array[i];
-            G_node * temp2 = &graph[edge_ind];
+            // G_node * temp2 = &graph[edge_ind];
 
             if (graph[edge_ind].visited == 0){
                 graph[edge_ind].visited = 1;
                 graph[edge_ind].pred = ind;
-                push(q,edge_ind );
+                add_to_queue(&q , edge_ind);
+
             }
         }
-        ind = pop(q);
+
+        counter ++;
+
     }
-    free_stack(&q);
+    free_fifo(&q);
 
     return -1 ;
 }
@@ -123,25 +127,25 @@ void free_graph(G_node ** p_graph , int n){
 }
 int main(){
 
-    FILE *file;
-    file = fopen("3medium1.in", "r"); // Opens file in read mode
-    FILE *outfile ; 
-    outfile = fopen("output.txt" , "w");
-    if (outfile == NULL) {
-        perror("Error opening output file");
-        return 1;
-    }
+    // FILE *file;
+    // file = fopen("1.in", "r"); // Opens file in read mode
+    // FILE *outfile ; 
+    // outfile = fopen("output.txt" , "w");
+    // if (outfile == NULL) {
+    //     perror("Error opening output file");
+    //     return 1;
+    // }
 
-    if (file == NULL) {
-    perror("File opening failed");
-    return 1;
-    }
+    // if (file == NULL) {
+    // perror("File opening failed");
+    // return 1;
+    // }
     
     int n ; 
     int q ; 
     char *word=  (char*) malloc(sizeof(char)*6);
-    // scanf("%d %d" , &n , &q);
-    fscanf(file , "%d %d" , &n , &q);
+    scanf("%d %d" , &n , &q);
+    // fscanf(file , "%d %d" , &n , &q);
 
     // printf("n = %d , q = %d\n" , n , q);
     G_node*  graph = (G_node*)malloc(n*sizeof(G_node));
@@ -159,8 +163,8 @@ int main(){
     }    
 
     for (int i = 0 ; i < n ; i++) {
-        fscanf(file,"%s" , word);
-        // scanf("%s" , word);
+        // fscanf(file,"%s" , word);
+        scanf("%s" , word);
         strcpy(graph[i].value , word); 
     }
 
@@ -184,18 +188,19 @@ int main(){
     // strcpy(start_word ,"baccc" );
     // strcpy(dest_word ,"bccba" );
     for (int i = 0 ; i<q ; i++){
-        fscanf(file,"%s %s" , start_word , dest_word);
-        // scanf("%s %s" , start_word ,dest_word );
+        // fscanf(file,"%s %s" , start_word , dest_word);
+        scanf("%s %s" , start_word ,dest_word );
         int num_edge = bfs(graph , n , start_word , dest_word);
-        restore_default_value(graph , n);
+        
         if (num_edge == -1){
             // fprintf(outfile, "Impossible\n");
             printf("Impossible\n");
         }
         else{
             // fprintf(outfile, "%d\n" , num_edge);            
-            printf("%d\n", num_edge);
+            printf("%d\n",num_edge);
         }
+        restore_default_value(graph , n);
     }
 
 
