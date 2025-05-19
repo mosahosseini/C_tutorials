@@ -30,7 +30,7 @@ void add_to_last(q_node**q , int val) {
         (*q) = temp ; 
         (*q) ->value = val; 
         (*q) -> next = NULL; 
-
+        last_q_node = temp;
     }
     else{
     last_q_node -> next = (q_node*) malloc(sizeof(q_node));
@@ -113,14 +113,16 @@ q_node * get_last(){
 // int main(){
 //     q_node * root ; 
 //     init_fifo(&root , 1);
-//     add_to_last( 2);
-//     add_to_last(4);
+//     add_to_last( &root,2);
+//     add_to_last(&root , 4);
 //     print_q(root);
 
 //     int head = remove_head(&root);
 //     int head2 = remove_head(&root);
 //     int head3 = remove_head(&root);
 //     printf("removed node : %d\n" , head);
+//     add_to_last(&root , 5);
+//     int head4 = remove_head(&root);
 
 //     print_q(root);
 //     free_fifo(&root);
