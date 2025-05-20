@@ -159,7 +159,28 @@ int node_from_1_to_2( char * word_1 , char * word_2){
 ```
 
 ## BFS: 
+So how we find the shortest path e.g least number of arc from start word to destination word. Well we will use BFS bredth firs search. The idea is to start from start node ans look at all its neighbours and then all  for each neibour we look at all its neibours and so on. We do the same procedur.
 
+see the pseudo code: 
 
+```
+BFS(Graph, start_node):
+
+    create a queue Q
+    mark start_node as visited
+    enqueue start_node into Q
+
+    while Q is not empty:
+        current_node = dequeue Q
+        process current_node (e.g., print or store it)
+
+        for each neighbor in neighbors of current_node:
+            if neighbor is not visited:
+                mark neighbor as visited
+                enqueue neighbor into Q
+```
+
+# Result
+A quick comparison shows that C implementation is much faster that python. 
 
 ![Python vs C comparison](python_vs_c.png)

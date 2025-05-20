@@ -1,0 +1,95 @@
+
+# Table Of Content
+
+
+
+
+## Strongly Connected Graphs
+**Deffinition**
+A graph `G(V,E)` is said to be stronly connected if there for each two nodes in the graph $u, v \in V$ is a path from u to v and a path from v to u
+
+**Theorem**
+A graph is storngly connected $\leftrightarrow$ there is a path from start node any node u and from any node to s. 
+
+proof: 
+
+$\rightarrow$ follows from deffinition. If the graph is strongly connected. then there are path from start to any node and vice versa. 
+
+$\leftarrow$ 
+1. Assume that there is a path from start to any node and from any node to start node. 
+
+2. then we can start in `u` and then go to start node `s` and from `s` we can go to any node `v`. 
+
+3. To go from `v` to `u` we first go from `v` to start node `s` and then to `u`.
+
+$u\cdots s \cdots v$ 
+$v \cdots s \cdots u$
+
+
+The result of this theorem is that if we pick a node S. 
+
+1. If we succeed in showing that there is a path from S -> u  $\forall u \in V $ and there is a path from u to s then the graph is strongly connected.
+
+## How do we determine if a graph is strongly connected? 
+
+There are two approaches: 
+
+**1. BFS**
+```python
+def Check_strongly_connected(G):
+    Start in a node S 
+    for each u in G:
+        if bfs(s,u) == 0:
+            return "there is no path from s -> u"
+
+    G´ = reverse(G)
+
+    for each u in G´: 
+        if bfs(s,u) == 0:
+            return "there is no path from u-> s"
+
+    return "the graph is strongly connected"
+```
+
+
+⏱️**Time Complexity for the BFS-based Strongly Connected Check Algorithm**
+
+Let:
+
+* `V` = number of vertices (nodes)
+* `E` = number of edges
+
+---
+
+
+1. **First BFS Traversal** on the original graph:
+
+   * Time: **O(V + E)**
+
+2. **Reversing the Graph**:
+
+   * Visit each edge once to reverse it → 
+   * Time: **O(V + E)**
+
+3. **Second BFS Traversal** on the reversed graph:
+
+   * Time: **O(V + E)**
+
+---
+
+### 📦 **Total Time Complexity**:
+
+```plaintext
+O(V + E) + O(V + E) + O(V + E) = O(V + E)
+```
+
+Even though we do 3 steps, they're all linear, so the total time is still **O(V + E)**.
+
+
+
+## DFS 
+
+
+
+
+
