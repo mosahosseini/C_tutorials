@@ -23,6 +23,7 @@ $\leftarrow$
 3. To go from `v` to `u` we first go from `v` to start node `s` and then to `u`.
 
 $u\cdots s \cdots v$ 
+
 $v \cdots s \cdots u$
 
 
@@ -88,8 +89,35 @@ Even though we do 3 steps, they're all linear, so the total time is still **O(V 
 
 
 ## DFS 
+This problem can be solved with DFS, the advantage of this algorithm is that is not only finds stronly connected graphs it also find the strongly connected components, meaning that the subset of the graph which are strongly connected. 
+
+Firstly introduced by Robert Tarjan and  uses DFS and a stack. 
 
 
+- Worth to note that one node itself is a strongly connected componend. 
 
+- also a subset of the graph nodes that are strongly connected togather. 
+![alt text](image.png)
 
+**Required data structure**
+
+- **Stack** 
+
+A stack in Lifo qeue where the last element is poped first. 
+
+- **DFS Node**
+
+A dfs node should have following valiables. 
+```c
+typedef struct {
+int dfn  /*depth first number */
+bool visited  /* this variabl will determine if the node is visited. */
+bool on_stack  /* This boolean variable determines if  whether the node is on stack or not*/
+int lowlink /*lowlink number*/
+}
+```
+### Pseudo code: 
+
+![alt text](image-1.png)
+![alt text](image-2.png)
 
