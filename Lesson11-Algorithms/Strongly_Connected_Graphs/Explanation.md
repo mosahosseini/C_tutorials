@@ -117,6 +117,15 @@ int lowlink /*lowlink number*/
 }
 ```
 ### Pseudo code: 
+1. define a global variable called dfnum. 
+2. Start in a node called start node and run dfs, meaning that pick a neightbour of start and if it is not visited yet, add it to stack and set the visited to true. and on_stack vaiable to true.  
+3. Set the low link and dfnum to the value of the global dfnum.
+4. Increment the global dfnum.
+5. If the successor is on stack then make the nodes lowlink the minimum of the successor and the node itself. 
+6. If the nodes dfnum == lowlink then the node is the root to a strongly connected component. Then we pop the stack untill we fined the node itself in the stack. 
+
+7. If the node is not on the stack we do not  change its lowlink. 
+ 
 
 ![alt text](image-1.png)
 ![alt text](image-2.png)
