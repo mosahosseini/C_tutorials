@@ -5,6 +5,7 @@
 #include "Stack.h"
 #include "Dynamic_Array.h"
 int MAX_CHAR = 120;
+ind dfn =-1;
 typedef struct node {
     L_Node * neighbors; 
     int df_num; 
@@ -12,6 +13,11 @@ typedef struct node {
     int on_stack; 
 } Node; 
 
+
+void dfs(Node *graph , int Start_node ){
+
+
+}
 
 int *  pop_stack(Node * graph ,Stack **s , dyn_array ** d_array , int terminator_node_val )
 {
