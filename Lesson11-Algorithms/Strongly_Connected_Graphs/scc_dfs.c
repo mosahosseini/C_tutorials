@@ -8,6 +8,7 @@ Stack * stk = NULL ;
 dyn_array *  sccs = NULL ;
 int DF_NUM = 0 ; 
 int MAX_CHAR = 120;
+int dfn =-1;
 typedef struct node {
     L_Node * neighbors; 
     int df_num; 
