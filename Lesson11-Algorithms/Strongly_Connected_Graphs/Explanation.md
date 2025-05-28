@@ -130,3 +130,59 @@ int lowlink /*lowlink number*/
 ![alt text](image-1.png)
 ![alt text](image-2.png)
 
+## Run the test cases: 
+1. Download the repositori and cd into the directory of the files: 
+2. Open ubuntu terminal and run the following command. 
+3. first you have to build an executable file from you raw c code with 
+```bash
+gcc -g scc_dfs.c -o scc_dfs
+```
+then you can check solution by
+
+```bash
+bash check_solution.sh ./scc_dfs
+```
+
+4. If you want to input costum input file: 
+
+- Your input file should  have the following format 
+
+first line is the number of node in you graph
+
+- second line is the neighbours of node 0 seperated by a space. OBS dont put space at the end of the line 
+- Third line is the neibours of node 1 seperated by a space. 
+$\vdots$
+- L:th line is the neibours of node L-2 seperated by a space.
+
+example input.txt
+```c
+8
+1
+2 8 6
+3
+4 7
+5
+6
+2 3
+6
+6
+```
+
+graph representation is: 
+first line indicated that the graph has 8 nodes: And nodes neighbours relations is as follows: 
+```python
+"node 0" : 1
+"node 1" : 2 , 8 , 6
+"node 2" : 3
+"node 3" : 4 , 7
+"node 4" : 5
+"node 5" : 6
+"node 6" : 2 , 3
+"node 7" : 6
+"node 8" : 6 
+```
+Then you can use the following command to validate your input file: 
+```bash
+./scc_dfs < input.txt
+```
+assuming the input file is renamed to `input.txt`. 

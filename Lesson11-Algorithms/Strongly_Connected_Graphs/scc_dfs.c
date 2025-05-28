@@ -44,15 +44,20 @@ void dfs(Node **graf, int ind)
     while (temp != NULL)
     {
         n_ind = temp->node_num; // the index of current neighbour. 
-        //If the neighbour is not visiter, we visit it. 
+        //If the neighbour is not visited, we visit it. 
         if (graph[n_ind].df_num == -1)
         {
             dfs(graf, n_ind); // neigbours ind
+            if (graph[n_ind].lowlink < graph[ind].lowlink){
+                graph[ind].lowlink = graph[n_ind].lowlink;
+            }
         }
+        else if (graph[n_ind].on_stack){
+            if ( graph[n_ind].df_num < graph[ind].lowlink)
+            {
+                graph[ind].lowlink = graph[n_ind].df_num;
+            }
 
-        if (graph[n_ind].on_stack && graph[n_ind].lowlink < graph[ind].lowlink)
-        {
-            graph[ind].lowlink = graph[n_ind].lowlink;
         }
 
         temp = temp->next;
@@ -78,12 +83,15 @@ void pop_stack(Node *graph, Stack **s, dyn_array **d_array, int terminator_node_
         return;
     }
 
-    while ((*s)->data[(*s)->top + 1] != terminator_node_val)
+    while ((*s)->top >= 0 )
     {
         // printf("poped element is: %d\n" , pop(s));
         int index_of_graph_node = pop(s);
         graph[index_of_graph_node].on_stack = 0;
         add(&root, index_of_graph_node);
+        if (index_of_graph_node == terminator_node_val){
+            break;
+        }
     }
 
     push_dyn_array(d_array, root);
@@ -105,44 +113,58 @@ void print_graph(Node *graph, int n)
 }
 
 
-
 void print_sccs(dyn_array *sccs)
 {
     for (int i = 0; i <= sccs->top; i++)
-    {
-        printf("scc_%d: {", i);
+    {   
+        int counter = 0 ; 
+        // printf("scc_%d: {", i);
+        while (sccs[i].linked_list != NULL){
         L_Node *temp = sccs[i].linked_list;
+        int max = -1; 
         while (temp != NULL)
-        {
-            printf(" %d ", temp->node_num);
+        {   
+            if (max < temp -> node_num ){
+                max = temp -> node_num;
+            }
+            // printf(" %d ", temp->node_num);
             temp = temp->next;
         }
-        printf("}\n");
+        if (counter == 0){
+           printf("%d", max); 
+           counter ++;
+        }
+        else {
+            printf(" ");
+            printf("%d", max);
+        }
+        remove_node(&sccs[i].linked_list , max);
+        
+    }
+    printf("\n");
+
+
     }
 }
 
+
+
+
 int main()
 {
-    FILE *file = fopen("input.txt", "r");
-    if (file == NULL)
-    {
-        perror("Error opening file");
-        return 1;
-    }
 
     int n;
     char *buffer = (char *)malloc(MAX_CHAR);
 
-    if (fgets(buffer, MAX_CHAR, file) != NULL)
+    if (fgets(buffer, MAX_CHAR, stdin) != NULL)
     {
-
         n = atoi(buffer);
     }
     else
     {
         printf("No input provided.\n");
         free(buffer);
-        fclose(file);
+
         return -1;
     }
 
@@ -151,15 +173,20 @@ int main()
     for (int i = 0; i < n; i++)
     {
 
-        if (fgets(buffer, MAX_CHAR, file) != NULL)
-        {
-            char *tok = strtok(buffer, " \n");
+        if (fgets(buffer, MAX_CHAR, stdin) != NULL)
+        {   
+
+            char *tok = strtok(buffer, " \n\t");
+
             L_Node *start = NULL;
-            while (tok != NULL)
-            {
+
+            
+            while (tok != NULL && tok[0] != '-' )
+            {   
+
                 int neibour_num = atol(tok);
                 add(&start, neibour_num);
-                tok = strtok(NULL, " \n");
+                tok = strtok(NULL, " \n\t");
             }
             graph[i].neighbors = start;
             graph[i].df_num = -1;
@@ -178,16 +205,22 @@ int main()
         }
     }
 
-    dfs(&graph, 0);
+    for (int i = 0 ; i <n ; i++){
+        int df_temp = graph[i].df_num;
+        if (df_temp == -1){
+        dfs(&graph, i);
+        }
+    }
+    
+
     print_sccs(sccs);
-    print_graph(graph, n);
 
     // Free allocated memory
-    fclose(file);
     for (int i = 0; i < n; i++)
     {
         free_mem(graph[i].neighbors);
     }
     free(graph);
     free(buffer);
+  
 }
