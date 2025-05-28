@@ -8,6 +8,10 @@ typedef struct dyn_array{
     int top;     
 } dyn_array;
 
+
+
+
+
 void push_dyn_array(struct dyn_array **p_array, L_Node *root) {
     struct dyn_array *array = *p_array;
     if (array == NULL) {
