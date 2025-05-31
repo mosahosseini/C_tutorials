@@ -5,10 +5,6 @@ A greedy algorithm is an approach that makes the best possible decision at each 
 
 
 
-Yes — that’s actually a great **intuition** for how greedy algorithms work, especially if you’re thinking visually or in terms of exploration.
-
-Let’s break it down:
-
 ---
 
 ### 1.1 Game Analogy:
@@ -42,7 +38,7 @@ That’s why greedy algorithms only work well on problems where:
 
 ### 1.2 What is meant by greedy-choice properties? 
 With greedy properties we mean that. 
-1. You can manke locally optimal choice at each step.
+1. You can make locally optimal choice at each step.
 2. These locally optimal choices will lead to global optimum. 
 
 
@@ -166,43 +162,104 @@ $$f(r_n) \leq f(t_n) \leq s(t_{n+1})$$
 
 If this is the case , we see that $r_n$ end before the $t_{n+1}$ starts this means that $t_{n+1}$ is one of those intervalls that we havent included in out solution yet. so we can choose the next intervall in out sequence to be $t_{n+1}$. This contradicts the original assumption that $n<m$. Because if n is larger we can alway choose to include intervalls in S so that they are equal. therefor $m=n$.
 
+## Time scheduling problem 2 
+
+** problem formulation: **
+
+$$
+Input  
+\begin{cases}
+t(x) & \text{ How long the interval x takes } \\
+d(x) & \text{deadline for x } 
+\end{cases}
+$$
+
+$$
+Output  
+\begin{cases}
+s(x) & \text{start} \\
+f(x) & \text{finish} 
+\end{cases}
+$$
 
 
-![alt text](scheduling_illustration.png)
+This problem is a little bit different. 
+- All intervals should be included 
+- Minimizing the worst latency. 
+- latency(x) = $max(o , f(x)-d(x))$ where d(x) is the deadline for interval x.
 
-**Annotations**
-In a factory that makes soda of different kind, we have two machines, the frist machine `Q` makes the bottles and the second machine `R` pours soda in them. A bottle that not have been assembled cant be filled. So `Q` must finish its job before R can starts its `R`. 
-
-In order for the soda to be completed it must go though both processes. 
-
-Assume we have two different kinds of bottles. Call them r_a (task a) and r_b (task b). 
-
-```text![alt text](image.png)
-time for task a = 4
-time for task b = 2 
-```
-
-I will describe the process here: 
-
-1. Machine Q starts with r_a. 
-2. It finishes r_a after 4 time unit and starts with task b.
-
-3. Machine R will start with r_a and finishes it after 4 additional time unit 4+4 = 8. 
-
-4. Machine Q is done with r_b after 6 time unit. But it has to wait because Machine R is still busy with r_a. 
-
-
-5. Machine R is done with r_a in 4 second to the total latency is 8 time unit for r_a. after 8 time unit it starts with r_b and is done with it in 2 additional time unit. the total latency for r_b is 10 time unit. look att the table below: 
-
-### 📊 Timeline (Q → R)
-
-| Time | Machine Q       | Machine R              |
-| ---- | ------------- | -------------------- |
-| 0–4  | Process `r_a` | —                    |
-| 4–6  | Process `r_b` | Process `r_a` (4–8)  |
-| 6–8  | —             | Process `r_b` (8–10) |
+- Name all intervalls $r_i$ so that $d(r_1) \le d(r_2) \le \cdots d(r_n)$
 
 
 
----
+We want to show that an optimal solution can be changed so that it is as good as ours. 
+
+
+## Time gaps: 
+Look att the picture below. If we have two intervals where there is a gap between them we can move them closer if the their $f(r_2) \le d(r_2)$. In other words it doesnt get worsened if we move $r_2$ closer to $r_1$. 
+
+![alt text](scheduling_2.png)
+
+
+If they have the same deadline it we can change place between those two, without worsening the solution. It doesnt effect the latency. 
+
+but $r_b$ comes before $r_a$ i T.
+![alt text](scheduling_2.1.png)
+
+## Inversion 
+two intervalls $r_a$ and $r_b$ are called inverted i T if $$d(r_a) < d(rb)$$ in some sequence. In our algorithm we dont get inverted sequences. 
+
+but $r_b$ comes before $r_a$ i T.
+![alt text](scheduling2.3.png)
+
+
+## Sequences without time gaps and inversion. 
+All sequences without time gap and inversion have the same worst latency or delay. 
+ 
+
+ The difference is  in which inverval will be delayed. 
+
+but $r_b$ comes before $r_a$ i T.
+![alt text](scheduling2.2.png)
+
+our sequence will not have any time gap or inversion.
+
+
+- We want to take the optimal solution T and change it to S without making it worse.
+
+- We dont change T directly but we make a new sequence instead. T can have some rest intervalls with different deadlines. 
+
+
+**If two intervalls in a sequence are inverted, then there must be another two intervalls ajacent to eachother which is inverted.**
+
+Now we want to show that if two adjacent intervalls are intervet we can swap them with out worsening the latency. 
+
+**proof:**
+Assume that we have a sequence Q where $r_a$ and $r_b$ is inverted and we swap these two invervalls in Sequence R which is our sequence. We want to show that swaping them will not affect latency. 
+
+![skit](scheduling2.4.png)
+
+* First of all we note that $r_a$ cannot be more late in R than it was in Q because it is scheduled earlier in R than it was in Q. 
+
+* The only question is does the latency in $r_b$ increases in R compared to Q? In other words : 
+
+Latencies described in equations below:
+$$
+\text{in Q}  \rightarrow t-d(r_a) \\
+
+\text{in R}  \rightarrow t-d(r_b) 
+$$
+
+The questin is if the latency in R is more than latency in Q. 
+
+$$
+t-d(r_a) \le t-d(r_b) \iff t+d(r_b) \le t+d(r_a) \iff d(r_b) \le d(r_a) ?
+$$
+
+can it be that $d(r_b) \le d(r_a)$ remember that we name them based on lowest deadline. so therefore the latency for $r_a$ cannot be greater than $r_b$. 
+
+So if you assume that the optimal solution have inversion, you can use this theorem to get rid of inversion and the optimal solution will be converter to our greedy solution. 
+
+
+Now we have shown that the optimal solution can be converted to ours without affecting the overall latency. thus we have shown that our solution is optimal. 
 
