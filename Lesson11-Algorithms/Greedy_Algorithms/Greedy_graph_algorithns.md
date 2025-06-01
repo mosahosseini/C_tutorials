@@ -1,0 +1,1 @@
+dijistras kruskals and prims algorithms
