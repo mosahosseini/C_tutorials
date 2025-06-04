@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "cppvsdbg",
+      "request": "launch",
+      "name": "Debug C Program",
+      "program": "${workspaceFolder}\\${input:programName}.exe",
+      "preLaunchTask": "C/C++: gcc.exe build active file",
+      "stopAtEntry": true
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "programName",
+      "description": "Select the C program to debug",
+      "options": [
+        "dijistras",
+        "priority_Q"
+      ]
+    }
+  ]
+}
