@@ -65,13 +65,15 @@ void up(Heap ** h , int pos_k){
 
 
 void insert(Heap ** h , int val  ){
-    if ((*h) -> capacity -1 == (*h) -> last_pos){
-      int * new_arr = (int *) realloc((*h) -> arr , sizeof(int)*2* (*h) ->capacity);
-      if (new_arr ==NULL){
-        printf("Reallocation failed!!! Fail is in insert.");
-        exit;
-      }
-      
+    if ((*h) -> capacity  == (*h) -> last_pos){
+        int new_size = sizeof(int)*(2*(*h) ->capacity+1);
+        int * old_arr = (*h) ->arr;
+        int * new_arr = (int *) realloc(old_arr , new_size);
+        if (new_arr ==NULL){
+            printf("Reallocation failed!!! Fail is in insert.");
+            exit;
+        }
+        
       (*h) -> arr = new_arr; 
     }
 
@@ -157,9 +159,11 @@ int main()
         return -1;
     }
     heapfy(&h);
+    insert(&h , 0);
     int val= -1;
     for (int i = 1 ; i < n+2 ; i++){
         val = h->arr[i];
+        printf("%d" , val);
     }
 
     free(h->arr);
