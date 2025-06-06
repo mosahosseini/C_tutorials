@@ -55,8 +55,9 @@ void up(Heap ** h , int pos_k){
     int pos_j;
     if (pos_k >1){
         pos_j = pos_k/2;
-        if (compare((*h) -> arr , pos_k , pos_j) > 0){
+        if (compare((*h) -> arr , pos_k , pos_j) < 0){
             swap(h , pos_k , pos_j);
+            int val = (*h) -> arr[pos_j];
             up(h , pos_j);
         }
     }
@@ -65,16 +66,18 @@ void up(Heap ** h , int pos_k){
 
 
 void insert(Heap ** h , int val  ){
-    if ((*h) -> capacity  == (*h) -> last_pos){
-        int new_size = sizeof(int)*(2*(*h) ->capacity+1);
-        int * old_arr = (*h) ->arr;
-        int * new_arr = (int *) realloc(old_arr , new_size);
+    if ((*h) -> capacity-1  == (*h) -> last_pos){
+        int new_size = sizeof(int)*((2*((*h) ->capacity-1))+1);
+
+        int * new_arr = (int *)realloc((*h) ->arr , new_size);
         if (new_arr ==NULL){
             printf("Reallocation failed!!! Fail is in insert.");
-            exit;
+            exit(EXIT_FAILURE);
         }
         
       (*h) -> arr = new_arr; 
+      (*h) -> arr[0] = -1;
+      (*h) -> capacity = (2*((*h) ->capacity-1))+1;
     }
 
     if ((*h) -> last_pos == 0){
@@ -90,8 +93,14 @@ void insert(Heap ** h , int val  ){
 }
 
 int remove_min(Heap **h){
-    int min_val = (*h) ->arr[1];
-    down(h,1);
+    if ((*h)->last_pos < 1) {
+        fprintf(stderr, "Heap is empty!\n");
+        return -1; // or some error code
+    }
+    int min_val = (*h)->arr[1];
+    (*h)->arr[1] = (*h)->arr[(*h)->last_pos];
+    (*h)->last_pos--;
+    down(h, 1);
     return min_val;
 }
 
@@ -126,11 +135,11 @@ int main()
         fprintf(stderr,"Failed to initiate heap!!\n");
 
     }
-    h->arr = (int*)malloc(sizeof(int)*n+1);
+    h->arr = (int*)malloc(sizeof(int)*(n+1));
     if (h->arr == NULL){
         fprintf(stderr , "Failed to initiate the array!!\n");
     }
-    h->capacity= n;
+    h->capacity= n+1;
     h ->last_pos = 0;
     h ->arr[0]=-1;
 
@@ -160,11 +169,11 @@ int main()
     }
     heapfy(&h);
     insert(&h , 0);
-    int val= -1;
-    for (int i = 1 ; i < n+2 ; i++){
-        val = h->arr[i];
-        printf("%d" , val);
+    int val= 15;;
+    while(val!= -1){
+        val = remove_min(&h);
     }
+
 
     free(h->arr);
     free(h);
