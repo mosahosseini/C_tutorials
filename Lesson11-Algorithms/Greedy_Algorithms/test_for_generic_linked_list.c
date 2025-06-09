@@ -4,7 +4,7 @@
 
 typedef struct l_node {
     int dest ;
-    float weight;  
+    int weight;  
     struct l_node * next ; 
 
 }l_node; 
@@ -28,7 +28,7 @@ int compare(const void* a , const void* b){
 
 void print_node(void* n){
     l_node* node = (l_node*)n;
-    printf("dest: %d  , weight:%f \n" , node ->dest ,node ->weight);
+    printf("dest: %d  , weight:%d \n" , node ->dest ,node ->weight);
 }
 int main(){
 
@@ -36,7 +36,7 @@ int main(){
     for (int i = 0 ; i <5 ; ++i){
         l_node * node = malloc(sizeof(l_node));
         node -> dest = i ; 
-        node -> weight = (float)(5-i);
+        node -> weight = (5-i);
         list_insert_front(list , node);
     }
 
