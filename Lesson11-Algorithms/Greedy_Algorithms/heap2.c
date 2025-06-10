@@ -34,6 +34,7 @@ int main() {
     // Initialize heap with array
     init_heap(h, items, sizeof(item_t));
 
+
     printf("Initial heap state:\n");
     for (size_t i = 1; i <= heap_size(h); i++) {
         printf("  a[%zu] = %d\n", i, ((item_t *)h->a[i])->key);
@@ -64,7 +65,7 @@ int main() {
     printf("\nDecreasing key of item 25 → 2 and reheapifying...\n");
     c.key = 2;
     heap_change_position(h, &c);
-
+    
     printf("Heap after change:\n");
     for (size_t i = 1; i <= heap_size(h); i++) {
         printf("  a[%zu] = %d\n", i, ((item_t *)h->a[i])->key);

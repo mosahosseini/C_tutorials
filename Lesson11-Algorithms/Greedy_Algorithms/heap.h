@@ -33,7 +33,7 @@ heap_t* new_heap(
     heap_t* heap; 
     size_t s;
     s = sizeof(heap_t)+(n+1)*sizeof(void*);
-    heap = malloc(s);
+    heap =(heap_t*) malloc(s);
     memset(heap , 0 , s);
     heap -> n = n;
     heap -> i = 0;
@@ -127,12 +127,18 @@ size_t heap_size(heap_t*h){
 void * heap_min(heap_t*h){
     void *  x;
     x = h ->a[1];
-    h->a[1] = h->a[h->i];
-    *(*h -> position)(h->a[1]) = 1; 
-    h->a[h->i] = NULL;
-    h->i -=1;
-    down(h,1);
-    return x;
+    if (x!=NULL){
+        // x = h ->a[1];
+        h->a[1] = h->a[h->i];
+        *(*h -> position)(h->a[1]) = 1; 
+        h->a[h->i] = NULL;
+        h->i -=1;
+        down(h,1);
+        return x;
+    }
+    else{
+        return NULL;
+    }
 }
 
 void heap_change_position(heap_t*h , void* x){
