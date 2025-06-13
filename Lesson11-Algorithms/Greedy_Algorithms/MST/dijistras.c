@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "define_heap.h"
+#include "define_llist.h"
 #include <limits.h>
 // the edge data structure defined in define llist.h
 
@@ -10,6 +11,7 @@ int dest;
 float weight;
 edge next;
 */
+
 
 
 
@@ -77,34 +79,26 @@ int main(){
         free(buffer);
         return -1;
     }
-    n;
-    m++;
 
-    int ** graph = (int **)malloc(sizeof(int*) * n);
+    list_t ** graph = (list_t **)malloc(sizeof(list_t*) * n+1);
     if (graph ==NULL){
             fprintf(stderr, "\nError: Graph initiation failed! \n");
             exit(EXIT_FAILURE);
         
     }
-    for (int i = 1 ; i <n ; i++){
-        graph[i] = (int * ) malloc(sizeof(int)*m);
-        if(graph[i] == NULL){
-        fprintf(stderr , "Something went wrong when initiating matrix columns!");
-        exit(EXIT_FAILURE);
+    for(int i = 1 ; i <n ; i++ ){
+        graph[i] = new_list(compare , get_next, set_next );
     }
-    }
-    int w ;
-    for (int i = 1 ; i <n ; i++){
-        
-        if(fgets(buffer, MAX_LENGTH , file ) != NULL){
-            char * token = strtok(buffer , " \n");
-            for (int j = 0; j < m && token != NULL; j++) {
-                graph[i][j] = atoi(token);
-                w = graph[i][j];
-                token = strtok(NULL, " ");
-            }
-                
-            }
+    
+    int ind, dest ,weight;
+    for (int j = 0 ; j < m ; m++ ){
+        if(fgets(buffer , MAX_LENGTH , file) != NULL){
+            sscanf(buffer , "%d %d %d" ,&ind , &dest , &weight);
+            edge * node = malloc(sizeof(edge));
+            node -> dest = dest ; 
+            node -> weight = weight;
+            list_insert_front(graph[ind] , node );
+        }
     }
 
     // for (int i = 1 ; i <n ; i++){
