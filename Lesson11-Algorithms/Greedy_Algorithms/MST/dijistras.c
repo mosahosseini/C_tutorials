@@ -91,7 +91,7 @@ int main(){
     }
     
     int ind, dest ,weight;
-    for (int j = 0 ; j < m ; m++ ){
+    for (int j = 0 ; j < m ; j++ ){
         if(fgets(buffer , MAX_LENGTH , file) != NULL){
             sscanf(buffer , "%d %d %d" ,&ind , &dest , &weight);
             edge * node = malloc(sizeof(edge));
@@ -100,6 +100,13 @@ int main(){
             list_insert_front(graph[ind] , node );
         }
     }
+
+    for (int i = 1 ; i <n ; i++){
+        printf("source: %d  ," , i);
+        list_foreach( graph[i], &print_node);
+    }
+    // edge * temp =graph[1]->head; 
+    // printf("ind : 1, dest: %d , weight: %d", temp->dest , temp->weight );
 
     // for (int i = 1 ; i <n ; i++){
     //     if(fgets(buffer, MAX_LENGTH , file ) != NULL){
