@@ -105,46 +105,8 @@ int main(){
         printf("source: %d  ," , i);
         list_foreach( graph[i], &print_node);
     }
-    // edge * temp =graph[1]->head; 
-    // printf("ind : 1, dest: %d , weight: %d", temp->dest , temp->weight );
-
-    // for (int i = 1 ; i <n ; i++){
-    //     if(fgets(buffer, MAX_LENGTH , file ) != NULL){
-    //         char * tok = strtok(buffer , " \n\t");
-    //         while (tok != NULL){
-    //             int dest , weight;
-    //             sscanf(tok, "%d:%d", &dest, &weight);
-    //             if (dest >= n) {
-    //                 fprintf(stderr, "Error: destination node %d out of bounds for graph with %d nodes.\n", dest, n);
-    //                 exit(EXIT_FAILURE);
-    //             }
-
-    //             edge * node = malloc(sizeof(edge));
-    //             node -> dest = dest ; 
-    //             node -> weight = weight;
-    //             list_insert_front(list , node );
-    //             tok = strtok(NULL, " \n\t");
-    //         }
-    //         graph[i] = list; 
-
-    //     }    
-    // }
-    // item_t * items = malloc(sizeof(item_t)*n);
-    // heap_t *h = new_heap(n, compare_items, get_position);
-    // create_heap(h , items , n);
+ 
     
-    
-    // dijkstras(h , items , graph , n);
-    // int pred = n-1; 
-    // while (pred != 0){
-    //     pred = items[pred].pred;
-  
-    // }
-
-    // for (int i = 0; i < n; i++) {
-    // list_free(graph[i]);
-    // }
-
     for (int i = 0 ; i <n ; i++){
         free(graph[i]);
         graph[i] = NULL;
