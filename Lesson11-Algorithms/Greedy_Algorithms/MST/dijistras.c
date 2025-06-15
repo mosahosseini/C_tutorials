@@ -40,7 +40,7 @@ void create_heap(heap_t *h ,item_t * items , size_t n , size_t start_node_ind )
             items[i].cost = 0;
         }
         else{
-            items[i].cost = 10000;
+            items[i].cost = 100000000;
 
         }
         items[i].ind = i;
@@ -49,9 +49,9 @@ void create_heap(heap_t *h ,item_t * items , size_t n , size_t start_node_ind )
     // Initialize heap with array
     init_heap(h, &items[1], sizeof(item_t));
     printf("Initial heap state:\n");
-    for (size_t i = 1; i <= heap_size(h); i++) {
-        printf("  a[%zu] = %d\n", i, ((item_t *)h->a[i])->pos);
-    }
+    // for (size_t i = 1; i <= heap_size(h); i++) {
+    //     printf("  a[%zu] = %d\n", i, ((item_t *)h->a[i])->ind);
+    // }
 
 }
 
@@ -65,12 +65,14 @@ int prims_algorithm( list_t ** graph , heap_t * h , item_t* items , size_t n ){
         sum += current -> cost;
         int curr_ind = current -> ind ; 
         edge * temp = (edge *) (graph[curr_ind] -> head);
+
         while (temp != NULL){
             int dest_ind = temp ->dest ; 
             items[dest_ind].cost = temp ->weight;
             item_t * w  = &items[dest_ind];
             heap_change_position(h, &items[dest_ind]);
-            temp = get_next(temp);
+            temp =  get_next(temp);
+            
         }
         current = (item_t *) heap_min(h);
 
@@ -103,6 +105,7 @@ int main(){
             exit(EXIT_FAILURE);
         
     }
+    graph[0] = NULL;
     for(int i = 1 ; i <=n ; i++ ){
         graph[i] = new_list(compare , get_next, set_next );
     }
@@ -123,18 +126,29 @@ int main(){
     //     list_foreach( graph[i], &print_node);
     // }
 
-    item_t * items = malloc(sizeof(item_t)*n+1);
+    item_t * items = malloc(sizeof(item_t)*(n+1));
     heap_t *h = new_heap(n, compare_items, get_position);
     create_heap(h , items, n , 1 );
     int  c = prims_algorithm(graph , h , items , n);
-    
-    
-    for (int i = 0 ; i <n ; i++){
-        free(graph[i]);
-        graph[i] = NULL;
-    }
-    free(graph);
 
+    printf("The sum is: %d:" , c );
+    // Free the edges inside the graph
+    for (int i = 1; i <= n; i++) {
+        edge *temp = (edge *) graph[i]->head;
+        while (temp != NULL) {
+            edge *next = get_next(temp);
+            free(temp);
+            temp = next;
+        }
+    }
+    for (int i = 1 ; i <=n ; i++){
+        free(graph[i]);
+
+    }
+    
+    free(graph);
+    free(h);
+    free(items);
     free(buffer);
     fclose(file);
     
