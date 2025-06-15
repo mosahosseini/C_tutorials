@@ -15,53 +15,70 @@ edge next;
 
 
 
-// void create_heap(heap_t *h ,item_t * items , size_t n )
-// {
-//     for (int i = 0 ; i <n ; i++){
-//         if(i == 0 ){
-//             items[i].cost = 0;
-//             items[i].ind =0;
-//             items[i].pred = 0;
-//         }
-//         else{
-//             items[i].cost = INT_MAX;
-//             items[i].ind =i;
-//         }
-//     };
+void create_heap(heap_t *h ,item_t * items , size_t n , size_t start_node_ind )
+{
+/**
+ * Function: create_heap
+ * ---------------------
+ * Initializes a heap with given items for use in algorithms like Dijkstra's and prims.
+ * 
+ * Parameters:
+ *   - h: Pointer to a heap structure.
+ *   - items: Array of item_t structures representing nodes cost. the heap will use this array.
+ *   - n: Number of elements in the items array.
+ *   - start_node_ind: Index of the starting node.
+ * 
+ * Behavior:
+ *   - Sets the `cost` of the start node to 0, indicating it's the starting point.
+ *   - Sets all other items' `cost` to INT_MAX (representing "infinity" or unvisited).
+ *   - Initializes the `ind` field of each item with its index.
+ *   - Sets `pred` of the first item to 0.
+ */
+    item_t *test;
+    for (int i = 1 ; i<= n ; i++){
+        if(i == start_node_ind ){
+            items[i].cost = 0;
+        }
+        else{
+            items[i].cost = 10000;
 
-    
-//     // Initialize heap with array
-//     init_heap(h, items, sizeof(item_t));
-//     printf("Initial heap state:\n");
-//     for (size_t i = 1; i <= heap_size(h); i++) {
-//         printf("  a[%zu] = %d\n", i, ((item_t *)h->a[i])->ind);
-//     }
+        }
+        items[i].ind = i;
+    };
 
-// }
+    // Initialize heap with array
+    init_heap(h, &items[1], sizeof(item_t));
+    printf("Initial heap state:\n");
+    for (size_t i = 1; i <= heap_size(h); i++) {
+        printf("  a[%zu] = %d\n", i, ((item_t *)h->a[i])->pos);
+    }
 
-// int* dijkstras(heap_t *h  , item_t* items , list_t ** graph ,size_t n ){
-//     item_t * current = (item_t*)heap_min(h);
+}
 
-//     while (current != NULL){
-//         int curr_ind = current->ind;
-//         edge* temp = (edge*)(graph[curr_ind]->head);
-//         while (temp != NULL){
-//             int dest_ind = temp ->dest; 
-//             int dv = items[dest_ind].cost;
-//             int du = current ->cost;
-//             int wuv = temp ->weight;
-//             if (du+wuv <dv){
-//                 items[dest_ind].cost = du + wuv;
-//                 heap_change_position(h, &items[dest_ind]);
-//                 items[dest_ind].pred = current->ind;
-//             }
-//             temp = get_next(temp);
-//         }
-//         current = (item_t * ) heap_min(h);
 
-//     }
-    
-// }
+
+int prims_algorithm( list_t ** graph , heap_t * h , item_t* items , size_t n ){
+    int sum = 0 ; 
+
+    item_t * current = (item_t *) heap_min(h);
+    while (current != NULL){
+        sum += current -> cost;
+        int curr_ind = current -> ind ; 
+        edge * temp = (edge *) (graph[curr_ind] -> head);
+        while (temp != NULL){
+            int dest_ind = temp ->dest ; 
+            items[dest_ind].cost = temp ->weight;
+            item_t * w  = &items[dest_ind];
+            heap_change_position(h, &items[dest_ind]);
+            temp = get_next(temp);
+        }
+        current = (item_t *) heap_min(h);
+
+
+    }
+    return sum;
+}
+
 
 
 int main(){
@@ -86,7 +103,7 @@ int main(){
             exit(EXIT_FAILURE);
         
     }
-    for(int i = 1 ; i <n ; i++ ){
+    for(int i = 1 ; i <=n ; i++ ){
         graph[i] = new_list(compare , get_next, set_next );
     }
     
@@ -101,11 +118,16 @@ int main(){
         }
     }
 
-    for (int i = 1 ; i <n ; i++){
-        printf("source: %d  ," , i);
-        list_foreach( graph[i], &print_node);
-    }
- 
+    // for (int i = 1 ; i <n ; i++){
+    //     printf("source: %d  ," , i);
+    //     list_foreach( graph[i], &print_node);
+    // }
+
+    item_t * items = malloc(sizeof(item_t)*n+1);
+    heap_t *h = new_heap(n, compare_items, get_position);
+    create_heap(h , items, n , 1 );
+    int  c = prims_algorithm(graph , h , items , n);
+    
     
     for (int i = 0 ; i <n ; i++){
         free(graph[i]);
