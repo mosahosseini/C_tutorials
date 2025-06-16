@@ -4,8 +4,9 @@
 
 // Sample struct stored in the heap
 typedef struct {
-    int cost;
+    double cost;
     int ind; 
+    int visited; // 0 if not visited , 1 otherwise
     size_t pos;  // Required for position tracking   
 } item_t;
 

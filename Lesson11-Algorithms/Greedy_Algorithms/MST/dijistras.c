@@ -38,17 +38,20 @@ void create_heap(heap_t *h ,item_t * items , size_t n , size_t start_node_ind )
     for (int i = 1 ; i<= n ; i++){
         if(i == start_node_ind ){
             items[i].cost = 0;
-        }
-        else{
-            items[i].cost = 100000000;
 
         }
+        else{
+            items[i].cost = INT_MAX;
+
+        }
+        items[i].visited = 0;
         items[i].ind = i;
     };
 
     // Initialize heap with array
     init_heap(h, &items[1], sizeof(item_t));
-    printf("Initial heap state:\n");
+    
+    // printf("Initial heap state:\n");
     // for (size_t i = 1; i <= heap_size(h); i++) {
     //     printf("  a[%zu] = %d\n", i, ((item_t *)h->a[i])->ind);
     // }
@@ -61,16 +64,24 @@ int prims_algorithm( list_t ** graph , heap_t * h , item_t* items , size_t n ){
     int sum = 0 ; 
 
     item_t * current = (item_t *) heap_min(h);
+    
     while (current != NULL){
+        current->visited = 1;
         sum += current -> cost;
         int curr_ind = current -> ind ; 
         edge * temp = (edge *) (graph[curr_ind] -> head);
 
         while (temp != NULL){
+
             int dest_ind = temp ->dest ; 
-            items[dest_ind].cost = temp ->weight;
-            item_t * w  = &items[dest_ind];
+            
+            if (!items[dest_ind].visited  && temp->weight < items[dest_ind].cost) {
+            items[dest_ind].cost = temp->weight;
             heap_change_position(h, &items[dest_ind]);
+            }
+            // items[dest_ind].cost = temp ->weight;
+            // item_t * w  = &items[dest_ind];
+            // heap_change_position(h, &items[dest_ind]);
             temp =  get_next(temp);
             
         }
@@ -99,7 +110,7 @@ int main(){
         return -1;
     }
 
-    list_t ** graph = (list_t **)malloc(sizeof(list_t*) * n+1);
+    list_t ** graph = (list_t **)malloc(sizeof(list_t*) * (n+1));
     if (graph ==NULL){
             fprintf(stderr, "\nError: Graph initiation failed! \n");
             exit(EXIT_FAILURE);
@@ -110,14 +121,19 @@ int main(){
         graph[i] = new_list(compare , get_next, set_next );
     }
     
-    int ind, dest ,weight;
+    int ind, dest;
+    double  weight;
     for (int j = 0 ; j < m ; j++ ){
         if(fgets(buffer , MAX_LENGTH , file) != NULL){
-            sscanf(buffer , "%d %d %d" ,&ind , &dest , &weight);
+            sscanf(buffer , "%d %d %lf" ,&ind , &dest , &weight);
             edge * node = malloc(sizeof(edge));
             node -> dest = dest ; 
             node -> weight = weight;
+            edge * node2 = malloc(sizeof(edge));
+            node2 -> dest = ind;
+            node2 -> weight = weight ; 
             list_insert_front(graph[ind] , node );
+            list_insert_front(graph[dest] , node2);
         }
     }
 

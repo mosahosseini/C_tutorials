@@ -4,7 +4,7 @@
 
 typedef struct edge {
     int dest ;
-    int weight;  
+    double weight;  
     struct edge * next ; 
 
 }edge; 
@@ -26,5 +26,5 @@ int compare(const void* a , const void* b){
 
 void print_node(void* n){
     edge* node = (edge*)n;
-    printf("dest: %d  , weight:%d \n" , node ->dest ,node ->weight);
+    printf("dest: %d  , weight:%f \n" , node ->dest ,node ->weight);
 }
