@@ -244,7 +244,6 @@ size_t heap_size(heap_t* h)
     return h->i;
 }
 
-
 /**
  * Function: heap_min
  * ------------------
