@@ -1,7 +1,8 @@
 #ifndef heap_h
 #define heap_h
 #include <stddef.h>
-
+#include <string.h>
+#include <stdio.h>
 typedef struct heap_t heap_t;
 
 heap_t* new_heap( size_t , int(*) (const void* , const void*) , size_t* (*) (void*));
