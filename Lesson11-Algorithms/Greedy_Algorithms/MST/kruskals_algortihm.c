@@ -3,92 +3,53 @@
 #include <stdlib.h>
 
 typedef struct node {
-    int ind;
-    int head; 
-    int num_children; 
+    int ind; //index of nodex in the array. 
+    int head; // head/parent of that node 
+    int num_children;  //number of children of that node.
 } node;
 
 
 
 int find(int ind, node *graph) {
-    node  temp = graph[ind];
+    // if the head is not set or the head is pointing to itself return its index.
     if (graph[ind].head == -1 || graph[ind].head == ind)
         return ind;
+
     // Path compression
-    graph[ind].head = find(graph[ind].head, graph);
+    graph[ind].head = find(graph[ind].head, graph); //this will sets all childrens head to the root parent. if we have 3->2->1  this will set 3->1 , 2->1 
     return graph[ind].head;
 }
 
 void unionn(int source, int dest, node *graph) {
-    int rootS = find(source, graph);
-    int rootD = find(dest, graph);
+    int rootS = find(source, graph); //finds the root of the source
+    int rootD = find(dest, graph); // finds the root of the dest. 
     
-    if (rootS == rootD) return;
+    if (rootS == rootD) return; // if they have the same root , we wil do nothing. 
 
-    if (graph[rootS].num_children < graph[rootD].num_children) {
-        graph[rootS].head = rootD;
-        graph[rootD].num_children += graph[rootS].num_children + 1;
+    if (graph[rootS].num_children < graph[rootD].num_children) {  // if number of children of the source is less that the dest.
+        graph[rootS].head = rootD; //we set the the root of source as children of the root of dest.
+        graph[rootD].num_children += graph[rootS].num_children + 1; //number of children of the dests root will be = 1+ (number of children of dest +number of children of source)
     } else {
         graph[rootD].head = rootS;
         graph[rootS].num_children += graph[rootD].num_children + 1;
     }
 }
 
-// void unionn(
-//     int source, 
-//     int dest , node** graph
-// ){  
-//     node  s = (*graph)[source]; 
-//     node d = (*graph)[dest]; 
-//     if (s.head== -1 &&  d.head== -1){
-//         (*graph)[source].head = s.ind;
-//         (*graph)[dest].head= s.ind;
-//         (*graph)[source].num_children++;
-//     }
-//     else if (s.head == -1 && d.head != -1){
-//         (*graph)[source].head = d.head; 
-//         (*graph)[dest].num_children ++;
-//     }
-//     else if (s.head != -1 && d.head == -1 ){
-//         (*graph)[dest].head = s.head;
-//         (*graph)[s.head].num_children ++;
-//     }
-//     else{
-//         int nodes_head = find(source , *graph);
-//         int noded_head = find(dest , *graph);
-//         int s_num_child = (*graph)[nodes_head].num_children;
-//         int d_num_child = (*graph)[noded_head].num_children;
-//         if (s_num_child < d_num_child){
-//             (*graph)[source].head = noded_head;
-//             (*graph)[noded_head].num_children ++;
-//         }
-//         else {
-//             (*graph)[noded_head].head = nodes_head;
-//             (*graph)[nodes_head].num_children ++;
-//         }
-
-//     }
-
-
-// };
-
 
 int kruskal(heap_t *h, node * graph){
-    int sum = 0 ; 
-    item_t * edge = (item_t *) heap_min(h);
+    int sum = 0 ; //variable to keep track of the min weights.
+    item_t * edge = (item_t *) heap_min(h); // remove min
     while(edge){
-        int head1 = find(edge->source , graph);
-        int head2 = find(edge -> dest , graph);
-        if (head1 !=  head2 ){
-            unionn(edge->source , edge->dest , graph);
-            node  temps = graph[edge->source];
-            node  tempd = graph[edge -> dest];
-            sum += edge->weight;
+        int head1 = find(edge->source , graph); //find the sources head
+        int head2 = find(edge -> dest , graph); //find the dests head
+        if (head1 !=  head2 ){ // if the head of the source and dest is not the same.
+            unionn(edge->source , edge->dest , graph); //Use union on them. 
+            sum += edge->weight;  // sum the weight. 
         }
-        edge = (item_t * ) heap_min(h);
+        edge = (item_t * ) heap_min(h);  // remove the next min edge.
     } 
 
-    return sum;
+    return sum; //return sum. 
     
 }
 
@@ -119,7 +80,6 @@ int main(){
 
 
     node * graph = (node*) malloc(sizeof(node)*(n+1));
-    // graph[0] is not used or can be initialized as needed, but do not assign NULL to a struct
     graph[0].ind  =  0;
     graph[0].head = -1; 
     for (int i  = 1 ; i <= n ; i++){
@@ -127,11 +87,11 @@ int main(){
         graph[i].head = -1;
         graph[i].num_children = 0;
     }
-    //allocate memory for the heap array.
+    //Allocate memory for the heap array.
     item_t * items = malloc(sizeof(item_t)*(m+1));
     heap_t *h = new_heap(m, compare_items, get_position); // we initiated a new heap. 
 
-        
+    // write data to the datastructure.    
     int source, dest;
     double  weight;
     for (int j = 1 ; j <= m ; j++ ){
@@ -143,15 +103,7 @@ int main(){
         }
     }
 
-    for (int i = 1; i <= n ; i++){
-        node temp = graph[i];
-    }
-    
-    init_heap(h , &items[1] , sizeof(item_t));
-
-    for (int j = 1; j <= m ; j++){
-        item_t  temp2 = items[j];
-    }    
+    init_heap(h , &items[1] , sizeof(item_t));   
     int  c = kruskal( h , graph); 
 
     printf("%d\n" , c );
