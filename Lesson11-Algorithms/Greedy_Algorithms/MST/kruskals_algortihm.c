@@ -16,7 +16,7 @@ int find(
         int node_ind = graph[ind].ind;
         int  head_ind = graph[ind].head;
 
-        while (node_ind != head_ind){
+        while (node_ind != head_ind && head_ind != -1){
             node_ind = head_ind; 
             head_ind = graph[node_ind].head;
         }
@@ -42,7 +42,7 @@ void unionn(
     }
     else if (s.head != -1 && d.head == -1 ){
         (*graph)[dest].head = s.head;
-        (*graph)[source].num_children ++;
+        (*graph)[s.head].num_children ++;
     }
     else{
         int nodes_head = find(s.head , graph);
@@ -70,8 +70,8 @@ int kruskal(heap_t *h, node * graph){
         int head2 = find(edge -> dest , graph);
         if (head1 !=  head2 || (head1 == -1 && head2 == -1 )){
             unionn(edge->source , edge->dest , &graph);
-            node  temps = graph[1];
-            node  tempd = graph[2];
+            node  temps = graph[edge->source];
+            node  tempd = graph[edge -> dest];
             sum += edge->weight;
         }
         edge = (item_t * ) heap_min(h);
@@ -114,6 +114,7 @@ int main(){
     for (int i  = 1 ; i <= n ; i++){
         graph[i].ind = i;
         graph[i].head = -1;
+        graph[i].num_children = 0;
     }
     //allocate memory for the heap array.
     item_t * items = malloc(sizeof(item_t)*(m+1));
@@ -131,9 +132,15 @@ int main(){
         }
     }
 
-
+    for (int i = 1; i <= n ; i++){
+        node temp = graph[i];
+    }
     
     init_heap(h , &items[1] , sizeof(item_t));
+
+    for (int j = 1; j <= m ; j++){
+        item_t  temp2 = items[j];
+    }    
     int  c = kruskal( h , graph); 
 
     printf("%d\n" , c );
