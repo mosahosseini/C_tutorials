@@ -10,58 +10,67 @@ typedef struct node {
 
 
 
-int find(
-    int  ind ,node * graph
-){  
-        int node_ind = graph[ind].ind;
-        int  head_ind = graph[ind].head;
+int find(int ind, node *graph) {
+    node  temp = graph[ind];
+    if (graph[ind].head == -1 || graph[ind].head == ind)
+        return ind;
+    // Path compression
+    graph[ind].head = find(graph[ind].head, graph);
+    return graph[ind].head;
+}
 
-        while (node_ind != head_ind && head_ind != -1){
-            node_ind = head_ind; 
-            head_ind = graph[node_ind].head;
-        }
+void unionn(int source, int dest, node *graph) {
+    int rootS = find(source, graph);
+    int rootD = find(dest, graph);
+    
+    if (rootS == rootD) return;
 
-        return head_ind;
+    if (graph[rootS].num_children < graph[rootD].num_children) {
+        graph[rootS].head = rootD;
+        graph[rootD].num_children += graph[rootS].num_children + 1;
+    } else {
+        graph[rootD].head = rootS;
+        graph[rootS].num_children += graph[rootD].num_children + 1;
     }
+}
+
+// void unionn(
+//     int source, 
+//     int dest , node** graph
+// ){  
+//     node  s = (*graph)[source]; 
+//     node d = (*graph)[dest]; 
+//     if (s.head== -1 &&  d.head== -1){
+//         (*graph)[source].head = s.ind;
+//         (*graph)[dest].head= s.ind;
+//         (*graph)[source].num_children++;
+//     }
+//     else if (s.head == -1 && d.head != -1){
+//         (*graph)[source].head = d.head; 
+//         (*graph)[dest].num_children ++;
+//     }
+//     else if (s.head != -1 && d.head == -1 ){
+//         (*graph)[dest].head = s.head;
+//         (*graph)[s.head].num_children ++;
+//     }
+//     else{
+//         int nodes_head = find(source , *graph);
+//         int noded_head = find(dest , *graph);
+//         int s_num_child = (*graph)[nodes_head].num_children;
+//         int d_num_child = (*graph)[noded_head].num_children;
+//         if (s_num_child < d_num_child){
+//             (*graph)[source].head = noded_head;
+//             (*graph)[noded_head].num_children ++;
+//         }
+//         else {
+//             (*graph)[noded_head].head = nodes_head;
+//             (*graph)[nodes_head].num_children ++;
+//         }
+
+//     }
 
 
-void unionn(
-    int source, 
-    int dest , node** graph
-){  
-    node  s = (*graph)[source]; 
-    node d = (*graph)[dest]; 
-    if (s.head== -1 &&  d.head== -1){
-        (*graph)[source].head = s.ind;
-        (*graph)[dest].head= s.ind;
-        (*graph)[source].num_children++;
-    }
-    else if (s.head == -1 && d.head != -1){
-        (*graph)[source].head = d.head; 
-        (*graph)[dest].num_children ++;
-    }
-    else if (s.head != -1 && d.head == -1 ){
-        (*graph)[dest].head = s.head;
-        (*graph)[s.head].num_children ++;
-    }
-    else{
-        int nodes_head = find(s.head , *graph);
-        int noded_head = find(d.head , *graph);
-        int s_num_child = (*graph)[nodes_head].num_children;
-        int d_num_child = (*graph)[noded_head].num_children;
-        if (s_num_child < d_num_child){
-            (*graph)[source].head = noded_head;
-            (*graph)[noded_head].num_children ++;
-        }
-        else {
-            (*graph)[dest].head = nodes_head;
-            (*graph)[nodes_head].num_children ++;
-        }
-
-    }
-
-
-};
+// };
 
 
 int kruskal(heap_t *h, node * graph){
@@ -70,8 +79,8 @@ int kruskal(heap_t *h, node * graph){
     while(edge){
         int head1 = find(edge->source , graph);
         int head2 = find(edge -> dest , graph);
-        if (head1 !=  head2 || (head1 == -1 && head2 == -1 )){
-            unionn(edge->source , edge->dest , &graph);
+        if (head1 !=  head2 ){
+            unionn(edge->source , edge->dest , graph);
             node  temps = graph[edge->source];
             node  tempd = graph[edge -> dest];
             sum += edge->weight;
@@ -92,8 +101,8 @@ int main(){
     char * buffer = (char*)malloc(MAX_LENGTH); // allocate memory for buffer.
     
 
-    FILE * file = fopen("input.txt" , "r"); //uncomment this if you want to run an specific file.
-    if(fgets(buffer, MAX_LENGTH , file ) != NULL){   // change the stdin to file if you run it for specific file.
+    // FILE * file = fopen("input.txt" , "r"); //uncomment this if you want to run an specific file.
+    if(fgets(buffer, MAX_LENGTH , stdin ) != NULL){   // change the stdin to file if you run it for specific file.
         sscanf(buffer , "%d %d", &n , &m); // sscan for setting values for n and m. 
     }
     else{
@@ -126,7 +135,7 @@ int main(){
     int source, dest;
     double  weight;
     for (int j = 1 ; j <= m ; j++ ){
-        if(fgets(buffer , MAX_LENGTH , file) != NULL){
+        if(fgets(buffer , MAX_LENGTH , stdin) != NULL){
             sscanf(buffer , "%d %d %lf" ,&source , &dest , &weight);
             items[j].source = source;
             items[j].dest = dest; 
