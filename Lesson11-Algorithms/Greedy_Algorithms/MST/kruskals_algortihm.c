@@ -45,9 +45,11 @@ void unionn(
         (*graph)[s.head].num_children ++;
     }
     else{
-        int nodes_head = find(s.head , graph);
-        int noded_head = find(d.head , graph);
-        if (graph[nodes_head]->num_children < graph[noded_head] -> num_children){
+        int nodes_head = find(s.head , *graph);
+        int noded_head = find(d.head , *graph);
+        int s_num_child = (*graph)[nodes_head].num_children;
+        int d_num_child = (*graph)[noded_head].num_children;
+        if (s_num_child < d_num_child){
             (*graph)[source].head = noded_head;
             (*graph)[noded_head].num_children ++;
         }
