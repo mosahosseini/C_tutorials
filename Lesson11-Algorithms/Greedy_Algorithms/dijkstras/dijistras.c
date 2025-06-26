@@ -120,16 +120,18 @@ int main(){
         pred = items[pred].pred;
   
     }
+    
+    // for (int i = 0 ; i <n ; i++){
+    //     printf("node: %d  \n" , i);
+    //     list_foreach(graph[i] , &print_node);
+    // }
 
     for (int i = 0; i < n; i++) {
     list_free(graph[i]);
     }
     free(graph);
 
-    for (int i = 0 ; i <n ; i++){
-        printf("node: %d  \n" , i);
-        list_foreach(graph[i] , &print_node);
-    }
+
 
     free(buffer);
     fclose(file);
